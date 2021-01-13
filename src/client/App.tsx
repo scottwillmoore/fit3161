@@ -10,7 +10,7 @@ function App() {
 
     return (
         <div className="app">
-            <h1>Welcome to Snowpack!</h1>
+            <h1>Welcome to FIT3161!</h1>
             <p>
                 Page has been opened for <code>{count}</code> seconds.
             </p>

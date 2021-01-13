@@ -9,6 +9,7 @@
         "start": "npm run develop"
     },
     "dependencies": {
+        "@snowpack/plugin-postcss": "^1.1.0",
         "@snowpack/plugin-react-refresh": "^2.4.0",
         "@snowpack/plugin-typescript": "^1.2.0",
         "@types/react": "^17.0.0",

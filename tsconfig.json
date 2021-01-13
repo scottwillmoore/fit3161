@@ -1,7 +1,12 @@
 {
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
-        "baseUrl": "./",
+        "baseUrl": "./src",
+        "paths": {
+            "@client/*": ["client/*"],
+            "@common/*": ["common/*"],
+            "@server/*": ["server/*"]
+        },
         "forceConsistentCasingInFileNames": true,
         "importsNotUsedAsValues": "error",
         "jsx": "preserve",
