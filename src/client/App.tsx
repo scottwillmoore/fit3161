@@ -15,6 +15,7 @@ function App() {
                 Page has been opened for <code>{count}</code> seconds.
             </p>
             <p>Angus was here!</p>
+            <p>Chris was here too</p>
         </div>
     );
 }
