@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import Login from "./Login";
+
 function App() {
     const [count, setCount] = useState(0);
 
@@ -14,8 +16,7 @@ function App() {
             <p>
                 Page has been opened for <code>{count}</code> seconds.
             </p>
-            <p>Angus was here!</p>
-            <p>Chris was here too</p>
+            <Login />
         </div>
     );
 }
