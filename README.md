@@ -4,6 +4,10 @@
 
 Digitising the Assessment of Post-Traumatic Amnesia.
 
+## Technology
+
+The project is built on JavaScript with the [React.js](https://reactjs.org/) and [Next.js](https://nextjs.org/) libraries. This provides a hybrid static and server-side rendered application. A good knowledge of HTML, CSS, JavaScript, React.js and Next.js is recommended to be a productive developer.
+
 ## Install
 
 You must have the following pre-requisites installed:
@@ -21,7 +25,7 @@ git clone git@github.com:scottwillmoore/fit3161.git
 npm install
 
 # Run the development server.
-npm start
+npm run develop
 ```
 
 You may now edit and tweak files and in most cases they will automatically hot-reload.
