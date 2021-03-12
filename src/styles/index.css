@@ -1,7 +1,105 @@
-html {
-    font-family: sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,800;1,400;1,500;1,700;1,800&display=swap");
+
+:root {
+    --font: "Montserrat", sans-serif;
+
+    --black: #18191f;
+    --white: #ffffff;
+
+    --blue: #00c6ae;
+    --pink: #ff89bb;
 }
 
-body {
+*:before,
+*:after,
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: var(--font);
+}
+
+html,
+body,
+#__next {
+    height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     margin: 0;
+}
+
+.app {
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--pink);
+}
+
+.artwork {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin: 0 auto;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 0.2rem solid var(--black);
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 0 0 0.5rem var(--black);
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 1rem 1rem;
+    border-bottom: 0.2rem solid var(--black);
+}
+
+.title h1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+}
+
+.form input {
+    margin-bottom: 1rem;
+    padding: 1rem 1.6rem;
+    border: 0.125rem solid var(--black);
+    border-radius: 1rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.form button {
+    padding: 1rem 1.6rem;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1.25rem;
+    font-weight: 900;
+    background: #18191f;
+    color: #ffffff;
 }
