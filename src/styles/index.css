@@ -8,6 +8,9 @@
 
     --blue: #00c6ae;
     --pink: #ff89bb;
+
+    --orange: #F95A2C;
+    --yellow: #FFBD12;
 }
 
 *:before,
@@ -46,6 +49,10 @@ p {
     flex-direction: column;
     height: 100%;
     background: var(--pink);
+}
+
+.containerwhite {
+    background: var(--white);
 }
 
 .artwork {
@@ -102,4 +109,24 @@ p {
     font-weight: 900;
     background: #18191f;
     color: #ffffff;
+}
+
+.bigButton {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+
+}
+
+.bigButton button {
+    padding: 1rem 1.6rem;
+    height: 15rem;
+    border: none;
+    border-radius: 1rem;
+    font-size: 2.0rem;
+    font-weight: 900;
+    text-align: left;
+    background: var(--orange);
+    color: #ffffff;
+    box-shadow: 0 0 0 0.1rem var(--black);
 }
