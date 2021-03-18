@@ -1,6 +1,7 @@
 import Layout from "components/layout";
+import Button from "components/button";
 
-export default function Index() {
+export default function Login() {
     return (
         <Layout title="Index">
             <div className="container">
@@ -19,7 +20,7 @@ export default function Index() {
                             inputMode="numeric"
                             placeholder="Pin"
                         />
-                        <button type="submit">Continue</button>
+                        <Button>Submit</Button>
                     </form>
                 </form>
             </div>
