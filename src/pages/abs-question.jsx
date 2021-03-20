@@ -1,15 +1,21 @@
-import { ArrowLeftIcon, ArrowRightIcon } from "@primer/octicons-react";
+import Head from "next/head";
 
-import Button from "components/button";
+import { ArrowLeftIcon, Header, Main, ArrowRightIcon, Button, Container } from "app/components";
 
 import css from "./test.module.css";
 
-export default function Test() {
+export default function AbsQuestion() {
     return (
-        <div className={css.app}>
-            <header className={css.header}>Header</header>
-            <main className={css.main}>
-                <form>
+        <Container>
+            <Head>
+                <title>ABS Question</title>
+            </Head>
+            <Header>
+                <h1>ABS Question</h1>
+                <p>TODO</p>
+            </Header>
+            <Main>
+                <form className={css.form}>
                     <div className={css.question}>
                         <p>How would you describe the patient on their</p>
                         <h1>
@@ -53,8 +59,7 @@ export default function Test() {
                         <ArrowRightIcon size={24} />
                     </Button>
                 </form>
-            </main>
-            <footer className={css.footer}>Footer</footer>
-        </div>
+            </Main>
+        </Container>
     );
 }

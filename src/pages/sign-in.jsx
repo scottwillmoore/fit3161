@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import {
     ArrowRightIcon,
     Button,
@@ -6,13 +8,17 @@ import {
     Main,
     PasswordInput,
     TextInput,
-} from "components";
+} from "app/components";
 
 import css from "./test.module.css";
 
 export default function SignIn() {
     return (
         <Container>
+            <Head>
+                <title>Sign In</title>
+                <meta name="description" content="Sign In" />
+            </Head>
             <Header>
                 <h1>Sign In</h1>
                 <p>Please use the form below to sign in</p>
