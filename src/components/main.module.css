@@ -1,0 +1,16 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 32rem;
+    height: 100%;
+    margin: 2rem;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 32rem;
+    height: 100%;
+    margin: 2rem;
+}
