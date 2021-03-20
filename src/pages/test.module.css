@@ -29,6 +29,15 @@
     box-shadow: 0 4px 16px #dcdfe580;
 }
 
+.hidden {
+    display: none;
+}
+
+input[type="radio"]:checked + .card {
+    border: 1px solid #175eeb;
+    box-shadow: 0 4px 16px #1c418c40;
+}
+
 .card h1 {
     font-size: 1rem;
     font-weight: 800;
