@@ -1,15 +1,10 @@
-import Head from "next/head";
-
 import { ArrowLeftIcon, Header, Main, ArrowRightIcon, Button, Container } from "app/components";
 
 import css from "./test.module.css";
 
 export default function AbsQuestion() {
     return (
-        <Container>
-            <Head>
-                <title>ABS Question</title>
-            </Head>
+        <Container title="ABS Question" description="">
             <Header>
                 <h1>ABS Question</h1>
                 <p>TODO</p>

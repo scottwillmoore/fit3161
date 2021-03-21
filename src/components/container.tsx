@@ -1,13 +1,21 @@
 import { PropsWithChildren } from "react";
+import Head from "next/head";
 
 import css from "./container.module.css";
 
-export interface ContainerProps extends PropsWithChildren<{}> {}
+export interface ContainerProps extends PropsWithChildren<{}> {
+    title: string;
+    description: string;
+}
 
-export function Container({ children, ...props }: ContainerProps) {
+export function Container({ title, description, children, ...props }: ContainerProps) {
     return (
-        <header className={css.page} {...props}>
+        <div className={css.container} {...props}>
+            <Head>
+                <title>{title}</title>
+                <meta name="description" content={description} />
+            </Head>
             {children}
-        </header>
+        </div>
     );
 }
