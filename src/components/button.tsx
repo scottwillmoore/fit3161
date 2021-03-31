@@ -1,15 +1,13 @@
-import { PropsWithChildren, ButtonHTMLAttributes } from "react";
+import { PropsWithChildren } from "react";
+import { css } from "emotion";
 
-import css from "./button.module.css";
+const buttonCss = css`
+    background: #000;
+    border: 1px solid #000;
+`;
 
-export interface ButtonProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
-    type: "submit" | "reset" | "button";
-}
+export type ButtonProps = {};
 
-export function Button({ children, ...props }: ButtonProps) {
-    return (
-        <button className={css.button} {...props}>
-            {children}
-        </button>
-    );
+export default function Button({ children }: PropsWithChildren<ButtonProps>) {
+    return <button css={buttonCss}>{children}</button>;
 }

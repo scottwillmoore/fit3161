@@ -10,8 +10,8 @@
     --orange: #f95a2c;
     --yellow: #ffbd12;
 
-    --font-family: "Fira Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-        sans-serif, Apple Color Emoji, Segoe UI Emoji;
+    --font-family: "Fira Sans", -apple-system, BlinkMacSystemFont, Segoe UI,
+        Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
 
     --font-size-extraSmall: 0.5rem;
     --font-size-small: 0.75rem;
@@ -22,11 +22,12 @@
     --font-weight-medium: 500;
     --font-weight-extraBold: 800;
 
-    --color-grey-100: black;
+    --color-neutral-100: #ffffff;
+    --color-neutral-200: #f5f7fa;
+    --color-neutral-500: #a8abb2;
+    --color-neutral-900: #132240;
 
-    --color-blue-100: black;
-
-    /* TODO: Font family, font size, font weight, color, ... */
+    --color-primary-500: #175ce5;
 }
 
 *:before,
@@ -37,6 +38,10 @@
 
 html {
     font-family: var(--font);
+}
+
+body {
+    background: var(--color-primary-500);
 }
 
 body,

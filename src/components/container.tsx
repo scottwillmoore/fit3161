@@ -1,21 +1,55 @@
 import { PropsWithChildren } from "react";
-import Head from "next/head";
+import { css } from "emotion";
 
-import css from "./container.module.css";
+import Icon from "app/components/icon";
 
-export interface ContainerProps extends PropsWithChildren<{}> {
+const containerCss = css`
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+`;
+
+const headerCss = css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    color: #ffffff;
+    background: #175ce5;
+`;
+
+const titleCss = css`
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+`;
+
+const mainCss = css`
+    flex: 1;
+    padding: 2rem;
+    background: #fafaff;
+`;
+
+export interface ContainerProperties {
     title: string;
-    description: string;
 }
 
-export function Container({ title, description, children, ...props }: ContainerProps) {
+export default function Container({
+    title,
+    children,
+}: PropsWithChildren<ContainerProperties>) {
     return (
-        <div className={css.container} {...props}>
-            <Head>
-                <title>{title}</title>
-                <meta name="description" content={description} />
-            </Head>
-            {children}
+        <div css={containerCss}>
+            <header css={headerCss}>
+                <button>Left</button>
+                <h1 css={titleCss}>{title}</h1>
+                <button>Right</button>
+            </header>
+
+            <main css={mainCss}>{children}</main>
         </div>
     );
 }
