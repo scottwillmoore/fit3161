@@ -32,6 +32,8 @@ You may now edit and tweak files and in most cases they will automatically hot-r
 
 It is recommended that an editor such as [Visual Studio Code](https://code.visualstudio.com/) is used. It is highly recommended that you install the [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension and configure it as the [default formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#default-formatter) for HTML, CSS, and JavaScript and configure the editor to [format on save](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#format-on-save).
 
+In addition, you may want to install the [Tailwind](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension to enable autocomplete for Tailwind classes. You will also need to edit your [settings](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss#recommended-vs-code-settings) to get this feature to work.
+
 ## License
 
 Copyright © Angus Dunn, Christopher Limoa, Scott Moore 2020

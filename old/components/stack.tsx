@@ -1,7 +1,15 @@
-import { PropsWithChildren, ReactHTML } from "react";
+import { PropsWithChildren } from "react";
 import { jsx, css } from "emotion";
 
-export type Element = keyof ReactHTML;
+export type Element =
+    | "article"
+    | "aside"
+    | "div"
+    | "footer"
+    | "header"
+    | "main"
+    | "nav"
+    | "section";
 
 const directionMap = {
     row: "row",
@@ -92,7 +100,7 @@ export type StackItemProperties = {
     basis?: Basis;
 };
 
-export function StackItem({
+function Item({
     element = "div",
     grow = 0,
     shrink = 1,
@@ -108,4 +116,4 @@ export function StackItem({
     return jsx(element, { css: stackItemCss }, children);
 }
 
-Stack.Item = StackItem;
+Stack.Item = Item;

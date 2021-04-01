@@ -1,13 +1,7 @@
-import { PropsWithChildren } from "react";
-import { css } from "emotion";
+import { Children, ClassName } from "app/utilities";
 
-const buttonCss = css`
-    background: #000;
-    border: 1px solid #000;
-`;
+export interface ButtonProperties extends Children, ClassName {}
 
-export type ButtonProps = {};
-
-export default function Button({ children }: PropsWithChildren<ButtonProps>) {
-    return <button css={buttonCss}>{children}</button>;
+export default function Button({ children, className }: ButtonProperties) {
+    return <button className="flex p-2 w-full text-white bg-blue-base">{children}</button>;
 }
