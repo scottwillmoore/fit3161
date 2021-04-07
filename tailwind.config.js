@@ -2,29 +2,30 @@ module.exports = {
     darkMode: false,
     purge: ["./public/**/*.html", "./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
+        borderRadius: {
+            none: "0rem",
+            DEFAULT: "0.5rem",
+        },
+        borderWidth: {
+            none: "0rem",
+            DEFAULT: "0.5rem",
+        },
         colors: {
-            black: "#132240",
+            // Light
+            black: "#1f1f33",
             white: "#ffffff",
-            gray: {
-                xlight: "#F5F7FA",
-                light: "#C0C4CC",
-                base: "#878D99",
-                dark: "#6B7280",
-                xdark: "#525866",
-            },
-            blue: {
-                base: "#175ce5",
-            },
-            purple: {
-                xlight: "#e5e5ff",
-            },
-            yellow: {
-                xlight: "",
-            },
+
+            primary: "#1f1f33",
+            secondary: "#f6ffcc",
+            secondary: "#d2e573",
+
+            // Dark
+            // white: "#1f1f33",
+            // black: "#ffffff",
         },
         fontFamily: {
             sans: [
-                '"Fira Sans"',
+                '"Inter"',
                 "ui-sans-serif",
                 "system-ui",
                 "-apple-system",
@@ -52,22 +53,20 @@ module.exports = {
             ],
         },
         fontSize: {
-            xxsmall: "0.25rem",
-            xsmall: "0.5rem",
+            xsmall: "0.625rem",
             small: "0.75rem",
-            base: "1rem",
-            large: "1.25rem",
-            xlarge: "1.5rem",
-            xxlarge: "2rem",
+            medium: "0.875rem",
+            large: "1rem",
+            xlarge: "1.25rem",
         },
         fontWeight: {
-            base: "500",
+            regular: "400",
             bold: "800",
         },
         lineHeight: {
-            narrow: "1.1",
-            base: "1.3",
-            tall: "1.5",
+            small: "1.1",
+            medium: "1.3",
+            large: "1.5",
         },
         spacing: {
             0: "0rem",
