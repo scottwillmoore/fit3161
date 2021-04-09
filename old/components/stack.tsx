@@ -1,15 +1,7 @@
 import { PropsWithChildren } from "react";
 import { jsx, css } from "emotion";
 
-export type Element =
-    | "article"
-    | "aside"
-    | "div"
-    | "footer"
-    | "header"
-    | "main"
-    | "nav"
-    | "section";
+export type Element = "article" | "aside" | "div" | "footer" | "header" | "main" | "nav" | "section";
 
 const directionMap = {
     row: "row",

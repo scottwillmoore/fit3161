@@ -14,44 +14,23 @@ export default function Question() {
                     <div className="question-text">
                         <p>Question 1</p>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing
-                            elit. Ducimus nostrum minima possimus laudantium
-                            totam harum molestiae optio officia sunt?{" "}
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus nostrum minima possimus
+                            laudantium totam harum molestiae optio officia sunt?{" "}
                         </p>
                     </div>
 
                     <div className="question-radio-container">
                         <div className="question-radio">
-                            <input
-                                type="radio"
-                                id="absent"
-                                value="Absent"
-                                name="option"
-                            />
+                            <input type="radio" id="absent" value="Absent" name="option" />
                             <label for="absent">Absent</label>
 
-                            <input
-                                type="radio"
-                                id="partially"
-                                value="Partially Present"
-                                name="option"
-                            />
+                            <input type="radio" id="partially" value="Partially Present" name="option" />
                             <label for="partially">Partially Present</label>
 
-                            <input
-                                type="radio"
-                                id="present"
-                                value="Present"
-                                name="option"
-                            />
+                            <input type="radio" id="present" value="Present" name="option" />
                             <label for="present">Present</label>
 
-                            <input
-                                type="radio"
-                                id="extremely"
-                                value="Extremely Present"
-                                name="option"
-                            />
+                            <input type="radio" id="extremely" value="Extremely Present" name="option" />
                             <label for="extremely">Extremely Present</label>
                         </div>
                     </div>

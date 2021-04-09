@@ -1,12 +1,4 @@
-import {
-    ArrowRightIcon,
-    Button,
-    Container,
-    Header,
-    Main,
-    PasswordInput,
-    TextInput,
-} from "app/components";
+import { ArrowRightIcon, Button, Container, Header, Main, PasswordInput, TextInput } from "app/components";
 
 import css from "./test.module.css";
 

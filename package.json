@@ -1,6 +1,7 @@
 {
     "private": true,
     "name": "fit3161",
+    "description": "An application to assist in the assessment of post-traumatic amnesia",
     "scripts": {
         "build": "next build",
         "develop": "next dev",

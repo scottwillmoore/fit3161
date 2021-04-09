@@ -2,26 +2,60 @@ module.exports = {
     darkMode: false,
     purge: ["./public/**/*.html", "./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
+        borderColor: (theme) => ({
+            ...theme("colors"),
+        }),
         borderRadius: {
             none: "0rem",
-            DEFAULT: "0.5rem",
+            DEFAULT: "0.25rem",
         },
         borderWidth: {
             none: "0rem",
-            DEFAULT: "0.5rem",
+            DEFAULT: "0.0625rem",
+        },
+        boxShadow: {
+            none: "none",
+            glow: "0 0 0.5rem 0.25rem rgba(115, 115, 229, 0.25)",
+            DEFAULT: "0 0.0625rem 0.1875rem 0 rgba(31, 31, 51, 0.08), 0 0.0625rem 0.125rem 0 rgba(31, 31, 51, 0.04)",
         },
         colors: {
-            // Light
-            black: "#1f1f33",
+            black: "#000000",
             white: "#ffffff",
 
-            primary: "#1f1f33",
-            secondary: "#f6ffcc",
-            secondary: "#d2e573",
+            blue: {
+                hard: "#6699ff",
+                medium: "#99bbff",
+                soft: "#e5eeff",
+            },
+            green: {
+                hard: "",
+                medium: "",
+                soft: "",
+            },
+            purple: {
+                black: "#1f1f33",
+                gray: "#666680",
+                white: "#fafaff",
 
-            // Dark
-            // white: "#1f1f33",
-            // black: "#ffffff",
+                hard: "#7a7af2",
+                medium: "#aaaaf2",
+                soft: "#dadaf2",
+            },
+            orange: {
+                hard: "",
+                medium: "",
+                soft: "",
+            },
+            red: {
+                hard: "#b25959",
+                medium: "#ffb2b2",
+                soft: "#ffe5e5",
+            },
+            yellow: {
+                hard: "",
+                medium: "",
+                soft: "",
+            },
         },
         fontFamily: {
             sans: [
@@ -53,38 +87,77 @@ module.exports = {
             ],
         },
         fontSize: {
-            xsmall: "0.625rem",
+            tiny: "0.625rem",
             small: "0.75rem",
             medium: "0.875rem",
             large: "1rem",
-            xlarge: "1.25rem",
+            huge: "1.25rem",
         },
         fontWeight: {
             regular: "400",
             bold: "800",
         },
+        letterSpacing: {
+            none: "0",
+        },
         lineHeight: {
-            small: "1.1",
+            none: "1",
+            tight: "1.1",
             medium: "1.3",
-            large: "1.5",
+            loose: "1.5",
+        },
+        maxHeight: (theme) => ({
+            none: "none",
+            full: "100%",
+            screen: "100vh",
+            ...theme("spacing"),
+        }),
+        maxWidth: (theme) => ({
+            none: "none",
+            full: "100%",
+            screen: "100vw",
+            ...theme("screens"),
+            ...theme("spacing"),
+        }),
+        opacity: {
+            0: "0",
+            25: "0.25",
+            50: "0.5",
+            75: "0.75",
+            100: "1",
+        },
+        ringColor: (theme) => ({
+            DEFAULT: theme("colors.blue.hard"),
+            ...theme("colors"),
+        }),
+        ringOffsetWidth: (theme) => ({
+            DEFAULT: "0rem",
+            ...theme("spacing"),
+        }),
+        ringWidth: (theme) => ({
+            DEFAULT: "0.25rem",
+            ...theme("spacing"),
+        }),
+        screens: {
+            small: "640px",
+            medium: "768px",
+            large: "1024px",
         },
         spacing: {
             0: "0rem",
-            0.5: "0.25rem",
-            1: "0.5rem",
-            1.5: "0.75rem",
-            2: "1rem",
-            2.5: "1.25rem",
-            3: "1.5rem",
-            3.5: "1.75rem",
-            4: "2rem",
-            5: "2.5rem",
-            6: "3rem",
-            7: "3.5rem",
-            8: "4rem",
-            12: "6rem",
-            16: "8rem",
-            32: "16rem",
+            2: "0.25rem",
+            4: "0.25rem",
+            8: "0.5rem",
+            12: "0.75rem",
+            16: "1rem",
+            20: "1.25rem",
+            24: "1.5rem",
+            32: "2rem",
+            48: "3rem",
+            64: "4rem",
+            96: "6rem",
+            128: "8rem",
+            256: "16rem",
         },
     },
 };

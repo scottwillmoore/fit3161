@@ -8,12 +8,7 @@ export interface ContainerProps extends PropsWithChildren<{}> {
     description: string;
 }
 
-export function Container({
-    title,
-    description,
-    children,
-    ...props
-}: ContainerProps) {
+export function Container({ title, description, children, ...props }: ContainerProps) {
     return (
         <div className={css.container} {...props}>
             <Head>

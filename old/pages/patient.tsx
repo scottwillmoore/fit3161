@@ -30,10 +30,7 @@ export default function Patient() {
         <div className={css.app}>
             <Head>
                 <meta name="apple-mobile-web-app-capable" content="yes" />
-                <meta
-                    name="apple-mobile-web-app-status-bar-style"
-                    content="black-translucent"
-                ></meta>
+                <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></meta>
             </Head>
 
             {/* <Header title="Patient" /> */}
@@ -81,11 +78,9 @@ export default function Patient() {
                             <div className={css.rowMiddle}>
                                 <h1>Agitated Behaviour Scale</h1>
                                 <p>
-                                    The Agitated Behaviour Scale (ABS) measures
-                                    behavioral aspects of agitation during the
-                                    acute phase of recovery from acquired brain
-                                    injury including aspects of aggression,
-                                    disinhibition, and lability.
+                                    The Agitated Behaviour Scale (ABS) measures behavioral aspects of agitation during
+                                    the acute phase of recovery from acquired brain injury including aspects of
+                                    aggression, disinhibition, and lability.
                                 </p>
                             </div>
                             <div className={css.rowRight}>
@@ -99,9 +94,7 @@ export default function Patient() {
                                 <AlertIcon size={16} />
                             </div>
                             <div className={css.rowMiddle}>
-                                <p>
-                                    You must select a response to the question.
-                                </p>
+                                <p>You must select a response to the question.</p>
                             </div>
                         </div>
                     </div>
