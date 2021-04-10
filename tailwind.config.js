@@ -6,17 +6,19 @@ module.exports = {
             ...theme("colors"),
         }),
         borderRadius: {
-            none: "0rem",
             DEFAULT: "0.25rem",
-        },
-        borderWidth: {
             none: "0rem",
-            DEFAULT: "0.0625rem",
+            full: "256rem",
         },
+        borderWidth: (theme) => ({
+            DEFAULT: "0.0625rem",
+            none: "0rem",
+            ...theme("spacing"),
+        }),
         boxShadow: {
-            none: "none",
-            glow: "0 0 0.5rem 0.25rem rgba(115, 115, 229, 0.25)",
             DEFAULT: "0 0.0625rem 0.1875rem 0 rgba(31, 31, 51, 0.08), 0 0.0625rem 0.125rem 0 rgba(31, 31, 51, 0.04)",
+            none: "none",
+            glow: "0 0 0.5rem 0.125rem rgba(115, 115, 229, 0.25)",
         },
         colors: {
             black: "#000000",
@@ -158,6 +160,13 @@ module.exports = {
             96: "6rem",
             128: "8rem",
             256: "16rem",
+        },
+    },
+    variants: {
+        extend: {
+            backgroundColor: ["checked"],
+            borderColor: ["checked"],
+            borderWidth: ["checked"],
         },
     },
 };

@@ -8,6 +8,99 @@ import Clipboard from "app/icons/clippy";
 import Share from "app/icons/share";
 import Trash from "app/icons/trash";
 
+import { Children } from "app/utilities";
+
+interface CardProps extends Children {}
+
+function Card({ children }: CardProps) {
+    const baseClasses = [
+        "flex",
+        "flex-col",
+        "space-y-16",
+        "p-16",
+        "text-left",
+        "text-purple-black",
+        "bg-white",
+        "border",
+        "border-purple-soft",
+        "rounded",
+        "shadow",
+        "transition-all",
+        "focus:outline-none",
+        "focus:ring",
+        "hover:shadow-glow",
+    ].join(" ");
+    return <button className={`${baseClasses}`}>{children}</button>;
+}
+
+import { ButtonHTMLAttributes } from "react";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    variant: "primary" | "secondary" | "dangerous";
+    label: string;
+    icon: any;
+}
+
+function Button({ variant, label, icon: Icon }: ButtonProps) {
+    const baseClasses = [
+        "flex",
+        "flex-row",
+        "items-center",
+        "px-16",
+        "py-12",
+        "rounded",
+        "shadow",
+        "text-medium",
+        "transition-all",
+        "focus:outline-none",
+        "focus:ring",
+    ].join(" ");
+
+    const classes = {
+        primary: "text-white border-none bg-purple-hard",
+        secondary: "text-purple-gray border border-purple-soft bg-white",
+        dangerous: "text-red-hard border border-red-hard bg-white",
+    }[variant];
+
+    return (
+        <button className={`${baseClasses} ${classes}`}>
+            <Icon height="16" className="mr-16" />
+            <span>{label}</span>
+        </button>
+    );
+}
+
+interface IconProps {
+    size: "small" | "large";
+    icon: any;
+}
+
+function Icon({ size, icon: Icon }: IconProps) {
+    const height = {
+        small: "16",
+        large: "24",
+    }[size];
+    return <Icon height={height} />;
+}
+
+interface BadgeProps {
+    size: "small" | "large";
+    icon: any;
+}
+
+function Badge({ size, icon: Icon }: BadgeProps) {
+    const height = {
+        small: "16",
+        large: "24",
+    }[size];
+
+    return (
+        <div className="p-8 text-white bg-purple-hard rounded">
+            <Icon height={height} />
+        </div>
+    );
+}
+
 export default function Patient() {
     const router = useRouter();
     const { id } = router.query;
@@ -32,6 +125,28 @@ export default function Patient() {
 
                 <div className="flex flex-col space-y-16">
                     <h1 className="text-large font-bold">Tests</h1>
+
+                    <Card>
+                        <div className="flex flex-row items-start justify-between">
+                            <Badge size="small" icon={Clipboard} />
+                            <Icon size="large" icon={ArrowUpRight} />
+                            {/* <ArrowUpRight height="24" className="text-purple-gray" /> */}
+                        </div>
+
+                        <div className="space-y-2">
+                            <h1 className="text-large font-bold">Agitated Behaviour Scale</h1>
+                            <p className="text-purple-gray text-small">
+                                The Agitated Behaviour Scale (ABS) measures behavioral aspects of agitation during the
+                                acute phase of recovery from acquired brain injury including aspects of aggression,
+                                disinhibition, and lability.
+                            </p>
+                        </div>
+
+                        <div className="-m-16 pt-16 px-16 text-purple-gray bg-purple-white border-t border-purple-soft">
+                            <p className="text-small">Last Administered</p>
+                            <p className="text-medium font-bold">11th December '20</p>
+                        </div>
+                    </Card>
 
                     <button className="space-y hover:shadow-glow p-16 text-left bg-white border border-purple-soft rounded focus:outline-none shadow space-y-16 transition-all focus:ring">
                         <div className="flex flex-row items-start justify-between">
@@ -100,15 +215,8 @@ export default function Patient() {
                     </button>
 
                     <div className="flex flex-row space-x-16">
-                        <button className="flex flex-row px-16 py-12 text-purple-gray text-medium bg-white border border-purple-soft rounded shadow space-x-16">
-                            <Share height="16" />
-                            <p>Export</p>
-                        </button>
-
-                        <button className="text-red-hard border-red-hard flex flex-row px-16 py-12 text-medium bg-white border rounded shadow space-x-16">
-                            <Trash height="16" />
-                            <p>Delete</p>
-                        </button>
+                        <Button variant="secondary" label="Export" icon={Share} />
+                        <Button variant="dangerous" label="Delete" icon={Trash} />
                     </div>
                 </div>
             </div>
