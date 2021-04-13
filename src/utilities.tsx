@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-
 import { css } from "emotion";
 
 export interface HasChildren extends PropsWithChildren<{}> {}
@@ -58,25 +57,31 @@ export type Flex = {
     alignContent?: AlignContent;
     justifyContent?: JustifyContent;
     alignItems?: AlignItems;
+    gap?: string;
 };
 
-export function flex({
+export const flex = ({
     direction = "row",
     wrap = "noWrap",
     alignContent = "stretch",
     justifyContent = "start",
     alignItems = "stretch",
-}: Flex) {
-    return css`
-        display: flex;
-        flex-direction: ${directionMap[direction]};
-        flex-wrap: ${wrapMap[wrap]};
-        align-content: ${alignContentMap[alignContent]};
-        justify-content: ${justifyContentMap[justifyContent]};
-        align-items: ${alignItemsMap[alignItems]};
-    `;
-}
+    gap = "0",
+}: Flex) => css`
+    display: flex;
+    flex-direction: ${directionMap[direction]};
+    flex-wrap: ${wrapMap[wrap]};
+    align-content: ${alignContentMap[alignContent]};
+    justify-content: ${justifyContentMap[justifyContent]};
+    align-items: ${alignItemsMap[alignItems]};
 
-export const row = (properties?: Omit<Flex, "direction">) => flex({ direction: "row", ...properties });
+    & > * + * {
+        ${direction.includes("row") ? `margin-left: ${gap};` : `margin-top: ${gap};`}
+    }
+`;
 
-export const column = (properties?: Omit<Flex, "direction">) => flex({ direction: "column", ...properties });
+export const row = (properties?: Omit<Flex, "direction">) =>
+    flex({ direction: "row", wrap: "noWrap", ...properties });
+
+export const column = (properties?: Omit<Flex, "direction">) =>
+    flex({ direction: "column", wrap: "noWrap", ...properties });

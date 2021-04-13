@@ -1,8 +1,7 @@
 import { css, useTheme } from "emotion";
 
-import { HasChildren, row, column } from "app/utilities";
-
 import { ChevronLeft, KebabHorizontal } from "app/icons";
+import { HasChildren, row, column } from "app/utilities";
 
 export interface ShellProps extends HasChildren {
     title: string;
@@ -25,7 +24,7 @@ export default function Shell({ title, children }: ShellProps) {
         >
             <header
                 css={css`
-                    background-color: white;
+                    background-color: ${color.white};
                     border-bottom-color: ${color.softPurple};
                     border-bottom-width: ${space[1]};
                 `}
@@ -34,11 +33,13 @@ export default function Shell({ title, children }: ShellProps) {
                     css={[
                         row({ alignItems: "center", justifyContent: "spaceBetween" }),
                         css`
-                            margin-left: auto;
-                            margin-right: auto;
                             margin-top: ${space[24]};
                             margin-bottom: ${space[24]};
-                            max-width: ${space[1024]};
+                            margin-left: auto;
+                            margin-right: auto;
+                            padding-left: ${space[24]};
+                            padding-right: ${space[24]};
+                            max-width: ${space[512]};
                         `,
                     ]}
                 >
@@ -78,12 +79,16 @@ export default function Shell({ title, children }: ShellProps) {
             </header>
 
             <main
-                css={css`
-                    margin-left: auto;
-                    margin-right: auto;
-                    padding: ${space[32]};
-                    max-width: ${space[1024]};
-                `}
+                css={[
+                    column({ gap: space[32] }),
+                    css`
+                        margin-left: auto;
+                        margin-right: auto;
+                        padding: ${space[24]};
+                        width: 100%;
+                        max-width: ${space[512]};
+                    `,
+                ]}
             >
                 {children}
             </main>

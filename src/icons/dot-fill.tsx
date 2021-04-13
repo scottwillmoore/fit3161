@@ -7,7 +7,10 @@ export interface DotFillProps extends SVGProps<SVGSVGElement> {
 }
 
 const heightMap = {
-    "16": { width: 16, path: '<path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>' },
+    "16": {
+        width: 16,
+        path: '<path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>',
+    },
     "24": { width: 24, path: '<path d="M12 18a6 6 0 100-12 6 6 0 000 12z"></path>' },
 };
 
