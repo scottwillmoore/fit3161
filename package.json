@@ -9,20 +9,36 @@
         "start": "next start"
     },
     "dependencies": {
-        "autoprefixer": "^10.2.5",
-        "hero": "npm:@heroicons/react@^1.0.0",
+        "emotion": "npm:@emotion/react@^11.1.5",
         "next": "^10.1.2",
-        "postcss": "^8.2.9",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "tailwind": "npm:tailwindcss@^2.0.4",
-        "tailwind-jit": "npm:@tailwindcss/jit@^0.1.17",
         "typescript": "^4.2.3"
     },
     "devDependencies": {
         "@types/node": "^14.14.37",
         "@types/react": "^17.0.3",
-        "prettier": "^2.2.1",
-        "prettier-plugin-tailwind": "^2.2.10"
+        "babel-plugin-emotion": "npm:@emotion/babel-plugin@^11.3.0",
+        "prettier": "^2.2.1"
+    },
+    "babel": {
+        "presets": [
+            [
+                "next/babel",
+                {
+                    "preset-react": {
+                        "runtime": "automatic",
+                        "importSource": "emotion"
+                    }
+                }
+            ]
+        ],
+        "plugins": [
+            "emotion"
+        ]
+    },
+    "prettier": {
+        "printWidth": 120,
+        "tabWidth": 4
     }
 }
