@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function CommentDiscussion({ height, ...props }: CommentDiscussionProps) {
+export default function CommentDiscussion({
+    height,
+    ...props
+}: CommentDiscussionProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

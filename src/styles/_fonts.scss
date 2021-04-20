@@ -1,0 +1,29 @@
+@use "sass:list";
+
+$font-family: "Inter";
+
+$font-weights: (400, 700);
+$font-styles: (normal, italic);
+$font-formats: ("woff2", "woff");
+
+@each $font-weight in $font-weights {
+    @each $font-style in $font-styles {
+        @font-face {
+            font-display: swap;
+
+            font-family: $font-family;
+            font-weight: $font-weight;
+            font-style: $font-style;
+
+            $font-src: ();
+            @each $font-format in $font-formats {
+                $font-url: "/fonts/#{$font-family}-#{$font-weight}-#{$font-style}.#{$font-format}";
+                $font-src: list.append(
+                    $font-src,
+                    url($font-url) format($font-format)
+                );
+            }
+            src: $font-src;
+        }
+    }
+}

@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function FileSymlinkFile({ height, ...props }: FileSymlinkFileProps) {
+export default function FileSymlinkFile({
+    height,
+    ...props
+}: FileSymlinkFileProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

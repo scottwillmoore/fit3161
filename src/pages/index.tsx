@@ -1,75 +1,24 @@
-import { css, useTheme } from "emotion";
-
-import { Shell } from "app/components";
+import { Card, Frame } from "app/components";
 import { Clippy, ArrowUpRight, Clock } from "app/icons";
-import { row, column } from "app/utilities";
 
 export default function Index() {
-    const { color, space } = useTheme();
-
     return (
+        <Frame title="Index">
+            <Card>
+                <p>Hello, world!</p>
+            </Card>
+        </Frame>
+    );
+    {
+        /* 
         <Shell title="Index">
-            <p
-                css={css`
-                    display: block;
-                    width: 100%;
-                    color: red;
-                `}
-            >
-                Hello, world!
-            </p>
+            <h1>Tests</h1>
 
-            <button
-                css={[
-                    column(),
-                    css`
-                        text-align: left;
-                        color: ${color.blackBlue};
-                        background-color: ${color.white};
-                        border-color: ${color.softBlue};
-                        border-radius: ${space[4]};
-                        transition-property: all;
-                        transition-duration: 150ms;
-                        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-
-                        &:focus {
-                            outline: none;
-                            box-shadow: 0 0 0 ${space[4]} ${color.softBlue};
-                        }
-
-                        &:hover {
-                            outline: none;
-                            box-shadow: 0 0 0 ${space[4]} ${color.softBlue};
-                        }
-
-                        & > * {
-                            position: relative;
-                            padding: ${space[16]};
-                            border-width: ${space[1]};
-                            border-color: ${color.softPurple};
-                        }
-
-                        & > * + * {
-                            margin-top: -${space[1]};
-                        }
-
-                        & > *:first-child {
-                            border-top-left-radius: ${space[4]};
-                            border-top-right-radius: ${space[4]};
-                        }
-
-                        & > *:last-child {
-                            border-bottom-left-radius: ${space[4]};
-                            border-bottom-right-radius: ${space[4]};
-                        }
-                    `,
-                ]}
-            >
-                <div css={column({ gap: space[16] })}>
-                    <div css={[row({ justifyContent: "spaceBetween" })]}>
+            <Card as="button">
+                <Column gap={space[16]}>
+                    <Row justify="spaceBetween" gap={space[16]}>
                         <div
                             css={css`
-                                display: flex;
                                 padding: ${space[8]};
                                 border-radius: ${space[4]};
                                 color: ${color.white};
@@ -79,8 +28,8 @@ export default function Index() {
                             <Clippy height="16" />
                         </div>
                         <ArrowUpRight height="24" />
-                    </div>
-                    <div css={column({ gap: space[4] })}>
+                    </Row>
+                    <Column gap={space[16]}>
                         <h1
                             css={css`
                                 font-size: ${space[16]};
@@ -101,19 +50,12 @@ export default function Index() {
                             agitation during the acute phase of recovery from acquired brain injury
                             including aspects of aggression, disinhibition, and lability.
                         </p>
-                    </div>
-                </div>
-                <div
-                    css={[
-                        row({ alignItems: "center", gap: space[16] }),
-                        css`
-                            background-color: ${color.whiteBlue};
-                        `,
-                    ]}
-                >
+                    </Column>
+                </Column>
+
+                <Row align="center" gap={space[16]}>
                     <div
                         css={css`
-                            display: flex;
                             padding: ${space[8]};
                             border-radius: ${space[4]};
                             color: ${color.grayBlue};
@@ -121,7 +63,7 @@ export default function Index() {
                     >
                         <Clock height="16" />
                     </div>
-                    <div css={column({ gap: space[4] })}>
+                    <Column>
                         <h2
                             css={css`
                                 font-size: ${space[12]};
@@ -140,9 +82,10 @@ export default function Index() {
                         >
                             11th December '20
                         </p>
-                    </div>
-                </div>
-            </button>
+                    </Column>
+                </Row>
+            </Card>
         </Shell>
-    );
+         */
+    }
 }

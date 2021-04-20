@@ -1,0 +1,97 @@
+import { css, useTheme } from "emotion";
+
+import { Element, Block, Column, Row } from "app/components";
+import { ChevronLeft, KebabHorizontal } from "app/icons";
+import { HasChildren } from "app/utilities";
+
+export interface ShellProps extends HasChildren {
+    title: string;
+}
+
+export default function Shell({ title, children }: ShellProps) {
+    const { color, space } = useTheme();
+
+    return (
+        <Column
+            css={css`
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: ${color.whiteBlue};
+            `}
+        >
+            <Element
+                element="header"
+                backgroundColor={color.white}
+                borderBottomColor={color.softPurple}
+                borderBottomWidth={space[1]}
+                // css={css`
+                //     background-color: ${color.white};
+                //     border-bottom-color: ${color.softPurple};
+                //     border-bottom-width: ${space[1]};
+                // `}
+            >
+                <Row
+                    as="nav"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    css={css`
+                        margin-top: ${space[24]};
+                        margin-bottom: ${space[24]};
+                        margin-left: auto;
+                        margin-right: auto;
+                        padding-left: ${space[24]};
+                        padding-right: ${space[24]};
+                        max-width: ${space[1024]};
+                    `}
+                >
+                    <button
+                        css={css`
+                            &:focus {
+                                outline: none;
+                                border-radius: ${space[4]};
+                                box-shadow: 0 0 0 ${space[2]} ${color.softBlue};
+                            }
+                        `}
+                    >
+                        <ChevronLeft height="24" />
+                    </button>
+
+                    <h1
+                        css={css`
+                            font-size: ${space[20]};
+                            font-weight: 700;
+                        `}
+                    >
+                        {title}
+                    </h1>
+
+                    <button
+                        css={css`
+                            &:focus {
+                                outline: none;
+                                border-radius: ${space[4]};
+                                box-shadow: 0 0 0 ${space[2]} ${color.softBlue};
+                            }
+                        `}
+                    >
+                        <KebabHorizontal height="24" />
+                    </button>
+                </Row>
+            </Element>
+
+            <Column
+                as="main"
+                css={css`
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding: ${space[24]};
+                    width: 100%;
+                    max-width: ${space[1024]};
+                `}
+            >
+                {children}
+            </Column>
+        </Column>
+    );
+}

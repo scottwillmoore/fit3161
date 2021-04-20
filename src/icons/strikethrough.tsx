@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function Strikethrough({ height, ...props }: StrikethroughProps) {
+export default function Strikethrough({
+    height,
+    ...props
+}: StrikethroughProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

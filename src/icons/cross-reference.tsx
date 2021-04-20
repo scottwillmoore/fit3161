@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function CrossReference({ height, ...props }: CrossReferenceProps) {
+export default function CrossReference({
+    height,
+    ...props
+}: CrossReferenceProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

@@ -1,0 +1,78 @@
+import { jsx } from "emotion";
+
+import { Element, ElementProperties, IntrinsicElement } from "app/components";
+
+// const directionMap = {
+//     row: "row",
+//     rowReverse: "row-reverse",
+//     column: "column",
+//     columnReverse: "column-reverse",
+// };
+
+// export type Direction = keyof typeof directionMap;
+
+// const justifyMap = {
+//     start: "flex-start",
+//     end: "flex-end",
+//     center: "center",
+//     spaceBetween: "space-between",
+//     spaceAround: "space-around",
+// };
+
+// export type Justify = keyof typeof justifyMap;
+
+// const alignMap = {
+//     start: "flex-start",
+//     end: "flex-end",
+//     center: "center",
+//     baseline: "baseline",
+//     stretch: "stretch",
+// };
+
+// export type Align = keyof typeof alignMap;
+
+// const gapMap = {
+//     row: "margin-left",
+//     rowReverse: "margin-right",
+//     column: "margin-top",
+//     columnReverse: "margin-bottom",
+// };
+
+// export type Gap = string;
+
+export interface StackProperties extends ElementProperties {}
+
+export default function Stack({
+    // as = "div",
+    // children,
+    // direction = "row",
+    // justify = "start",
+    // align = "stretch",
+    // gap,
+    ...properties
+}: StackProperties) {
+    // const stackCss = css`
+    //     display: flex;
+    //     flex-direction: ${directionMap[direction]};
+    //     justify-content: ${justifyMap[justify]};
+    //     align-items: ${alignMap[align]};
+
+    //     ${gap &&
+    //     css`
+    //         & > * + * {
+    //             ${gapMap[direction]}: ${gap};
+    //         }
+    //     `}
+    // `;
+    // return jsx(as, { css: stackCss, ...properties }, children);
+
+    return <Element display="flex" {...properties} />;
+}
+
+export function Column(properties: Omit<StackProperties, "direction">) {
+    return <Stack flexDirection="column" {...properties} />;
+}
+
+export function Row(properties: Omit<StackProperties, "direction">) {
+    return <Stack flexDirection="row" {...properties} />;
+}

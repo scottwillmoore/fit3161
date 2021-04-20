@@ -1,0 +1,58 @@
+@use "colors" as *;
+@use "functions" as *;
+
+$border-radius: 4px;
+
+$border-width: 1px;
+
+// $box-shadow: 0 1px 3px rgba($color-blue-black, 0.05);
+$box-shadow: null;
+$box-shadow-outline: 0 0 0 3px $color-blue-soft;
+
+$font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+$font-size-xsmall: 10px;
+$font-size-small: 12px;
+$font-size-medium: 14px;
+$font-size-large: 16px;
+$font-size-xlarge: 20px;
+
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+// SPACE
+
+$space-0: 0px;
+$space-1: 1px;
+$space-4: 2px;
+$space-8: 8px;
+$space-16: 16px;
+$space-24: 24px;
+$space-32: 32px;
+$space-48: 48px;
+$space-64: 64px;
+
+// https://css-tricks.com/approaches-media-queries-sass/
+// https://github.com/digitaledgeit/sass-spacing/blob/master/mixins.scss
+// https://nortal.com/blog/how-sass-helps-us-build-scalable-and-consistent-uis/
+// https://github.com/foundation/foundation-sites/blob/develop/scss/settings/_settings.scss
+// https://github.com/govau/design-system-components/blob/master/packages/core/src/sass/_globals.scss
+
+// Idea
+// * Color (color, background-color, ...)
+// * Length (margin, padding, width, height, ...)
+// * Breakpoint
+// * Font Family, Size and Weight
+// * Time?
+// * Animation
+// * Border Radius
+// * Border Width
+// * Border Style
+// * Box Shadow and Ring
+
+// px to rem
+
+// https://github.com/digitaledgeit/sass-spacing
+// https://www.toptal.com/css/sass-mixins-keep-your-stylesheets-dry

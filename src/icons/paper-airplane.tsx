@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function PaperAirplane({ height, ...props }: PaperAirplaneProps) {
+export default function PaperAirplane({
+    height,
+    ...props
+}: PaperAirplaneProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function FileSubmodule({ height, ...props }: FileSubmoduleProps) {
+export default function FileSubmodule({
+    height,
+    ...props
+}: FileSubmoduleProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

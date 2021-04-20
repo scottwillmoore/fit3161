@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function DeviceCameraVideo({ height, ...props }: DeviceCameraVideoProps) {
+export default function DeviceCameraVideo({
+    height,
+    ...props
+}: DeviceCameraVideoProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

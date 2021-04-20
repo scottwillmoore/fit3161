@@ -1,0 +1,28 @@
+@function is-number($value) {
+    @return type-of($value) == "number";
+}
+
+@function is-unitless($value) {
+    @return is-number($value) and unit($value) == "";
+}
+
+@function length($length) {
+    @if is-unitless($length) {
+        @return ($length / 2) * 1rem;
+    } @else {
+        @return $length;
+    }
+}
+
+@function get-else($value, $default) {
+    @return if($value, $value, $default);
+}
+
+@function map-get-else($map, $key, $default) {
+    $exist: map-has-key($map, $key);
+    @return if($exist, map-get($map, $key), $default);
+}
+
+@function map-get-else-key($map, $key) {
+    @return map-get-else($map, $key, $key);
+}

@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function GitPullRequest({ height, ...props }: GitPullRequestProps) {
+export default function GitPullRequest({
+    height,
+    ...props
+}: GitPullRequestProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

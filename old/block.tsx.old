@@ -1,0 +1,9 @@
+import { jsx } from "emotion";
+
+// import { Element, ElementProperties, IntrinsicElement, HasAs } from "app/components";
+
+// export type BlockProperties<T extends IntrinsicElement> = HasAs<T>;
+
+// export function Block<T extends IntrinsicElement>(properties: ElementProperties<T>) {
+//     return jsx<ElementProperties<T>>(Element, properties);
+// }

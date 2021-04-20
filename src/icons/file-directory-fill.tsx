@@ -14,7 +14,10 @@ const heightMap = {
     },
 };
 
-export default function FileDirectoryFill({ height, ...props }: FileDirectoryFillProps) {
+export default function FileDirectoryFill({
+    height,
+    ...props
+}: FileDirectoryFillProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

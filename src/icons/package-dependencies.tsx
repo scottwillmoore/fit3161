@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function PackageDependencies({ height, ...props }: PackageDependenciesProps) {
+export default function PackageDependencies({
+    height,
+    ...props
+}: PackageDependenciesProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

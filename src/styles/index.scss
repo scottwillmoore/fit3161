@@ -1,0 +1,8 @@
+@use "normalize";
+
+@use "fonts";
+@use "variables" as *;
+
+html {
+    font-family: $font-family;
+}

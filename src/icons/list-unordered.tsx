@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function ListUnordered({ height, ...props }: ListUnorderedProps) {
+export default function ListUnordered({
+    height,
+    ...props
+}: ListUnorderedProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

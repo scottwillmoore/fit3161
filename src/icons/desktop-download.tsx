@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function DesktopDownload({ height, ...props }: DesktopDownloadProps) {
+export default function DesktopDownload({
+    height,
+    ...props
+}: DesktopDownloadProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

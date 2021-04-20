@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function HorizontalRule({ height, ...props }: HorizontalRuleProps) {
+export default function HorizontalRule({
+    height,
+    ...props
+}: HorizontalRuleProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

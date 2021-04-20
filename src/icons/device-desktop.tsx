@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function DeviceDesktop({ height, ...props }: DeviceDesktopProps) {
+export default function DeviceDesktop({
+    height,
+    ...props
+}: DeviceDesktopProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

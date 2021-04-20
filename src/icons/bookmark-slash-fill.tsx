@@ -14,7 +14,10 @@ const heightMap = {
     },
 };
 
-export default function BookmarkSlashFill({ height, ...props }: BookmarkSlashFillProps) {
+export default function BookmarkSlashFill({
+    height,
+    ...props
+}: BookmarkSlashFillProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

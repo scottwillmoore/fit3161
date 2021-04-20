@@ -1,0 +1,63 @@
+@use "functions" as *;
+@use "variables" as *;
+
+@mixin margin-x($margin-x) {
+    margin-left: length($margin-x);
+    margin-right: length($margin-x);
+}
+
+@mixin margin-y($margin-y) {
+    margin-top: length($margin-y);
+    margin-bottom: length($margin-y);
+}
+
+@mixin padding-x($padding-x) {
+    padding-left: length($padding-x);
+    padding-right: length($padding-x);
+}
+
+@mixin padding-y($padding-y) {
+    padding-top: length($padding-y);
+    padding-bottom: length($padding-y);
+}
+
+@mixin container($max-width: 1024px) {
+    @include margin-x(auto);
+    @include padding-x(4);
+    max-width: $max-width;
+}
+
+$flex-map: (
+    start: flex-start,
+    end: flex-end,
+);
+
+@mixin flex($wrap: nowrap, $direction: row, $justify: start, $align: stretch) {
+    display: flex;
+    flex-wrap: $wrap;
+    flex-direction: $direction;
+    align-items: map-get-else-key($flex-map, $align);
+    justify-content: map-get-else-key($flex-map, $justify);
+}
+
+@mixin stack($direction: row, $justify: start, $align: stretch) {
+    @include flex(nowrap, $direction, $justify, $align);
+}
+
+@mixin column($justify: start, $align: stretch) {
+    @include stack(column, $justify, $align);
+}
+
+@mixin row($justify: start, $align: stretch) {
+    @include stack(row, $justify, $align);
+}
+
+@mixin transition(
+    $property: all,
+    $duration: 200ms,
+    $timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+) {
+    transition-property: $property;
+    transition-duration: $duration;
+    transition-timing-function: $timing-function;
+}

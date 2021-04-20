@@ -1,0 +1,74 @@
+import * as Emotion from "emotion";
+import * as React from "react";
+
+import { WithConditionalCSSProp } from "emotion/types/jsx-namespace";
+
+type WithChildren = {
+    children?: React.ReactNode;
+};
+
+type WithClassName = {
+    className?: string;
+};
+
+type ElementType = keyof JSX.IntrinsicElements;
+
+type ElementAttributes<T extends ElementType> = JSX.IntrinsicElements[T];
+
+type WithElement<T extends ElementType> = {
+    element: T;
+} & ElementAttributes<T>;
+
+// prettier-ignore
+export type ElementProperties<T extends ElementType> = 
+    WithChildren &
+    WithClassName &
+    WithElement<T>;
+
+const elementCss: Emotion.CSSObject = {};
+
+export const Element = <T extends ElementType>({
+    element,
+    ...properties
+}: ElementProperties<T>) => {
+    // const cssProperties: Emotion.CSSObject = {};
+    // Object.keys(properties).forEach((key) => {
+    //     if (key == "color" || key == "backgroundColor") {
+    //         cssProperties[key] = properties[key];
+    //         delete properties[key];
+    //     }
+    // });
+    return Emotion.jsx(element, { css: elementCss, ...properties });
+};
+
+type WithCss<T> = T & WithConditionalCSSProp<T>;
+
+export type BlockProperties<T extends ElementType> = ElementProperties<T>;
+
+const blockCss: Emotion.CSSObject = {
+    display: "block",
+};
+
+export const Block = <T extends ElementType>({ ...properties }: WithCss<BlockProperties<T>>) => (
+    <Element<T> css={blockCss} {...properties} />
+);
+
+export type RedBlockProperties<T extends ElementType> = BlockProperties<T>;
+
+const redBlockCss: Emotion.CSSObject = {
+    backgroundColor: "red",
+};
+
+export const RedBlock = <T extends ElementType>({ ...properties }: RedBlockProperties<T>) => (
+    <Block<T> css={redBlockCss} {...properties} />
+);
+
+export type HasColor = {
+    color?: string;
+    backgroundColor?: string;
+};
+
+export const colorCss: Emotion.FunctionInterpolation<HasColor> = (properties) => {
+    console.log(properties);
+    return properties;
+};

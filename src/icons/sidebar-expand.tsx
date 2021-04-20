@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function SidebarExpand({ height, ...props }: SidebarExpandProps) {
+export default function SidebarExpand({
+    height,
+    ...props
+}: SidebarExpandProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function CodescanCheckmark({ height, ...props }: CodescanCheckmarkProps) {
+export default function CodescanCheckmark({
+    height,
+    ...props
+}: CodescanCheckmarkProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

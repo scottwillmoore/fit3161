@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function SidebarCollapse({ height, ...props }: SidebarCollapseProps) {
+export default function SidebarCollapse({
+    height,
+    ...props
+}: SidebarCollapseProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

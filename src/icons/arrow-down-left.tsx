@@ -14,7 +14,10 @@ const heightMap = {
     },
 };
 
-export default function ArrowDownLeft({ height, ...props }: ArrowDownLeftProps) {
+export default function ArrowDownLeft({
+    height,
+    ...props
+}: ArrowDownLeftProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

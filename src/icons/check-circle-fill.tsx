@@ -19,7 +19,10 @@ const heightMap = {
     },
 };
 
-export default function CheckCircleFill({ height, ...props }: CheckCircleFillProps) {
+export default function CheckCircleFill({
+    height,
+    ...props
+}: CheckCircleFillProps) {
     const { width, path } = heightMap[height];
     const viewBox = `0 0 ${width} ${height}`;
     return (

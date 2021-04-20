@@ -44,3 +44,71 @@ export const lightTheme = {
         1024: "64rem",
     },
 };
+
+// Color
+
+// BackgroundColor
+
+// BorderColor
+// BorderRadius
+// BorderStyle
+// BorderWidth
+
+// FontFamily
+// FontSize
+// FontWeight
+
+// themetype
+
+// <Button />
+// <Card />
+
+// TYPED STYLED SYSTEM
+
+function system(system: any) {
+    return null;
+}
+
+import { Properties as CSSProperties } from "csstype";
+
+type Color = "abc" | "xyz";
+
+export interface ThemeProperties {
+    color?: `$${Color}`;
+}
+
+export interface Properties
+    extends Omit<CSSProperties, keyof ThemeProperties>,
+        ThemeProperties {}
+
+const test: Properties = {
+    display: "flex",
+    color: "$abc",
+};
+
+type BorderWidth = {};
+
+type Space = keyof typeof lightTheme.space;
+
+// export type Time = number;
+
+// export type Length = number;
+
+// export type Color = "black" | "white";
+
+// export type Breakpoint = number;
+
+// export interface ColorProperties {
+//     color: Color;
+//     backgroundColor: Color;
+// }
+
+// export interface MarginProperties {
+//     margin: Length;
+//     marginBottom: Length;
+//     marginHorizontal: Length;
+//     marginLeft: Length;
+//     marginRight: Length;
+//     marginTop: Length;
+//     marginVertical: Length;
+// }
