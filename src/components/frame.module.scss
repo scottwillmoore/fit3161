@@ -33,6 +33,6 @@
 .body {
     @include column;
     @include container;
-    @include padding-y(4);
+    @include padding-y(6);
     @include space-between-y(4);
 }

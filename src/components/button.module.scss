@@ -7,27 +7,39 @@
     align-items: center;
     padding: 16px 24px;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 18px;
     box-shadow: $box-shadow;
+    transition-property: all;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button:focus {
+    outline: none;
+    box-shadow: $box-shadow-outline;
+}
+
+.button:hover {
+    box-shadow: $box-shadow-outline;
 }
 
 .button > * + * {
     margin-left: 16px;
 }
 
-.button-primary {
+.buttonPrimary {
     color: $color-white;
     background-color: $color-blue-hard;
 }
 
-.button-secondary {
+.buttonSecondary {
     color: $color-blue-gray;
     background-color: $color-white;
     border-width: 1px;
     border-color: $color-blue-gray;
 }
 
-.button-danger {
+.buttonDanger {
     color: $color-red-hard;
     background-color: $color-white;
     border-width: 1px;

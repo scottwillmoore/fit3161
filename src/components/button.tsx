@@ -4,24 +4,28 @@ import { As, WithAs, WithChildren } from "app/utilities";
 
 import classes from "./button.module.scss";
 
+function capitalize([first, ...rest]: string) {
+    return `${first.toUpperCase()}${rest.join("")}`;
+}
+
 export type ButtonVariant = "primary" | "secondary" | "danger";
 
 export type ButtonProperties<T extends As> = WithAs<T> & {
     icon: any;
     text: string;
-    variant?: ButtonVariant;
+    variant: ButtonVariant;
 };
 
 export function Button<T extends As>({
     as,
     icon,
     text,
-    variant = "secondary",
+    variant,
     ...properties
 }: ButtonProperties<T>) {
     const classNames = [];
     classNames.push(classes.button);
-    classNames.push(classes[`button-${variant}`]);
+    classNames.push(classes[`button${capitalize(variant)}`]);
 
     const className = classNames.join(" ");
 
@@ -29,7 +33,7 @@ export function Button<T extends As>({
         as || "button",
         { className, ...properties },
         <Fragment>
-            {createElement(icon, { height: "16" })}
+            {createElement(icon, { height: "24" })}
             <span className={classes.text}>{text}</span>
         </Fragment>
     );

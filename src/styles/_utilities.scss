@@ -33,7 +33,7 @@
     }
 }
 
-@mixin container($max-width: 1024px) {
+@mixin container($max-width: 768px) {
     @include margin-x(auto);
     @include padding-x(4);
     max-width: $max-width;

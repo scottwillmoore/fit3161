@@ -38,6 +38,15 @@ export default function Index() {
                 </CardSection>
             </Card>
 
+            <h1>
+                "Short attention span, easy distractibility, inability to
+                concentrate."
+            </h1>
+            <p>
+                Select the option which best describes this behaviour of the
+                patient.
+            </p>
+
             <RadioGroup>
                 {responses.map((response) => (
                     <Radio name="response" {...response} />

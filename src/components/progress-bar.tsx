@@ -10,7 +10,7 @@ export function ProgressBar({ min = 0, max = 100, value }: ProgressBarProps) {
     const percentage = (100 * value) / (max - min);
     return (
         <div className={classes.container}>
-            <p className={classes.description}>Question 1 of 7</p>
+            {/* <span className={classes.description}>Question 1 of 7</span> */}
             <div className={classes.progress}>
                 <div
                     className={classes.bar}

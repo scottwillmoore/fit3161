@@ -3,10 +3,11 @@
 @use "utilities" as *;
 @use "variables" as *;
 
-$font-size: $font-size-medium;
-$thickness: 4px;
-$color: $color-blue-hard;
-$background-color: $color-blue-soft;
+$description-font-size: 16px;
+$description-color: $color-blue-gray;
+$bar-color: $color-blue-soft;
+$bar-thickness: 4px;
+$progress-color: $color-blue-hard;
 
 .container {
     @include column;
@@ -14,18 +15,19 @@ $background-color: $color-blue-soft;
 }
 
 .description {
-    font-size: $font-size;
+    font-size: $description-font-size;
+    color: $description-color;
 }
 
 .progress {
     overflow: hidden;
-    height: $thickness;
-    border-radius: $thickness / 2;
-    background-color: $background-color;
+    height: $bar-thickness;
+    border-radius: $bar-thickness / 2;
+    background-color: $bar-color;
 }
 
 .bar {
     @include transition;
     height: 100%;
-    background-color: $color;
+    background-color: $progress-color;
 }
