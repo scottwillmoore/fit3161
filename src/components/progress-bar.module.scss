@@ -1,0 +1,31 @@
+@use "colors" as *;
+@use "functions" as *;
+@use "utilities" as *;
+@use "variables" as *;
+
+$font-size: $font-size-medium;
+$thickness: 4px;
+$color: $color-blue-hard;
+$background-color: $color-blue-soft;
+
+.container {
+    @include column;
+    @include space-between-y(2);
+}
+
+.description {
+    font-size: $font-size;
+}
+
+.progress {
+    overflow: hidden;
+    height: $thickness;
+    border-radius: $thickness / 2;
+    background-color: $background-color;
+}
+
+.bar {
+    @include transition;
+    height: 100%;
+    background-color: $color;
+}

@@ -7,13 +7,13 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    color: $color-purple-black;
-    background-color: $color-purple-white;
+    color: $color-blue-black;
+    background-color: $color-blue-white;
 }
 
 .header {
     background-color: $color-white;
-    border-bottom-color: $color-purple-soft;
+    border-bottom-color: $color-blue-soft;
     border-bottom-width: $border-width;
     box-shadow: $box-shadow;
 }
@@ -27,11 +27,12 @@
 .title {
     font-size: $font-size-large;
     font-weight: $font-weight-bold;
-    color: $color-purple-black;
+    color: $color-blue-black;
 }
 
 .body {
     @include column;
     @include container;
     @include padding-y(4);
+    @include space-between-y(4);
 }

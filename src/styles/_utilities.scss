@@ -21,6 +21,18 @@
     padding-bottom: length($padding-y);
 }
 
+@mixin space-between-x() {
+    & > * + * {
+        margin-left: length($space-between-x);
+    }
+}
+
+@mixin space-between-y($space-between-y) {
+    & > * + * {
+        margin-top: length($space-between-y);
+    }
+}
+
 @mixin container($max-width: 1024px) {
     @include margin-x(auto);
     @include padding-x(4);

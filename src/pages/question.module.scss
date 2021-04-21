@@ -1,0 +1,20 @@
+@use "colors" as *;
+@use "functions" as *;
+@use "utilities" as *;
+@use "variables" as *;
+
+.question {
+    @include column;
+    @include space-between-y(1);
+}
+
+.questionTitle {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    color: $color-blue-black;
+}
+
+.questionDescription {
+    font-size: $font-size-small;
+    color: $color-blue-gray;
+}
