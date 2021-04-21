@@ -1,0 +1,44 @@
+@use "colors" as *;
+@use "variables" as *;
+
+.button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    box-shadow: $box-shadow;
+}
+
+.button > * + * {
+    margin-left: 16px;
+}
+
+.button-primary {
+    color: $color-white;
+    background-color: $color-blue-hard;
+}
+
+.button-secondary {
+    color: $color-blue-gray;
+    background-color: $color-white;
+    border-width: 1px;
+    border-color: $color-blue-gray;
+}
+
+.button-danger {
+    color: $color-red-hard;
+    background-color: $color-white;
+    border-width: 1px;
+    border-color: $color-red-hard;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonGroup > * + * {
+    margin-left: 24px;
+}

@@ -1,5 +1,14 @@
-import { Card, Frame, Radio, RadioGroup } from "app/components";
-// import { Clippy, ArrowUpRight, Clock } from "app/icons";
+import {
+    Button,
+    ButtonGroup,
+    Card,
+    CardSection,
+    Frame,
+    Radio,
+    RadioGroup,
+} from "app/components";
+
+import { Beaker, Share, Trash } from "app/icons";
 
 const responses = [
     {
@@ -24,9 +33,9 @@ export default function Index() {
     return (
         <Frame title="Index">
             <Card>
-                <Card.Section>
+                <CardSection>
                     <p>Hello, world!</p>
-                </Card.Section>
+                </CardSection>
             </Card>
 
             <RadioGroup>
@@ -34,6 +43,12 @@ export default function Index() {
                     <Radio name="response" {...response} />
                 ))}
             </RadioGroup>
+
+            <ButtonGroup>
+                <Button variant="primary" icon={Beaker} text="Analysis" />
+                <Button variant="secondary" icon={Share} text="Export" />
+                <Button variant="danger" icon={Trash} text="Delete" />
+            </ButtonGroup>
         </Frame>
     );
 }

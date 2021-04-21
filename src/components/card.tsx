@@ -14,14 +14,16 @@ export function Card<T extends As>({ as, children, ...props }: CardProps<T>) {
     );
 }
 
-export type SectionProps<T extends As> = Join<WithChildren, WithAs<T>>;
+export type CardSectionProps<T extends As> = Join<WithChildren, WithAs<T>>;
 
-function Section<T extends As>({ as, children, ...props }: SectionProps<T>) {
+export function CardSection<T extends As>({
+    as,
+    children,
+    ...props
+}: CardSectionProps<T>) {
     return createElement(
         as || "div",
         { className: classes.section, ...props },
         children
     );
 }
-
-Card.Section = Section;
