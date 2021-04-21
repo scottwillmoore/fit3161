@@ -1,0 +1,28 @@
+import classes from "./radio.module.scss";
+
+export type RadioProperties = {
+    name: string;
+    title: string;
+    description: string;
+};
+
+export function Radio({ name, title, description }: RadioProperties) {
+    return (
+        <label>
+            <input className={classes.input} type="radio" name={name} />
+            <div className={classes.card}>
+                <div className={classes.indicator}></div>
+                <div className={classes.column}>
+                    <span className={classes.title}>{title}</span>
+                    <span className={classes.description}>{description}</span>
+                </div>
+            </div>
+        </label>
+    );
+}
+
+export type RadioGroupProperties = {};
+
+export function RadioGroup({}: RadioGroupProperties) {
+    return <div className={classes.card}></div>;
+}

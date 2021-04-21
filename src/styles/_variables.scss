@@ -12,11 +12,11 @@ $font-size-large: 20px;
 $font-weight-regular: 400;
 $font-weight-bold: 700;
 
-$border-radius: length(1 / 4);
-$border-width: length(1 / 16);
+$border-width: 1px;
+$border-radius: 4px;
 
-$box-shadow: null;
-// $box-shadow: 0 1px 3px rgba($color-blue-black, 0.05);
+// $box-shadow: null;
+$box-shadow: 0 1px 3px rgba($color-blue-black, 0.05);
 $box-shadow-outline: 0 0 0 3px $color-blue-soft;
 
 // SPACE

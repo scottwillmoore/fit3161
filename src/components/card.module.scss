@@ -4,38 +4,79 @@
 @use "variables" as *;
 
 .card {
-    @include column;
-    @include transition;
-
+    display: flex;
+    flex-direction: column;
     text-align: left;
     color: $color-blue-black;
     background-color: $color-white;
     border-radius: $border-radius;
-
     box-shadow: $box-shadow;
 
     &:hover {
         box-shadow: $box-shadow-outline;
     }
-
-    & > * {
-        position: relative;
-        padding: 16px;
-        border-width: $border-width;
-        border-color: $color-blue-soft;
-    }
-
-    & > * {
-        margin-top: -1px;
-    }
-
-    & > *:first-child {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-    }
-
-    & > *:last-child {
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-    }
 }
+
+.section {
+}
+
+.section {
+    position: relative;
+    padding: 16px;
+    border-width: $border-width;
+    border-color: $color-blue-soft;
+}
+
+.section {
+    margin-top: -1px;
+}
+
+.section:first-child {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+}
+
+.section:last-child {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+}
+
+// .card {
+//     @include column;
+//     @include transition;
+
+//     text-align: left;
+//     color: $color-blue-black;
+//     background-color: $color-white;
+//     border-radius: $border-radius;
+
+//     box-shadow: $box-shadow;
+
+//     &:hover {
+//         box-shadow: $box-shadow-outline;
+//     }
+
+//     & > * {
+//         position: relative;
+//         padding: 16px;
+//         border-width: $border-width;
+//         border-color: $color-blue-soft;
+//     }
+
+//     & > * {
+//         margin-top: -1px;
+//     }
+
+//     & > *:first-child {
+//         border-top-left-radius: 4px;
+//         border-top-right-radius: 4px;
+//     }
+
+//     & > *:last-child {
+//         border-bottom-left-radius: 4px;
+//         border-bottom-right-radius: 4px;
+//     }
+// }
+
+// .section {
+// }

@@ -1,0 +1,117 @@
+@use "colors" as *;
+@use "variables" as *;
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    background-color: $color-white;
+    box-shadow: $box-shadow;
+    transition-property: all;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardFocus {
+    box-shadow: $box-shadow-outline;
+}
+
+.input {
+    position: absolute;
+    opacity: 0;
+}
+
+// .input:focus + .card {
+//     box-shadow: $box-shadow-outline;
+// }
+
+// .input:checked + .card {
+//     background-color: $color-purple-soft;
+//     border-color: $color-purple-medium;
+// }
+
+.item {
+    box-sizing: content-box;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: -1px;
+    padding: 32px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color-purple-soft;
+}
+
+.label:first-child .item {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.label:last-child .item {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+// .input:focus + .item {
+//     box-shadow: $box-shadow-outline;
+// }
+
+.input:checked + .item {
+    z-index: 1;
+    background-color: $color-blue-soft;
+    border-color: $color-blue-medium;
+}
+
+.item > * + * {
+    margin-left: 32px;
+}
+
+.indicator {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color-purple-soft;
+    border-radius: 100%;
+    transition-property: all;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:checked + .item .indicator {
+    background-color: $color-white;
+    border-color: $color-purple-hard;
+    border-width: 6px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.column > * + * {
+    margin-top: 8px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+
+    color: $color-purple-black;
+}
+
+// .input:checked + * .title {
+//     color: $color-purple-hard;
+// }
+
+.description {
+    font-size: 16px;
+
+    color: $color-purple-gray;
+}
+
+// .input:checked + * .description {
+//     color: $color-purple-hard;
+// }

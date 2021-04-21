@@ -20,7 +20,7 @@ function Question() {
 export default function Index() {
     return (
         <Frame title="Index">
-            <ProgressBar value={50} />
+            <ProgressBar value={90} />
             <Question />
             <MultipleChoice />
         </Frame>
