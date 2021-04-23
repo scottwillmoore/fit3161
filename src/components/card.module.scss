@@ -3,80 +3,55 @@
 @use "utilities" as *;
 @use "variables" as *;
 
+$background-color-primary: $color-white;
+$background-color-secondary: $color-blue-white;
+$border-color: $color-blue-soft;
+$border-width: 1px;
+$border-radius: 8px;
+$box-shadow: $box-shadow;
+$box-shadow-focus: $box-shadow-outline;
+$box-shadow-hover: $box-shadow-outline;
+
 .card {
     display: flex;
     flex-direction: column;
-    text-align: left;
-    color: $color-blue-black;
-    background-color: $color-white;
     border-radius: $border-radius;
     box-shadow: $box-shadow;
 
+    &:focus {
+        box-shadow: $box-shadow-focus;
+    }
+
     &:hover {
-        box-shadow: $box-shadow-outline;
+        box-shadow: $box-shadow-hover;
+    }
+
+    & > * + * {
+        margin-top: -1px;
     }
 }
 
-.section {
-}
-
-.section {
+.cardSection {
     position: relative;
     padding: 16px;
     border-width: $border-width;
-    border-color: $color-blue-soft;
+    border-color: $border-color;
+
+    &:first-child {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+    }
 }
 
-.section {
-    margin-top: -1px;
+.cardSectionPrimary {
+    background-color: $background-color-primary;
 }
 
-.section:first-child {
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
+.cardSectionSecondary {
+    background-color: $background-color-secondary;
 }
-
-.section:last-child {
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-}
-
-// .card {
-//     @include column;
-//     @include transition;
-
-//     text-align: left;
-//     color: $color-blue-black;
-//     background-color: $color-white;
-//     border-radius: $border-radius;
-
-//     box-shadow: $box-shadow;
-
-//     &:hover {
-//         box-shadow: $box-shadow-outline;
-//     }
-
-//     & > * {
-//         position: relative;
-//         padding: 16px;
-//         border-width: $border-width;
-//         border-color: $color-blue-soft;
-//     }
-
-//     & > * {
-//         margin-top: -1px;
-//     }
-
-//     & > *:first-child {
-//         border-top-left-radius: 4px;
-//         border-top-right-radius: 4px;
-//     }
-
-//     & > *:last-child {
-//         border-bottom-left-radius: 4px;
-//         border-bottom-right-radius: 4px;
-//     }
-// }
-
-// .section {
-// }

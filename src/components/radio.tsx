@@ -1,16 +1,16 @@
 import { useState } from "react";
 
-import { WithChildren } from "app/utilities";
+import { ChildrenProps, classNames } from "app/utilities";
 
 import classes from "./radio.module.scss";
 
-export type RadioProperties = {
+export type RadioProps = {
     name: string;
     title: string;
     description: string;
 };
 
-export function Radio({ name, title, description }: RadioProperties) {
+export function Radio({ name, title, description }: RadioProps) {
     return (
         <label className={classes.label}>
             <input className={classes.input} type="radio" name={name} />
@@ -25,17 +25,12 @@ export function Radio({ name, title, description }: RadioProperties) {
     );
 }
 
-export type RadioGroupProperties = WithChildren;
+export type RadioGroupProps = ChildrenProps;
 
-export function RadioGroup({ children }: RadioGroupProperties) {
+export function RadioGroup({ children }: RadioGroupProps) {
     const [focus, setFocus] = useState(false);
 
-    const classNames = [classes.card];
-    if (focus) {
-        classNames.push(classes.cardFocus);
-    }
-
-    const className = classNames.join(" ");
+    const className = classNames(classes.card, focus && classes.cardFocus);
 
     return (
         <div

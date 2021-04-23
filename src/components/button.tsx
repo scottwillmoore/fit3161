@@ -1,6 +1,12 @@
-import { Fragment, createElement } from "react";
+import { Fragment } from "react";
 
-import { As, WithAs, WithChildren } from "app/utilities";
+import {
+    As,
+    AsProps,
+    ChildrenProps,
+    classNames,
+    createElement,
+} from "app/utilities";
 
 import classes from "./button.module.scss";
 
@@ -8,39 +14,43 @@ function capitalize([first, ...rest]: string) {
     return `${first.toUpperCase()}${rest.join("")}`;
 }
 
-export type ButtonVariant = "primary" | "secondary" | "danger";
+const buttonVariants = {
+    primary: classes.buttonPrimary,
+    secondary: classes.buttonSecondary,
+    danger: classes.buttonDanger,
+};
 
-export type ButtonProperties<T extends As> = WithAs<T> & {
+export type ButtonVariant = keyof typeof buttonVariants;
+
+export type ButtonProps<T extends As> = {
     icon: any;
     text: string;
     variant: ButtonVariant;
-};
+} & AsProps<T>;
 
 export function Button<T extends As>({
-    as,
-    icon,
+    icon: Icon,
     text,
     variant,
-    ...properties
-}: ButtonProperties<T>) {
-    const classNames = [];
-    classNames.push(classes.button);
-    classNames.push(classes[`button${capitalize(variant)}`]);
-
-    const className = classNames.join(" ");
+    as,
+    asRef,
+    ...props
+}: ButtonProps<T>) {
+    const className = classNames(classes.button, buttonVariants[variant]);
 
     return createElement(
         as || "button",
-        { className, ...properties },
+        asRef,
+        { className, ...props },
         <Fragment>
-            {createElement(icon, { height: "24" })}
+            <Icon height="24" />
             <span className={classes.text}>{text}</span>
         </Fragment>
     );
 }
 
-export type ButtonGroupProperties = WithChildren;
+export type ButtonGroupProps = ChildrenProps;
 
-export function ButtonGroup({ children }: ButtonGroupProperties) {
+export function ButtonGroup({ children }: ButtonGroupProps) {
     return <div className={classes.buttonGroup}>{children}</div>;
 }

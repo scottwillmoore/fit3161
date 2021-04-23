@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { Fragment } from "react";
 
-import { WithChildren } from "app/utilities";
+import { ChildrenProps } from "app/utilities";
 import { ChevronLeft, KebabHorizontal } from "app/icons";
 
 import classes from "./frame.module.scss";
@@ -27,7 +27,7 @@ function Header({ title }: HeaderProps) {
     );
 }
 
-export type BodyProps = WithChildren;
+export type BodyProps = ChildrenProps;
 
 function Body({ children }: BodyProps) {
     return <main className={classes.body}>{children}</main>;
@@ -35,7 +35,7 @@ function Body({ children }: BodyProps) {
 
 export type FrameProps = {
     title: string;
-} & WithChildren;
+} & ChildrenProps;
 
 export function Frame({ title, children }: FrameProps) {
     return (
@@ -65,7 +65,7 @@ export function Frame({ title, children }: FrameProps) {
 
             <div className={classes.frame}>
                 <Header title={title} />
-                <Body>{children} </Body>
+                <Body>{children}</Body>
             </div>
         </Fragment>
     );

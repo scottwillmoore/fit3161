@@ -1,29 +1,68 @@
-import { createElement } from "react";
-
-import { As, Join, WithAs, WithChildren } from "app/utilities";
+import {
+    As,
+    AsProps,
+    ChildrenProps,
+    classNames,
+    createElement,
+} from "app/utilities";
 
 import classes from "./card.module.scss";
 
-export type CardProps<T extends As> = Join<WithChildren, WithAs<T>>;
+const CARD_DEFAULT_AS = "div";
 
-export function Card<T extends As>({ as, children, ...props }: CardProps<T>) {
+export type CardProps<T extends As> = AsProps<T> & ChildrenProps;
+
+export function Card<T extends As>({
+    as,
+    asRef,
+    children,
+    ...props
+}: CardProps<T>) {
+    const className = classes.card;
     return createElement(
-        as || "div",
-        { className: classes.card, ...props },
+        as || CARD_DEFAULT_AS,
+        asRef,
+        {
+            className,
+            ...props,
+        },
         children
     );
 }
 
-export type CardSectionProps<T extends As> = Join<WithChildren, WithAs<T>>;
+const CARD_SECTION_DEFAULT_AS = "div";
+
+const cardSectionVariants = {
+    primary: classes.cardSectionPrimary,
+    secondary: classes.cardSectionSecondary,
+};
+
+export type CardSectionVariant = keyof typeof cardSectionVariants;
+
+export type CardSectionProps<T extends As> = {
+    variant?: CardSectionVariant;
+} & AsProps<T> &
+    ChildrenProps;
 
 export function CardSection<T extends As>({
+    variant = "primary",
     as,
+    asRef,
     children,
     ...props
 }: CardSectionProps<T>) {
+    const className = classNames(
+        classes.cardSection,
+        cardSectionVariants[variant]
+    );
+
     return createElement(
-        as || "div",
-        { className: classes.section, ...props },
+        as || CARD_SECTION_DEFAULT_AS,
+        asRef,
+        {
+            className,
+            ...props,
+        },
         children
     );
 }
