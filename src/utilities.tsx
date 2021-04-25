@@ -42,9 +42,9 @@ export type ChildrenProps<T extends ReactNode = ReactNode> = {
     children?: T;
 };
 
-export function classNames(
-    ...classes: (undefined | null | false | string)[]
-): string {
+export type ClassName = undefined | null | false | string;
+
+export function classNames(...classes: ClassName[]): string {
     return classes.filter(Boolean).join(" ");
 }
 

@@ -1,30 +1,25 @@
-$color-black: #000000;
-$color-gray: #999999;
-$color-white: #ffffff;
+@use "functions" as *;
 
-$color-red-hard: #b25959;
-$color-red-medium: #ffb2b2;
-$color-red-soft: #ffe5e5;
+$white-1: #ffffff;
+$white-2: #fafcff;
+$white-3: #f5f7fa;
+$white-4: #e6e9f0;
+$white-5: #d8dce5;
 
-$color-orange-hard: #e5b85c;
-$color-orange-medium: #ffe5b2;
-$color-orange-soft: #fff6e5;
+$black-1: #1f2533;
+$black-2: #363d4d;
+$black-3: #525866;
+$black-4: #666f80;
+$black-5: #7a8599;
 
-$color-green-hard: #66ccaa;
-$color-green-medium: #b2ffe6;
-$color-green-soft: #e5fff7;
+$red-1: #b25959;
+$red-2: #cc7a7a;
+$red-3: #ffb2b2;
+$red-4: #ffcccc;
+$red-5: #ffe5e5;
 
-$color-blue-black: #1f2533;
-$color-blue-gray: #666f80;
-$color-blue-white: #fafcff;
-$color-blue-hard: #6699ff;
-$color-blue-medium: #99bbff;
-// $color-blue-soft: #cedaf2;
-$color-blue-soft: #e5eeff;
-
-$color-purple-black: #1f1f33;
-$color-purple-gray: #666680;
-$color-purple-white: #fafaff;
-$color-purple-hard: #7a7af2;
-$color-purple-medium: #aaaaf2;
-$color-purple-soft: #dadaf2;
+$blue-1: #1452cc;
+$blue-2: #457ae5;
+$blue-3: #80aaff;
+$blue-4: #ccddff;
+$blue-5: #e5eeff;

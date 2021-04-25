@@ -48,7 +48,7 @@ const responses = [
 export default function Index() {
     return (
         <Frame title="Question">
-            <ProgressBar value={90} />
+            {/* <ProgressBar value={90} /> */}
 
             <Question />
 

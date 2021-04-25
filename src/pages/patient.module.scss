@@ -1,0 +1,55 @@
+@use "variables" as *;
+@use "utilities" as *;
+
+.card {
+    text-align: left;
+}
+
+.header {
+    @include row(start, space-between);
+    margin-bottom: 32px;
+}
+
+.box {
+    display: flex;
+    padding: 12px;
+    border-radius: 4px;
+    color: $gray-1;
+    background-color: $cool-gray-9;
+}
+
+.arrow {
+    width: 32px;
+    height: 32px;
+    color: $cool-gray-5;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.body > * + * {
+    margin-top: 8px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.description {
+    font-size: 16px;
+    color: $color-blue-gray;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: $color-blue-gray;
+}
+
+.footer > * + * {
+    margin-left: 16px;
+}

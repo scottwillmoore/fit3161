@@ -15,17 +15,16 @@ export type CardProps<T extends As> = AsProps<T> & ChildrenProps;
 export function Card<T extends As>({
     as,
     asRef,
+    className,
     children,
     ...props
 }: CardProps<T>) {
-    const className = classes.card;
+    const mergedClassNames = classNames(className, classes.card);
+
     return createElement(
         as || CARD_DEFAULT_AS,
         asRef,
-        {
-            className,
-            ...props,
-        },
+        { className: mergedClassNames, ...props },
         children
     );
 }
@@ -49,9 +48,11 @@ export function CardSection<T extends As>({
     as,
     asRef,
     children,
+    className,
     ...props
 }: CardSectionProps<T>) {
-    const className = classNames(
+    const mergedClassNames = classNames(
+        className,
         classes.cardSection,
         cardSectionVariants[variant]
     );
@@ -59,10 +60,7 @@ export function CardSection<T extends As>({
     return createElement(
         as || CARD_SECTION_DEFAULT_AS,
         asRef,
-        {
-            className,
-            ...props,
-        },
+        { className: mergedClassNames, ...props },
         children
     );
 }

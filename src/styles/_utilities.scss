@@ -1,75 +1,84 @@
+// https://css-tricks.com/approaches-media-queries-sass/
+// https://github.com/digitaledgeit/sass-spacing/blob/master/mixins.scss
+// https://nortal.com/blog/how-sass-helps-us-build-scalable-and-consistent-uis/
+// https://github.com/foundation/foundation-sites/blob/develop/scss/settings/_settings.scss
+// https://github.com/govau/design-system-components/blob/master/packages/core/src/sass/_globals.scss
+
+@use "colors" as *;
 @use "functions" as *;
+@use "spaces" as *;
 @use "variables" as *;
 
 @mixin margin-x($margin-x) {
-    margin-left: length($margin-x);
-    margin-right: length($margin-x);
+    margin-left: $margin-x;
+    margin-right: $margin-x;
 }
 
 @mixin margin-y($margin-y) {
-    margin-top: length($margin-y);
-    margin-bottom: length($margin-y);
+    margin-top: $margin-y;
+    margin-bottom: $margin-y;
 }
 
 @mixin padding-x($padding-x) {
-    padding-left: length($padding-x);
-    padding-right: length($padding-x);
+    margin-left: $padding-x;
+    margin-right: $padding-x;
 }
 
 @mixin padding-y($padding-y) {
-    padding-top: length($padding-y);
-    padding-bottom: length($padding-y);
+    margin-top: $padding-y;
+    margin-bottom: $padding-y;
 }
 
-@mixin space-between-x() {
-    & > * + * {
-        margin-left: length($space-between-x);
-    }
-}
-
-@mixin space-between-y($space-between-y) {
-    & > * + * {
-        margin-top: length($space-between-y);
-    }
-}
-
-@mixin container($max-width: 768px) {
+@mixin container($max-width) {
     @include margin-x(auto);
-    @include padding-x(4);
     max-width: $max-width;
 }
 
-$flex-map: (
+@mixin fluid-container() {
+}
+
+$direction-map: (
+    column: margin-top,
+    row: margin-left,
+);
+
+@mixin space-between($direction, $space-between) {
+    $margin: map-get-else-key($direction-map, $direction);
+    & > * + * {
+        #{$margin}: $space-between;
+    }
+}
+
+@mixin space-between-x($space-between-x) {
+    @include space-between(row, $space-between-x);
+}
+
+@mixin space-between-y($space-between-y) {
+    @include space-between(column, $space-between-y);
+}
+
+$placement-map: (
     start: flex-start,
     end: flex-end,
 );
 
-@mixin flex($wrap: nowrap, $direction: row, $justify: start, $align: stretch) {
-    display: flex;
-    flex-wrap: $wrap;
-    flex-direction: $direction;
-    align-items: map-get-else-key($flex-map, $align);
-    justify-content: map-get-else-key($flex-map, $justify);
-}
-
-@mixin stack($direction: row, $justify: start, $align: stretch) {
-    @include flex(nowrap, $direction, $justify, $align);
-}
-
-@mixin column($justify: start, $align: stretch) {
-    @include stack(column, $justify, $align);
-}
-
-@mixin row($justify: start, $align: stretch) {
-    @include stack(row, $justify, $align);
-}
-
-@mixin transition(
-    $property: all,
-    $duration: 200ms,
-    $timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+@mixin stack(
+    $direction: row,
+    $align: stretch,
+    $justify: start,
+    $space-between: 0
 ) {
-    transition-property: $property;
-    transition-duration: $duration;
-    transition-timing-function: $timing-function;
+    @include space-between($direction, $space-between);
+    display: flex;
+    flex-direction: $direction;
+    align-items: map-get-else-key($placement-map, $align);
+    justify-content: map-get-else-key($placement-map, $justify);
+}
+
+@mixin column($align: stretch, $justify: start, $space-between: 0) {
+    @include stack(column, $align, $justify, $space-between);
+}
+
+@mixin row($align: stretch, $justify: start, $space-between: 0) {
+    @include stack(row, $align, $justify, $space-between);
 }

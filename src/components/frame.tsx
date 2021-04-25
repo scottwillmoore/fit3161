@@ -63,7 +63,7 @@ export function Frame({ title, children }: FrameProps) {
                 <title>{title}</title>
             </Head>
 
-            <div className={classes.frame}>
+            <div className={classes.background}>
                 <Header title={title} />
                 <Body>{children}</Body>
             </div>

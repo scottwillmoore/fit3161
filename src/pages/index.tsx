@@ -36,6 +36,9 @@ export default function Index() {
                 <CardSection>
                     <p>Hello, world!</p>
                 </CardSection>
+                <CardSection variant="secondary">
+                    <p>Hello, world!</p>
+                </CardSection>
             </Card>
 
             <h1>

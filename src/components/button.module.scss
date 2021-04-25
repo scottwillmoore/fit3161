@@ -1,56 +1,45 @@
 @use "colors" as *;
+@use "spaces" as *;
 @use "variables" as *;
+@use "utilities" as *;
 
 .button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 16px 24px;
-    border-radius: 4px;
-    font-size: 18px;
+    @include row($align: center, $justify: center, $space-between: $space-16);
+    @include transition();
+    padding: $space-16 $space-24;
+    border-radius: $border-radius;
+    font-size: $font-size-medium;
     box-shadow: $box-shadow;
-    transition-property: all;
-    transition-duration: 200ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button:focus {
     outline: none;
-    box-shadow: $box-shadow-outline;
+    box-shadow: $ring;
 }
 
 .button:hover {
-    box-shadow: $box-shadow-outline;
-}
-
-.button > * + * {
-    margin-left: 16px;
+    box-shadow: $ring;
 }
 
 .buttonPrimary {
-    color: $color-white;
-    background-color: $color-blue-hard;
+    color: $white-1;
+    background-color: $blue-2;
 }
 
 .buttonSecondary {
-    color: $color-blue-gray;
-    background-color: $color-white;
-    border-width: 1px;
-    border-color: $color-blue-gray;
+    color: $black-4;
+    background-color: $white-1;
+    border-width: $border-width;
+    border-color: $border-color;
 }
 
 .buttonDanger {
-    color: $color-red-hard;
-    background-color: $color-white;
-    border-width: 1px;
-    border-color: $color-red-hard;
+    color: $red-1;
+    background-color: $white-1;
+    border-width: $border-width;
+    border-color: $red-1;
 }
 
 .buttonGroup {
-    display: flex;
-    flex-direction: row;
-}
-
-.buttonGroup > * + * {
-    margin-left: 24px;
+    @include row($space-between: $space-24);
 }

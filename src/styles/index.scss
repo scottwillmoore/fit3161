@@ -1,11 +1,14 @@
-@use "colors" as *;
-@use "variables" as *;
-
 @use "normalize";
+
 @use "fonts";
+
+@use "colors" as *;
+@use "spaces" as *;
+@use "utilities" as *;
+@use "variables" as *;
 
 html {
     font-family: $font-family;
-    color: $color-blue-black;
-    background-color: $color-blue-white;
+    color: $black-1;
+    background-color: $white-2;
 }

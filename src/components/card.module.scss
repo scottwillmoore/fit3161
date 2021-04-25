@@ -1,41 +1,32 @@
 @use "colors" as *;
-@use "functions" as *;
+@use "spaces" as *;
 @use "utilities" as *;
 @use "variables" as *;
 
-$background-color-primary: $color-white;
-$background-color-secondary: $color-blue-white;
-$border-color: $color-blue-soft;
-$border-width: 1px;
-$border-radius: 8px;
-$box-shadow: $box-shadow;
-$box-shadow-focus: $box-shadow-outline;
-$box-shadow-hover: $box-shadow-outline;
-
 .card {
-    display: flex;
-    flex-direction: column;
+    @include column();
+    @include transition();
     border-radius: $border-radius;
     box-shadow: $box-shadow;
 
     &:focus {
-        box-shadow: $box-shadow-focus;
+        box-shadow: $ring;
     }
 
     &:hover {
-        box-shadow: $box-shadow-hover;
-    }
-
-    & > * + * {
-        margin-top: -1px;
+        box-shadow: $ring;
     }
 }
 
 .cardSection {
     position: relative;
-    padding: 16px;
+    padding: $space-24 $space-32;
     border-width: $border-width;
-    border-color: $border-color;
+    border-color: $white-5;
+
+    &:not(:first-child) {
+        margin-top: -$border-width;
+    }
 
     &:first-child {
         border-top-left-radius: $border-radius;
@@ -49,9 +40,9 @@ $box-shadow-hover: $box-shadow-outline;
 }
 
 .cardSectionPrimary {
-    background-color: $background-color-primary;
+    background-color: $white-1;
 }
 
 .cardSectionSecondary {
-    background-color: $background-color-secondary;
+    background-color: $white-3;
 }

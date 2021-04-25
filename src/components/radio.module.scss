@@ -1,22 +1,18 @@
 @use "colors" as *;
+@use "spaces" as *;
+@use "utilities" as *;
 @use "variables" as *;
 
-$border-width: 1px;
-$border-radius: 8px;
-
-.card {
-    display: flex;
-    flex-direction: column;
-    background-color: $color-white;
-    border-radius: $border-radius;
-    box-shadow: $box-shadow;
-    transition-property: all;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+.card:hover {
+    box-shadow: $ring;
 }
 
-.cardFocus {
-    box-shadow: $box-shadow-outline;
+.input:focus + .card {
+    box-shadow: $ring;
+}
+
+.cardSection {
+    @include row($align: center, $space-between: $space-24);
 }
 
 .input {
@@ -24,98 +20,41 @@ $border-radius: 8px;
     opacity: 0;
 }
 
-// .input:focus + .card {
-//     box-shadow: $box-shadow-outline;
-// }
-
-// .input:checked + .card {
-//     background-color: $color-purple-soft;
-//     border-color: $color-purple-medium;
-// }
-
-.item {
-    cursor: pointer;
-    box-sizing: content-box;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: -$border-width;
-    padding: 24px 48px;
-    border-width: $border-width;
-    border-style: solid;
-    border-color: $color-blue-soft;
+.input:checked + .card .cardSection {
+    background-color: $blue-5;
+    border-color: $blue-1;
 }
 
-.label:first-child .item {
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
-}
-
-.label:last-child .item {
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-}
-
-// .input:focus + .item {
-//     box-shadow: $box-shadow-outline;
-// }
-
-.input:checked + .item {
-    z-index: 1;
-    background-color: $color-blue-soft;
-    border-color: $color-blue-medium;
-}
-
-.item > * + * {
-    margin-left: 24px;
-}
-
-.indicator {
+.radio {
+    @include transition();
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
+    width: $space-24;
+    height: $space-24;
     border-width: $border-width;
-    border-style: solid;
-    border-color: $color-blue-soft;
+    border-color: $white-5;
     border-radius: 100%;
-    transition-property: all;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.input:checked + .item .indicator {
-    background-color: $color-white;
-    border-color: $color-blue-hard;
-    border-width: 6px;
+.input:checked + .card .cardSection .radio {
+    background-color: $white-1;
+    border-color: $blue-1;
+    border-width: $space-6;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
+    @include column($space-between: $space-8);
 }
 
-.column > * + * {
-    margin-top: 8px;
+.input .title {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
 }
-
-.title {
-    font-size: 20px;
-    font-weight: 700;
-
-    color: $color-purple-black;
-}
-
-// .input:checked + * .title {
-//     color: $color-purple-hard;
-// }
 
 .description {
-    font-size: 16px;
-
-    color: $color-purple-gray;
+    font-size: $font-size-medium;
+    color: $black-4;
 }
 
-// .input:checked + * .description {
-//     color: $color-purple-hard;
-// }
+.radioGroup {
+    @include column($space-between: $space-32);
+}

@@ -1,6 +1,5 @@
-import { useState } from "react";
-
-import { ChildrenProps, classNames } from "app/utilities";
+import { Card, CardSection } from "app/components";
+import { ChildrenProps } from "app/utilities";
 
 import classes from "./radio.module.scss";
 
@@ -14,13 +13,17 @@ export function Radio({ name, title, description }: RadioProps) {
     return (
         <label className={classes.label}>
             <input className={classes.input} type="radio" name={name} />
-            <div className={classes.item}>
-                <div className={classes.indicator}></div>
-                <div className={classes.column}>
-                    <span className={classes.title}>{title}</span>
-                    <span className={classes.description}>{description}</span>
-                </div>
-            </div>
+            <Card className={classes.card}>
+                <CardSection className={classes.cardSection}>
+                    <div className={classes.radio}></div>
+                    <div className={classes.column}>
+                        <span className={classes.title}>{title}</span>
+                        <span className={classes.description}>
+                            {description}
+                        </span>
+                    </div>
+                </CardSection>
+            </Card>
         </label>
     );
 }
@@ -28,17 +31,5 @@ export function Radio({ name, title, description }: RadioProps) {
 export type RadioGroupProps = ChildrenProps;
 
 export function RadioGroup({ children }: RadioGroupProps) {
-    const [focus, setFocus] = useState(false);
-
-    const className = classNames(classes.card, focus && classes.cardFocus);
-
-    return (
-        <div
-            onBlur={() => setFocus(false)}
-            onFocus={() => setFocus(true)}
-            className={className}
-        >
-            {children}
-        </div>
-    );
+    return <div className={classes.radioGroup}>{children}</div>;
 }

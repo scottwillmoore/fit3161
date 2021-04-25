@@ -1,17 +1,10 @@
-@function is-number($value) {
-    @return type-of($value) == "number";
-}
+$font-size: 16px;
 
-@function is-unitless($value) {
-    @return is-number($value) and unit($value) == "";
-}
-
-@function length($length) {
-    @if is-unitless($length) {
-        @return ($length / 2) * 1rem;
-    } @else {
-        @return $length;
+@function rem($length) {
+    @if unit($length) != "px" {
+        @warn "Expected $length to have unit of 'px'.";
     }
+    @return ($length / $font-size) * 1rem;
 }
 
 @function get-else($value, $default) {
