@@ -8,19 +8,12 @@
     @include transition();
     border-radius: $border-radius;
     box-shadow: $box-shadow;
-
-    &:focus {
-        box-shadow: $ring;
-    }
-
-    &:hover {
-        box-shadow: $ring;
-    }
 }
 
 .cardSection {
     position: relative;
-    padding: $space-24 $space-32;
+    // padding: $space-24 $space-32;
+    padding: $space-24;
     border-width: $border-width;
     border-color: $white-5;
 

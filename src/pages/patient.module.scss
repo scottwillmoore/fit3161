@@ -1,55 +1,75 @@
-@use "variables" as *;
+@use "colors" as *;
+@use "spaces" as *;
 @use "utilities" as *;
+@use "variables" as *;
 
 .card {
     text-align: left;
+
+    &:focus {
+        box-shadow: $ring;
+    }
+
+    &:hover {
+        box-shadow: $ring;
+    }
+}
+
+.card:hover {
+    box-shadow: $ring;
+}
+
+.card:focus {
+    box-shadow: $ring;
 }
 
 .header {
     @include row(start, space-between);
-    margin-bottom: 32px;
+    margin-bottom: $space-32;
 }
 
 .box {
     display: flex;
-    padding: 12px;
-    border-radius: 4px;
-    color: $gray-1;
-    background-color: $cool-gray-9;
+    padding: $space-12;
+    border-radius: $border-radius;
+    color: $white-1;
+    background-color: $blue-1;
 }
 
 .arrow {
-    width: 32px;
-    height: 32px;
-    color: $cool-gray-5;
+    width: $space-32;
+    height: $space-32;
+    color: $black-4;
 }
 
 .body {
-    display: flex;
-    flex-direction: column;
-}
-
-.body > * + * {
-    margin-top: 8px;
+    @include column($space-between: $space-8);
 }
 
 .title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xlarge;
+    font-weight: $font-weight-bold;
 }
 
 .description {
-    font-size: 16px;
-    color: $color-blue-gray;
+    font-size: $font-size-medium;
+    color: $black-4;
 }
 
 .footer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: $color-blue-gray;
+    @include row($align: center, $space-between: $space-16);
+    color: $black-4;
 }
 
-.footer > * + * {
-    margin-left: 16px;
+.column {
+    @include column($space-between: $space-4);
+}
+
+.subtitle {
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+}
+
+.date {
+    font-size: $font-size-medium;
 }

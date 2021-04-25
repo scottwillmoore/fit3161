@@ -7,7 +7,7 @@
     box-shadow: $ring;
 }
 
-.input:focus + .card {
+.input:focus + * {
     box-shadow: $ring;
 }
 
@@ -20,7 +20,7 @@
     opacity: 0;
 }
 
-.input:checked + .card .cardSection {
+.input:checked + * .cardSection {
     background-color: $blue-5;
     border-color: $blue-1;
 }
@@ -35,7 +35,7 @@
     border-radius: 100%;
 }
 
-.input:checked + .card .cardSection .radio {
+.input:checked + * .radio {
     background-color: $white-1;
     border-color: $blue-1;
     border-width: $space-6;
@@ -45,7 +45,7 @@
     @include column($space-between: $space-8);
 }
 
-.input .title {
+.title {
     font-size: $font-size-large;
     font-weight: $font-weight-bold;
 }
