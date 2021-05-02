@@ -1,0 +1,59 @@
+@use "colors" as *;
+@use "spaces" as *;
+@use "utilities" as *;
+@use "variables" as *;
+
+.card:hover {
+    box-shadow: $ring;
+}
+
+.cardSection {
+    @include row($align: center, $space-between: $space-24);
+}
+
+.input {
+    position: absolute;
+    opacity: 0;
+}
+
+.input:checked + * .cardSection {
+    border-color: $blue-3;
+    box-shadow: $ring;
+}
+
+.checkbox {
+    @include transition();
+    flex-shrink: 0;
+    width: $space-24;
+    height: $space-24;
+    border-width: $border-width;
+    border-color: $white-5;
+    border-radius: 100%;
+}
+
+.input:checked + * .radio {
+    background-color: $white-1;
+    border-color: $blue-1;
+    border-width: $space-6;
+}
+
+.column {
+    @include column($space-between: $space-8);
+}
+
+.title {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+}
+
+.description {
+    font-size: $font-size-medium;
+    color: $black-4;
+}
+
+.checkboxGroup {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-gap: 10px;
+    position: centre;
+}

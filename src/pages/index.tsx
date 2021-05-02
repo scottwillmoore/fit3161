@@ -6,6 +6,8 @@ import {
     Frame,
     Radio,
     RadioGroup,
+    Checkbox,
+    CheckboxGroup
 } from "app/components";
 
 import { Beaker, Share, Trash } from "app/icons";
@@ -27,6 +29,18 @@ const responses = [
         title: `Extreme`,
         description: `The individual is not able to engage in appropriate behavior due to the interference of their agitated behavior, even when external cues or redirection is provided.`,
     },
+];
+
+const images = [
+    "img1",
+    "img2",
+    "img3",
+    "img4",
+    "img5",
+    "img6",
+    "img7",
+    "img8",
+    "img9",
 ];
 
 export default function Index() {
@@ -55,6 +69,12 @@ export default function Index() {
                     <Radio name="response" {...response} />
                 ))}
             </RadioGroup>
+            
+            <CheckboxGroup>
+                {images.map((image) => (
+                    <Checkbox name="image" {...image} />
+                ))}
+            </CheckboxGroup>
 
             <ButtonGroup>
                 <Button variant="primary" icon={Beaker} text="Analysis" />
