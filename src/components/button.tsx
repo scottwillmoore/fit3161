@@ -14,34 +14,33 @@ function capitalize([first, ...rest]: string) {
     return `${first.toUpperCase()}${rest.join("")}`;
 }
 
-const buttonVariants = {
-    primary: classes.buttonPrimary,
-    secondary: classes.buttonSecondary,
-    danger: classes.buttonDanger,
-};
-
-export type ButtonVariant = keyof typeof buttonVariants;
+export type ButtonVariant = "primary" | "secondary" | "danger";
 
 export type ButtonProps<T extends As> = {
+    variant?: ButtonVariant;
     icon: any;
     text: string;
-    variant: ButtonVariant;
 } & AsProps<T>;
 
 export function Button<T extends As>({
+    variant = "secondary",
     icon: Icon,
     text,
-    variant,
     as,
     asRef,
+    className,
     ...props
 }: ButtonProps<T>) {
-    const className = classNames(classes.button, buttonVariants[variant]);
+    const mergedClassName = classNames(
+        className,
+        classes.button,
+        classes[variant]
+    );
 
     return createElement(
         as || "button",
         asRef,
-        { className, ...props },
+        { className: mergedClassName, ...props },
         <Fragment>
             <Icon height="24" />
             <span className={classes.text}>{text}</span>

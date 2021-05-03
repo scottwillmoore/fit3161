@@ -30,12 +30,16 @@
         border-bottom-left-radius: $border-radius;
         border-bottom-right-radius: $border-radius;
     }
-}
 
-.cardSectionPrimary {
-    background-color: $white-1;
-}
+    &.primary {
+        background-color: $white-1;
+    }
 
-.cardSectionSecondary {
-    background-color: $white-3;
+    &.secondary {
+        background-color: $white-3;
+    }
+
+    &.danger {
+        background-color: $red-5;
+    }
 }

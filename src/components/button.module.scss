@@ -10,34 +10,34 @@
     border-radius: $border-radius;
     font-size: $font-size-medium;
     box-shadow: $box-shadow;
-}
 
-.button:focus {
-    outline: none;
-    box-shadow: $ring;
-}
+    &:focus {
+        outline: none;
+        box-shadow: $ring;
+    }
 
-.button:hover {
-    box-shadow: $ring;
-}
+    &:hover {
+        box-shadow: $ring;
+    }
 
-.buttonPrimary {
-    color: $white-1;
-    background-color: $blue-2;
-}
+    &.primary {
+        color: $white-1;
+        background-color: $blue-2;
+    }
 
-.buttonSecondary {
-    color: $black-4;
-    background-color: $white-1;
-    border-width: $border-width;
-    border-color: $border-color;
-}
+    &.secondary {
+        color: $black-4;
+        background-color: $white-1;
+        border-width: $border-width;
+        border-color: $border-color;
+    }
 
-.buttonDanger {
-    color: $red-1;
-    background-color: $white-1;
-    border-width: $border-width;
-    border-color: $red-1;
+    &.danger {
+        color: $red-1;
+        background-color: $white-1;
+        border-width: $border-width;
+        border-color: $red-1;
+    }
 }
 
 .buttonGroup {

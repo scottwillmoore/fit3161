@@ -19,24 +19,19 @@ export function Card<T extends As>({
     children,
     ...props
 }: CardProps<T>) {
-    const mergedClassNames = classNames(className, classes.card);
+    const mergedClassName = classNames(className, classes.card);
 
     return createElement(
         as || CARD_DEFAULT_AS,
         asRef,
-        { className: mergedClassNames, ...props },
+        { className: mergedClassName, ...props },
         children
     );
 }
 
 const CARD_SECTION_DEFAULT_AS = "div";
 
-const cardSectionVariants = {
-    primary: classes.cardSectionPrimary,
-    secondary: classes.cardSectionSecondary,
-};
-
-export type CardSectionVariant = keyof typeof cardSectionVariants;
+export type CardSectionVariant = "primary" | "secondary" | "danger";
 
 export type CardSectionProps<T extends As> = {
     variant?: CardSectionVariant;
@@ -51,16 +46,16 @@ export function CardSection<T extends As>({
     className,
     ...props
 }: CardSectionProps<T>) {
-    const mergedClassNames = classNames(
+    const mergedClassName = classNames(
         className,
         classes.cardSection,
-        cardSectionVariants[variant]
+        classes[variant]
     );
 
     return createElement(
         as || CARD_SECTION_DEFAULT_AS,
         asRef,
-        { className: mergedClassNames, ...props },
+        { className: mergedClassName, ...props },
         children
     );
 }

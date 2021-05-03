@@ -15,11 +15,12 @@ function Header({ title }: HeaderProps) {
     return (
         <header className={classes.header}>
             <nav className={classes.navigation}>
-                <button>
+                <button className={classes.button}>
                     <ChevronLeft height="24" />
                 </button>
+
                 <h1 className={classes.title}>{title}</h1>
-                <button>
+                <button className={classes.button}>
                     <KebabHorizontal height="24" />
                 </button>
             </nav>

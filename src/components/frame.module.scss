@@ -18,6 +18,20 @@
     box-shadow: $box-shadow;
 }
 
+.button {
+    @include transition();
+    border-radius: $border-radius;
+
+    &:focus {
+        outline: none;
+        box-shadow: $ring;
+    }
+
+    &:hover {
+        box-shadow: $ring;
+    }
+}
+
 .navigation {
     @include row($align: center, $justify: space-between);
     @include container($breakpoint-medium);

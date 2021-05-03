@@ -23,7 +23,6 @@ $font-size-small: rem(14px);
 $font-size-medium: rem(16px);
 $font-size-large: rem(20px);
 $font-size-xlarge: rem(24px);
-$font-size-xxlarge: rem(32px);
 
 $font-style-normal: normal;
 $font-style-italic: italic;
@@ -31,7 +30,7 @@ $font-style-italic: italic;
 $font-weight-normal: 400;
 $font-weight-bold: 700;
 
-$ring: 0 0 0 rem(2px) $white-1, 0 0 0 rem(4px) $blue-3;
+$ring: 0 0 0 rem(2px) $white-1, 0 0 0 rem(4px) $blue-4;
 
 @mixin transition(
     $property: all,
