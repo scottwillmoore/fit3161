@@ -82,3 +82,13 @@ $placement-map: (
 @mixin row($align: stretch, $justify: start, $space-between: 0) {
     @include stack(row, $align, $justify, $space-between);
 }
+
+@mixin transition(
+    $property: all,
+    $duration: 100ms,
+    $timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+) {
+    transition-property: $property;
+    transition-duration: $duration;
+    transition-timing-function: $timing-function;
+}

@@ -1,28 +1,50 @@
-@use "sass:list";
+@use "sass:list" as *;
 
-$font-family: "Inter";
-$font-weights: (400, 700);
-$font-styles: (normal, italic);
-$font-formats: ("woff2", "woff");
+@use "./functions" as *;
 
-@each $font-weight in $font-weights {
-    @each $font-style in $font-styles {
-        @font-face {
-            font-display: swap;
+$font-weight-map: (
+    "Regular": 400,
+    "Bold": 700,
+);
 
-            font-family: $font-family;
-            font-weight: $font-weight;
-            font-style: $font-style;
+$font-style-map: (
+    "": normal,
+    "Italic": italic,
+);
 
-            $font-src: ();
-            @each $font-format in $font-formats {
-                $font-url: "/fonts/#{$font-family}-#{$font-weight}-#{$font-style}.#{$font-format}";
-                $font-src: list.append(
-                    $font-src,
-                    url($font-url) format($font-format)
-                );
+@mixin font($font-family, $font-weights, $font-styles) {
+    @each $font-weight in $font-weights {
+        @each $font-style in $font-styles {
+            @font-face {
+                font-display: swap;
+
+                font-family: $font-family;
+                font-weight: map-get-else-key($font-weight-map, $font-weight);
+                font-style: map-get-else-key($font-style-map, $font-style);
+
+                $font-src: ();
+                $font-formats: ("woff2", "woff");
+                @each $font-format in $font-formats {
+                    $font-url: "/fonts/#{$font-family}-#{$font-weight}#{$font-style}.#{$font-format}";
+                    $font-src: append(
+                        $font-src,
+                        url($font-url) format($font-format)
+                    );
+                }
+                src: $font-src;
             }
-            src: $font-src;
         }
     }
 }
+
+@include font(
+    $font-family: "Inter",
+    $font-weights: (
+        "Regular",
+        "Bold",
+    ),
+    $font-styles: (
+        "",
+        "Italic",
+    )
+);

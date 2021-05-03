@@ -1,7 +1,5 @@
-@use "colors" as *;
-@use "spaces" as *;
-@use "utilities" as *;
-@use "variables" as *;
+@use "./styles/utilities" as *;
+@use "./styles/variables" as *;
 
 .background {
     position: absolute;
