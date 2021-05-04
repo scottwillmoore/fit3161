@@ -1,0 +1,61 @@
+@use "@/styles" as *;
+
+.card {
+    cursor: pointer;
+}
+
+.card:hover {
+    box-shadow: $ring;
+}
+
+.input:focus + .card {
+    box-shadow: $ring;
+}
+
+.cardSection {
+    @include row($align: center, $gap: $length-24);
+}
+
+.input {
+    position: absolute;
+    opacity: 0;
+}
+
+.input:checked + .card .cardSection {
+    background-color: $color-blue-5;
+    border-color: $color-blue-1;
+}
+
+.radio {
+    @include transition();
+    flex-shrink: 0;
+    width: $length-24;
+    height: $length-24;
+    border-width: $border-width;
+    border-color: $color-white-5;
+    border-radius: 100%;
+}
+
+.input:checked + .card .cardSection .radio {
+    background-color: $color-white-1;
+    border-color: $color-blue-1;
+    border-width: $length-6;
+}
+
+.information {
+    @include column($gap: $length-8);
+}
+
+.title {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+}
+
+.description {
+    font-size: $font-size-medium;
+    color: $color-black-4;
+}
+
+.radioGroup {
+    @include column($gap: $length-16);
+}

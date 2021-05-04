@@ -1,12 +1,3 @@
-$font-size: 16px;
-
-@function rem($length) {
-    @if unit($length) != "px" {
-        @warn "Expected $length to have unit of 'px'.";
-    }
-    @return ($length / $font-size) * 1rem;
-}
-
 @function get-else($value, $default) {
     @return if($value, $value, $default);
 }

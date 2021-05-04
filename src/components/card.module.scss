@@ -1,0 +1,40 @@
+@use "@/styles" as *;
+
+.card {
+    @include column();
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+}
+
+.cardSection {
+    position: relative;
+    padding: $length-24 $length-32;
+    border-width: $border-width;
+    border-color: $color-white-5;
+
+    &:not(:first-child) {
+        margin-top: -$border-width;
+    }
+
+    &:first-child {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+    }
+
+    &.primary {
+        background-color: $color-white-1;
+    }
+
+    &.secondary {
+        background-color: $color-white-3;
+    }
+
+    &.danger {
+        background-color: $color-red-5;
+    }
+}

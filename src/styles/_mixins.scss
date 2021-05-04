@@ -1,0 +1,77 @@
+@use "./functions" as *;
+
+@mixin margin-x($margin-x) {
+    margin-left: $margin-x;
+    margin-right: $margin-x;
+}
+
+@mixin margin-y($margin-y) {
+    margin-top: $margin-y;
+    margin-bottom: $margin-y;
+}
+
+@mixin padding-x($padding-x) {
+    margin-left: $padding-x;
+    margin-right: $padding-x;
+}
+
+@mixin padding-y($padding-y) {
+    margin-top: $padding-y;
+    margin-bottom: $padding-y;
+}
+
+@mixin container($breakpoint) {
+    @include margin-x(auto);
+    max-width: $breakpoint;
+}
+
+$direction-map: (
+    column: margin-top,
+    row: margin-left,
+);
+
+@mixin space($direction, $space) {
+    $margin: map-get-else-key($direction-map, $direction);
+    & > * + * {
+        #{$margin}: $space;
+    }
+}
+
+@mixin space-x($space-x) {
+    @include space(row, $space-x);
+}
+
+@mixin space-y($space-y) {
+    @include space(column, $space-y);
+}
+
+$placement-map: (
+    start: flex-start,
+    end: flex-end,
+);
+
+@mixin stack($direction: row, $align: stretch, $justify: start, $gap: 0) {
+    @include space($direction, $gap);
+    display: flex;
+    flex-direction: $direction;
+    align-items: map-get-else-key($placement-map, $align);
+    justify-content: map-get-else-key($placement-map, $justify);
+}
+
+@mixin column($align: stretch, $justify: start, $gap: 0) {
+    @include stack(column, $align, $justify, $gap);
+}
+
+@mixin row($align: stretch, $justify: start, $gap: 0) {
+    @include stack(row, $align, $justify, $gap);
+}
+
+@mixin transition(
+    $property: all,
+    $duration: 100ms,
+    $timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+) {
+    transition-property: $property;
+    transition-duration: $duration;
+    transition-timing-function: $timing-function;
+}

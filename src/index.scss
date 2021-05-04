@@ -1,10 +1,11 @@
-@use "./styles/fonts" as *;
-@use "./styles/variables" as *;
+@use "@/styles" as *;
 
-@import "./styles/resets";
+@use "./reset";
+
+@use "./fonts/inter";
 
 html {
     font-family: $font-family;
-    color: $black-1;
-    background-color: $white-2;
+    color: $color-black-1;
+    background-color: $color-white-2;
 }

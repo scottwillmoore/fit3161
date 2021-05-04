@@ -1,0 +1,30 @@
+@use "colors" as *;
+@use "spaces" as *;
+@use "utilities" as *;
+@use "variables" as *;
+
+.container {
+    @include column(
+        $justify: start,
+        $align: stretch,
+        $space-between: $space-16
+    );
+}
+
+.description {
+    font-size: $font-size-medium;
+    color: $black-4;
+}
+
+.progress {
+    overflow: hidden;
+    height: $space-4;
+    border-radius: $space-4 / 2;
+    background-color: $white-5;
+}
+
+.bar {
+    @include transition;
+    height: 100%;
+    background-color: $blue-1;
+}

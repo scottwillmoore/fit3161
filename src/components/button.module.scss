@@ -1,0 +1,41 @@
+@use "@/styles" as *;
+
+.button {
+    @include row($align: center, $justify: center, $gap: $length-16);
+    padding: $length-16 $length-24;
+    font-size: $font-size-medium;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+
+    &:focus {
+        outline: none;
+        box-shadow: $ring;
+    }
+
+    &:hover {
+        box-shadow: $ring;
+    }
+
+    &.primary {
+        color: $color-white-1;
+        background-color: $color-blue-2;
+    }
+
+    &.secondary {
+        color: $color-black-4;
+        background-color: $color-white-1;
+        border-color: $color-white-5;
+        border-width: $border-width;
+    }
+
+    &.danger {
+        color: $color-red-1;
+        background-color: $color-white-1;
+        border-color: $color-red-1;
+        border-width: $border-width;
+    }
+}
+
+.buttonGroup {
+    @include row($gap: $length-24);
+}

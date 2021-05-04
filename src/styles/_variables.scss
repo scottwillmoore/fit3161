@@ -1,39 +1,78 @@
-@use "./functions" as *;
+$color-white-1: #ffffff;
+$color-white-2: #fafcff;
+$color-white-3: #f5f7fa;
+$color-white-4: #e6e9f0;
+$color-white-5: #d8dce5;
 
-@import "./colors";
-@import "./spaces";
+$color-black-1: #1f2533;
+$color-black-2: #363d4d;
+$color-black-3: #525866;
+$color-black-4: #666f80;
+$color-black-5: #7a8599;
 
-// Border...
+$color-red-1: #b25959;
+$color-red-2: #cc7a7a;
+$color-red-3: #ffb2b2;
+$color-red-4: #ffcccc;
+$color-red-5: #ffe5e5;
 
-$border-color: $white-5;
-$border-radius: rem(4px);
-$border-style: solid;
-$border-width: rem(1px);
+$color-yellow-1: #ccbe7a;
+$color-yellow-2: #e5d68a;
+$color-yellow-3: #fff2b2;
+$color-yellow-4: #fff7cc;
+$color-yellow-5: #fffbe5;
 
-// Breakpoint...
+$color-blue-1: #1452cc;
+$color-blue-2: #457ae5;
+$color-blue-3: #80aaff;
+$color-blue-4: #ccddff;
+$color-blue-5: #e5eeff;
 
-$breakpoint-small: 576px;
-$breakpoint-medium: 768px;
-$breakpoint-large: 1024px;
+$color-green-1: #59b294;
+$color-green-2: #7accb1;
+$color-green-3: #b2ffe6;
+$color-green-4: #ccffee;
+$color-green-5: #e5fff7;
 
-// Box shadow...
+$length-1: 1px;
+$length-2: 2px;
+$length-4: 4px;
+$length-6: 6px;
+$length-8: 8px;
+$length-12: 12px;
+$length-16: 16px;
+$length-24: 24px;
+$length-32: 32px;
+$length-40: 40px;
+$length-48: 48px;
+$length-64: 64px;
+$length-80: 80px;
+$length-96: 96px;
+$length-128: 128px;
 
-$box-shadow: 0 rem(2px) rem(4px) rgba($black-1, 0.1);
-$ring: 0 0 0 rem(2px) $white-1, 0 0 0 rem(4px) $blue-4;
-
-// Font...
+$breakpoint-1: 576px;
+$breakpoint-2: 768px;
+$breakpoint-3: 1024px;
 
 $font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-$font-size-small: rem(14px);
-$font-size-medium: rem(16px);
-$font-size-large: rem(20px);
-$font-size-xlarge: rem(24px);
+$font-size-small: 14px;
+$font-size-medium: 16px;
+$font-size-large: 20px;
+$font-size-xlarge: 24px;
 
 $font-style-normal: normal;
 $font-style-italic: italic;
 
 $font-weight-normal: 400;
 $font-weight-bold: 700;
+
+$border-color: $color-white-5;
+$border-radius: 4px;
+$border-style: solid;
+$border-width: 1px;
+
+$box-shadow: 0 2px 4px rgba($color-black-1, 0.1);
+$ring: 0 0 0 2px $color-white-1, 0 0 0 4px $color-blue-4;

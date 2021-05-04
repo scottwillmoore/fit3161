@@ -1,0 +1,72 @@
+@use "@/styles" as *;
+
+.card {
+    text-align: left;
+
+    &:focus {
+        box-shadow: $ring;
+    }
+
+    &:hover {
+        box-shadow: $ring;
+    }
+}
+
+.card:hover {
+    box-shadow: $ring;
+}
+
+.card:focus {
+    box-shadow: $ring;
+}
+
+.header {
+    @include row(start, space-between);
+    margin-bottom: $length-32;
+}
+
+.box {
+    display: flex;
+    padding: $length-12;
+    border-radius: $border-radius;
+    color: $color-white-1;
+    background-color: $color-blue-1;
+}
+
+.arrow {
+    width: $length-32;
+    height: $length-32;
+    color: $color-black-4;
+}
+
+.body {
+    @include column($gap: $length-8);
+}
+
+.title {
+    font-size: $font-size-xlarge;
+    font-weight: $font-weight-bold;
+}
+
+.description {
+    font-size: $font-size-medium;
+    color: $color-black-4;
+}
+
+.footer {
+    @include row($align: center, $gap: $length-16);
+    color: $color-black-4;
+}
+
+.column {
+    @include column($gap: $length-4);
+}
+
+.subtitle {
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+}
+
+.date {
+    font-size: $font-size-medium;
+}

@@ -1,6 +1,4 @@
-@use "sass:list" as *;
-
-@use "./functions" as *;
+@use "@/styles" as *;
 
 $font-weight-map: (
     "Regular": 400,
@@ -12,7 +10,7 @@ $font-style-map: (
     "Italic": italic,
 );
 
-@mixin font($font-family, $font-weights, $font-styles) {
+@mixin font-faces($font-family, $font-weights, $font-styles) {
     @each $font-weight in $font-weights {
         @each $font-style in $font-styles {
             @font-face {
@@ -25,7 +23,7 @@ $font-style-map: (
                 $font-src: ();
                 $font-formats: ("woff2", "woff");
                 @each $font-format in $font-formats {
-                    $font-url: "/fonts/#{$font-family}-#{$font-weight}#{$font-style}.#{$font-format}";
+                    $font-url: "./#{$font-family}-#{$font-weight}#{$font-style}.#{$font-format}";
                     $font-src: append(
                         $font-src,
                         url($font-url) format($font-format)
@@ -37,7 +35,7 @@ $font-style-map: (
     }
 }
 
-@include font(
+@include font-faces(
     $font-family: "Inter",
     $font-weights: (
         "Regular",
