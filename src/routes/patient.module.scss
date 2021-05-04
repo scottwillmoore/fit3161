@@ -1,5 +1,54 @@
 @use "@/styles" as *;
 
+.property {
+    @include row($align: center, $gap: $length-24);
+}
+
+.icon {
+    box-sizing: content-box;
+    width: $length-32;
+    height: $length-32;
+    color: $color-black-4;
+    background-color: $color-white-4;
+    border-radius: $border-radius;
+    padding: $length-8;
+    flex-shrink: 0;
+}
+
+.text {
+    @include column($gap: $length-8);
+}
+
+.name {
+    font-size: $font-size-medium;
+    font-weight: $font-weight-bold;
+    color: $color-black-4;
+}
+
+.content {
+    font-size: $font-size-large;
+    color: $color-black-1;
+}
+
+.primary {
+    & .name {
+        font-size: $font-size-large;
+    }
+
+    & .content {
+        font-size: $font-size-xlarge;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.test {
+    @include space-y($length-24);
+}
+
 .card {
     text-align: left;
 
@@ -26,7 +75,7 @@
 }
 
 .box {
-    display: flex;
+    display: inline-block;
     padding: $length-12;
     border-radius: $border-radius;
     color: $color-white-1;

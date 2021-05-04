@@ -7,8 +7,7 @@ import { Patient } from "@/routes";
 import classes from "./app.module.scss";
 
 export function App() {
-    const title = "Title";
-
+    const title = "Patient";
     const history = useHistory();
 
     return (
@@ -32,7 +31,7 @@ export function App() {
             </header>
             <main className={classes.body}>
                 <Switch>
-                    <Route path="/patient/:id">
+                    <Route path="/patient/:patientId">
                         <Patient />
                     </Route>
                     <Route>
@@ -41,7 +40,7 @@ export function App() {
                                 icon={Star}
                                 text="Go"
                                 onClick={() => {
-                                    history.push("/patient/1");
+                                    history.push("/patient/da6v4m6f0g8lr9iq");
                                 }}
                             />
                         </ButtonGroup>

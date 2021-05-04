@@ -1,8 +1,27 @@
-import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
+import { format } from "date-fns";
+import { Timestamp } from "firebase/firestore";
+import {
+    Route,
+    Switch,
+    useHistory,
+    useParams,
+    useRouteMatch,
+} from "react-router-dom";
 
 import { Button, ButtonGroup, Card, CardSection } from "@/components";
-import { Share, Trash, Beaker, Clippy, ArrowUpRight, Clock } from "@/icons";
+import {
+    ArrowUpRight,
+    Beaker,
+    Clippy,
+    Clock,
+    Person,
+    Share,
+    Trash,
+    Eye,
+    Calendar,
+} from "@/icons";
 import { Test } from "@/routes";
+import { classNames, usePatient } from "@/utilities";
 
 import classes from "./patient.module.scss";
 
@@ -60,8 +79,51 @@ export function Action({ title, description, path }: ActionProps) {
     );
 }
 
+export type PropertyVariant = "primary" | "secondary";
+
+export type PropertyProps = {
+    variant?: PropertyVariant;
+    icon?: any;
+    name: string;
+    content: string;
+};
+
+export function Property({
+    variant = "secondary",
+    icon: Icon,
+    name,
+    content,
+}: PropertyProps) {
+    return (
+        <div className={classNames(classes.property, classes[variant])}>
+            {Icon && <Icon className={classes.icon} height="24" />}
+            <div className={classes.text}>
+                <p className={classes.name}>{name}</p>
+                <p className={classes.content}>{content}</p>
+            </div>
+        </div>
+    );
+}
+
+export type PatientParams = {
+    patientId: string;
+};
+
 export function Patient() {
     const { path } = useRouteMatch();
+    const { patientId } = useParams<PatientParams>();
+
+    const patient = usePatient(patientId);
+    if (!patient) {
+        return null;
+    }
+
+    const dateFormat = "do MMMM yyyy";
+    const formatTimestamp = (timestamp: Timestamp) =>
+        format(timestamp.toDate(), dateFormat);
+
+    const createdOn = formatTimestamp(patient.createdOn);
+    const lastAccessedOn = formatTimestamp(patient.lastAccessedOn);
 
     return (
         <Switch>
@@ -69,6 +131,35 @@ export function Patient() {
                 <Test />
             </Route>
             <Route>
+                <div className={classes.test}>
+                    <Card>
+                        <CardSection>
+                            <div className={classes.box}>
+                                <Person height="24" />
+                            </div>
+
+                            <Property
+                                variant="secondary"
+                                name="Identified By"
+                                content={patientId}
+                            />
+
+                            <div className={classes.grid}>
+                                <Property
+                                    name="Created On"
+                                    icon={Calendar}
+                                    content={createdOn}
+                                />
+                                <Property
+                                    name="Last Viewed On"
+                                    icon={Eye}
+                                    content={lastAccessedOn}
+                                />
+                            </div>
+                        </CardSection>
+                    </Card>
+                </div>
+
                 {actions.map(Action)}
 
                 <ButtonGroup>
