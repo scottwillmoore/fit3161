@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 
-import { Button, ButtonGroup, Radio, RadioGroup } from "@/components";
+import { Button, ButtonGroup, Progress, Radio, RadioGroup } from "@/components";
 import { ArrowLeft, ArrowRight } from "@/icons";
 
 import classes from "./test.module.scss";
@@ -76,7 +76,10 @@ export function Test() {
 
     return (
         <Fragment>
-            {/* <ProgressBar value={90} /> */}
+            <h1 className={classes.title}>Agitated Behaviour Scale</h1>
+            <p className={classes.subtitle}>Question 1 of 7</p>
+
+            <Progress min={0} max={1} value={index / (behaviours.length - 1)} />
 
             <div className={classes.questionGroup}>
                 <p className={classes.question}>{question}</p>

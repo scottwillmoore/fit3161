@@ -1,12 +1,12 @@
-import classes from "./progress-bar.module.scss";
+import classes from "./progress.module.scss";
 
-export type ProgressBarProps = {
+export type ProgressProps = {
     min?: number;
     max?: number;
     value: number;
 };
 
-export function ProgressBar({ min = 0, max = 100, value }: ProgressBarProps) {
+export function Progress({ min = 0, max = 100, value }: ProgressProps) {
     const percentage = (100 * value) / (max - min);
     return (
         <div className={classes.container}>

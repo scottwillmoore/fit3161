@@ -1,0 +1,29 @@
+@use "@/styles" as *;
+
+.container {
+    @include column($justify: start, $align: stretch, $gap: $length-16);
+}
+
+.description {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: $font-size-medium;
+    color: $color-black-4;
+    background-color: $color-white-2;
+    border-color: $color-blue-1;
+    padding: $length-8 $length-12;
+}
+
+.progress {
+    overflow: hidden;
+    height: $length-4;
+    border-radius: $length-4 / 2;
+    background-color: $color-white-5;
+}
+
+.bar {
+    @include transition;
+    height: 100%;
+    background-color: $color-blue-1;
+}

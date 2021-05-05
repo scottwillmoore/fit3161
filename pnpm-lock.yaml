@@ -14,6 +14,7 @@ specifiers:
   react-transition-group: ^4.4.1
   sass: ^1.32.12
   typescript: ^4.2.4
+  uuid: ^8.3.2
   vite: ^2.2.3
 
 dependencies:
@@ -23,6 +24,7 @@ dependencies:
   react-dom: 17.0.2_react@17.0.2
   react-router-dom: 5.2.0_react@17.0.2
   react-transition-group: 4.4.1_react-dom@17.0.2+react@17.0.2
+  uuid: 8.3.2
 
 devDependencies:
   '@types/react': 17.0.4
@@ -1533,6 +1535,11 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
+    dev: false
+
+  /uuid/8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
     dev: false
 
   /value-equal/1.0.1:

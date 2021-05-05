@@ -1,5 +1,16 @@
 @use "@/styles" as *;
 
+.title {
+    font-size: $font-size-xxlarge;
+    font-weight: bold;
+    color: $color-black-1;
+}
+
+.subtitle {
+    font-size: $font-size-large;
+    color: $color-black-4;
+}
+
 .questionGroup {
     @include column($gap: $length-8);
 }
@@ -8,6 +19,7 @@
     font-size: $font-size-xlarge;
     font-weight: $font-weight-bold;
     color: $color-black-1;
+    height: 2em;
 }
 
 .question {
