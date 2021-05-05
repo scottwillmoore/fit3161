@@ -12,13 +12,11 @@ import { Button, ButtonGroup, Card, CardSection } from "@/components";
 import {
     ArrowUpRight,
     Beaker,
-    Clippy,
+    Calendar,
     Clock,
-    Person,
+    Eye,
     Share,
     Trash,
-    Eye,
-    Calendar,
 } from "@/icons";
 import { Test } from "@/routes";
 import { classNames, usePatient } from "@/utilities";
@@ -38,51 +36,22 @@ const actions: ActionProps[] = [
     },
 ];
 
-export type ActionProps = {
-    title: string;
-    description: string;
-    path: string;
+export type IconProps = {
+    variant?: "primary" | "secondary";
+    icon: any;
 };
 
-export function Action({ title, description, path }: ActionProps) {
-    const history = useHistory();
-    const { url } = useRouteMatch();
-
-    const handleClick = () => {
-        history.push(`${url}/${path}`);
-    };
-
+function Icon({ variant = "secondary", icon: Icon }: IconProps) {
     return (
-        <Card as="button" className={classes.card} onClick={handleClick}>
-            <CardSection>
-                <div className={classes.header}>
-                    <div className={classes.box}>
-                        <Clippy height="24" />
-                    </div>
-                    <ArrowUpRight className={classes.arrow} height="24" />
-                </div>
-                <div className={classes.body}>
-                    <h1 className={classes.title}>{title}</h1>
-                    <p className={classes.description}>{description}</p>
-                </div>
-            </CardSection>
-            <CardSection variant="secondary">
-                <div className={classes.footer}>
-                    <Clock height="24" />
-                    <div className={classes.column}>
-                        <p className={classes.subtitle}>Last Administered</p>
-                        <p className={classes.date}>11th December '20</p>
-                    </div>
-                </div>
-            </CardSection>
-        </Card>
+        <Icon
+            className={classNames(classes.icon, classes[variant])}
+            height="24"
+        />
     );
 }
 
-export type PropertyVariant = "primary" | "secondary";
-
 export type PropertyProps = {
-    variant?: PropertyVariant;
+    variant?: "primary" | "secondary";
     icon?: any;
     name: string;
     content: string;
@@ -90,18 +59,85 @@ export type PropertyProps = {
 
 export function Property({
     variant = "secondary",
-    icon: Icon,
+    icon,
     name,
     content,
 }: PropertyProps) {
     return (
         <div className={classNames(classes.property, classes[variant])}>
-            {Icon && <Icon className={classes.icon} height="24" />}
+            {icon && <Icon variant="secondary" icon={icon} />}
             <div className={classes.text}>
                 <p className={classes.name}>{name}</p>
                 <p className={classes.content}>{content}</p>
             </div>
         </div>
+    );
+}
+
+type ActionProps = {
+    title: string;
+    description: string;
+    path: string;
+};
+
+// function Action({ title, description, path }: ActionProps) {
+//     const history = useHistory();
+//     const { url } = useRouteMatch();
+//     const handleClick = () => {
+//         history.push(`${url}/${path}`);
+//     };
+
+//     return (
+//         <Card as="button" className={classes.action} onClick={handleClick}>
+//             <CardSection>
+//                 <div className={classes.header}>
+//                     <Icon variant="primary" icon={Clippy} />
+//                     <ArrowUpRight className={classes.arrow} height="24" />
+//                 </div>
+//                 <div className={classes.body}>
+//                     <h1 className={classes.title}>{title}</h1>
+//                     <p className={classes.description}>{description}</p>
+//                 </div>
+//             </CardSection>
+
+//             <CardSection variant="secondary" className={classes.properties}>
+//                 <Property
+//                     icon={Clock}
+//                     name="Last Administered"
+//                     content={`11th December 2020`}
+//                 />
+//             </CardSection>
+//         </Card>
+//     );
+// }
+
+function Action({ title, description, path }: ActionProps) {
+    const history = useHistory();
+    const { url } = useRouteMatch();
+    const handleClick = () => {
+        history.push(`${url}/${path}`);
+    };
+
+    return (
+        <Card as="button" className={classes.action} onClick={handleClick}>
+            <CardSection>
+                <div className={classes.header}>
+                    <div className={classes.body}>
+                        <h1 className={classes.title}>{title}</h1>
+                        <p className={classes.description}>{description}</p>
+                    </div>
+                    <ArrowUpRight className={classes.arrow} height="24" />
+                </div>
+            </CardSection>
+
+            <CardSection variant="secondary">
+                <Property
+                    icon={Clock}
+                    name="Last Administered"
+                    content={`11th December 2020`}
+                />
+            </CardSection>
+        </Card>
     );
 }
 
@@ -131,33 +167,23 @@ export function Patient() {
                 <Test />
             </Route>
             <Route>
-                <div className={classes.test}>
-                    <Card>
-                        <CardSection>
-                            <div className={classes.box}>
-                                <Person height="24" />
-                            </div>
+                <Property
+                    variant="primary"
+                    name="Identity"
+                    content="123e4567-e89b-12d3-a456-426614174000"
+                />
 
-                            <Property
-                                variant="secondary"
-                                name="Identified By"
-                                content={patientId}
-                            />
-
-                            <div className={classes.grid}>
-                                <Property
-                                    name="Created On"
-                                    icon={Calendar}
-                                    content={createdOn}
-                                />
-                                <Property
-                                    name="Last Viewed On"
-                                    icon={Eye}
-                                    content={lastAccessedOn}
-                                />
-                            </div>
-                        </CardSection>
-                    </Card>
+                <div className={classes.properties}>
+                    <Property
+                        name="Created"
+                        icon={Calendar}
+                        content={createdOn}
+                    />
+                    <Property
+                        name="Last Viewed"
+                        icon={Eye}
+                        content={lastAccessedOn}
+                    />
                 </div>
 
                 {actions.map(Action)}

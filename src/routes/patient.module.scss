@@ -1,22 +1,40 @@
 @use "@/styles" as *;
 
+// ICON
+
+.icon {
+    box-sizing: content-box;
+    padding: $length-12;
+    border-radius: $border-radius;
+
+    &.primary {
+        color: $color-white-1;
+        background-color: $color-blue-1;
+    }
+
+    &.secondary {
+        color: $color-black-1;
+        background-color: $color-white-5;
+    }
+}
+
+// PROPERTY
+
 .property {
     @include row($align: center, $gap: $length-24);
 }
 
-.icon {
-    box-sizing: content-box;
-    width: $length-32;
-    height: $length-32;
-    color: $color-black-4;
-    background-color: $color-white-4;
-    border-radius: $border-radius;
-    padding: $length-8;
-    flex-shrink: 0;
+.primary {
+    & .content {
+        font-size: $font-size-xlarge;
+        color: $color-black-1;
+        font-weight: $font-weight-bold;
+        font-family: "Jetbrains Mono", monospace;
+    }
 }
 
 .text {
-    @include column($gap: $length-8);
+    @include column($gap: $length-4);
 }
 
 .name {
@@ -26,30 +44,13 @@
 }
 
 .content {
-    font-size: $font-size-large;
+    font-size: $font-size-medium;
     color: $color-black-1;
 }
 
-.primary {
-    & .name {
-        font-size: $font-size-large;
-    }
+// ACTION
 
-    & .content {
-        font-size: $font-size-xlarge;
-    }
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.test {
-    @include space-y($length-24);
-}
-
-.card {
+.action {
     text-align: left;
 
     &:focus {
@@ -61,28 +62,13 @@
     }
 }
 
-.card:hover {
-    box-shadow: $ring;
-}
-
-.card:focus {
-    box-shadow: $ring;
-}
-
 .header {
-    @include row(start, space-between);
-    margin-bottom: $length-32;
-}
-
-.box {
-    display: inline-block;
-    padding: $length-12;
-    border-radius: $border-radius;
-    color: $color-white-1;
-    background-color: $color-blue-1;
+    @include row($justify: space-between, $align: start, $gap: $length-48);
+    // margin-bottom: $length-32;
 }
 
 .arrow {
+    flex-shrink: 0;
     width: $length-32;
     height: $length-32;
     color: $color-black-4;
@@ -102,20 +88,7 @@
     color: $color-black-4;
 }
 
-.footer {
-    @include row($align: center, $gap: $length-16);
-    color: $color-black-4;
-}
-
-.column {
-    @include column($gap: $length-4);
-}
-
-.subtitle {
-    font-size: $font-size-small;
-    font-weight: $font-weight-bold;
-}
-
-.date {
-    font-size: $font-size-medium;
+.properties {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }

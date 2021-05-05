@@ -1,9 +1,28 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 import { Button, ButtonGroup, Radio, RadioGroup } from "@/components";
 import { ArrowLeft, ArrowRight } from "@/icons";
 
 import classes from "./test.module.scss";
+
+const question = `Select the response which best describes this behaviour of the patient.`;
+
+const behaviours = [
+    `Short attention span, easy distractibility, inability to concentrate.`,
+    `Impulsive, impatient, low tolerance for pain or frustration.`,
+    `Uncooperative, resistant to care, demanding.`,
+    `Violent and or threatening violence toward people or property.`,
+    `Explosive and/or unpredictable anger.`,
+    `Rocking, rubbing, moaning or other self-stimulating behavior.`,
+    `Pulling at tubes, restraints, etc.`,
+    `Wandering from treatment areas.`,
+    `Restlessness, pacing, excessive movement.`,
+    `Repetitive behaviors, motor and/or verbal.`,
+    `Rapid, loud or excessive talking.`,
+    `Sudden changes of mood.`,
+    `Easily initiated or excessive crying and/or laughter.`,
+    `Self-abusiveness, physical and/or verbal.`,
+];
 
 const responses = [
     {
@@ -24,20 +43,44 @@ const responses = [
     },
 ];
 
+function Start() {
+    return <Button icon={ArrowLeft} text="Start" />;
+}
+
+function Question({ index }: { index: number }) {
+    return <Fragment></Fragment>;
+}
+
+function Submission() {
+    return <Button icon={ArrowLeft} text="Submit" />;
+}
+
+export enum Response {
+    Absent = 0,
+    Slight = 1,
+    Moderate = 2,
+    Extreme = 3,
+}
+
+export type State = {
+    currentQuestion: number;
+    responses: Response[];
+};
+
 export function Test() {
+    const [index, setIndex] = useState(0);
+
+    const handleNextQuestion = () => {
+        setIndex(index + 1);
+    };
+
     return (
         <Fragment>
             {/* <ProgressBar value={90} /> */}
 
-            <div className={classes.question}>
-                <p className={classes.questionDescription}>
-                    Select the option which best describes this behaviour of the
-                    patient.
-                </p>
-                <h1 className={classes.questionTitle}>
-                    Short attention span, easy distractibility, inability to
-                    concentrate.
-                </h1>
+            <div className={classes.questionGroup}>
+                <p className={classes.question}>{question}</p>
+                <h1 className={classes.behaviour}>{behaviours[index]}</h1>
             </div>
 
             <RadioGroup>
@@ -47,8 +90,18 @@ export function Test() {
             </RadioGroup>
 
             <ButtonGroup>
-                <Button variant="secondary" icon={ArrowLeft} text="Previous" />
-                <Button variant="primary" icon={ArrowRight} text="Next" />
+                <Button
+                    variant="secondary"
+                    icon={ArrowLeft}
+                    text="Previous"
+                    onClick={() => setIndex(index - 1)}
+                />
+                <Button
+                    variant="primary"
+                    icon={ArrowRight}
+                    text="Next"
+                    onClick={() => setIndex(index + 1)}
+                />
             </ButtonGroup>
         </Fragment>
     );

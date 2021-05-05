@@ -12,7 +12,12 @@ export type RadioProps = {
 export function Radio({ name, title, description }: RadioProps) {
     return (
         <label className={classes.label}>
-            <input className={classes.input} type="radio" name={name} />
+            <input
+                className={classes.input}
+                type="radio"
+                name={name}
+                // onChange={(event) => console.log(event)}
+            />
             <Card className={classes.card}>
                 <CardSection className={classes.cardSection}>
                     <div className={classes.radio}></div>
@@ -31,5 +36,12 @@ export function Radio({ name, title, description }: RadioProps) {
 export type RadioGroupProps = ChildrenProps;
 
 export function RadioGroup({ children }: RadioGroupProps) {
-    return <div className={classes.radioGroup}>{children}</div>;
+    return (
+        <div
+            className={classes.radioGroup}
+            onChange={(event) => console.log(event)}
+        >
+            {children}
+        </div>
+    );
 }

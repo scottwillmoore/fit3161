@@ -10,9 +10,11 @@ import {
 import {
     DocumentData,
     FirebaseFirestore,
+    Timestamp,
     doc,
     getDoc,
     getFirestore,
+    updateDoc,
 } from "firebase/firestore";
 
 import { ChildrenProps } from "@/utilities";
@@ -21,7 +23,7 @@ export const FirebaseContext = createContext<FirebaseState>(
     {} as FirebaseState
 );
 
-export type FirebaseProviderProperties = {
+export type FirebaseProviderProps = {
     options: FirebaseOptions;
 } & ChildrenProps;
 
@@ -30,10 +32,7 @@ export type FirebaseState = {
     store: FirebaseFirestore;
 };
 
-export function FirebaseProvider({
-    options,
-    children,
-}: FirebaseProviderProperties) {
+export function FirebaseProvider({ options, children }: FirebaseProviderProps) {
     const [state, setState] = useState<FirebaseState>();
 
     useEffect(() => {
@@ -75,9 +74,11 @@ export function usePatient(patientId: string) {
     useEffect(() => {
         (async () => {
             const reference = doc(store, "patients", patientId);
+
             const snapshot = await getDoc(reference);
             if (snapshot.exists()) {
                 setPatient(snapshot.data());
+                await updateDoc(reference, "lastAccessedOn", Timestamp.now());
             }
         })();
     }, [patientId]);

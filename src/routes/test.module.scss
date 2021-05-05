@@ -1,16 +1,16 @@
 @use "@/styles" as *;
 
-.question {
+.questionGroup {
     @include column($gap: $length-8);
 }
 
-.questionTitle {
+.behaviour {
     font-size: $font-size-xlarge;
     font-weight: $font-weight-bold;
     color: $color-black-1;
 }
 
-.questionDescription {
+.question {
     font-size: $font-size-medium;
     color: $color-black-4;
 }
