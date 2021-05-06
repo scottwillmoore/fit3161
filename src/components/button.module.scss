@@ -37,5 +37,15 @@
 }
 
 .buttonGroup {
-    @include row($gap: $length-24);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.buttonGroup > * {
+    margin-right: $length-24;
+
+    &:last-child {
+        margin-right: 0;
+    }
 }

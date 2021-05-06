@@ -1,0 +1,12 @@
+-   Better page and route management
+-   Set the page title and header with a hook
+-   Fix the progress bar layout
+-   Store and submit test result into database
+-   Automatically create new patient
+-   Add loading indicator for asynchronous queries
+-   Set the back and menu button action with a hook
+-   Create prompt for back button
+-   Handle edge cases with test
+-   Show start and end page for test
+-   Create empty analysis page
+-   Delete patient

@@ -1,12 +1,7 @@
 import { format } from "date-fns";
 import { Timestamp } from "firebase/firestore";
-import {
-    Route,
-    Switch,
-    useHistory,
-    useParams,
-    useRouteMatch,
-} from "react-router-dom";
+import { Fragment } from "react";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 
 import { Button, ButtonGroup, Card, CardSection } from "@/components";
 import {
@@ -15,10 +10,10 @@ import {
     Calendar,
     Clock,
     Eye,
+    Person,
     Share,
     Trash,
 } from "@/icons";
-import { Test } from "@/routes";
 import { classNames, usePatient } from "@/utilities";
 
 import classes from "./patient.module.scss";
@@ -162,38 +157,30 @@ export function Patient() {
     const lastAccessedOn = formatTimestamp(patient.lastAccessedOn);
 
     return (
-        <Switch>
-            <Route path={`${path}/abs`}>
-                <Test />
-            </Route>
-            <Route>
+        <Fragment>
+            <Property
+                variant="primary"
+                icon={Person}
+                name="Identity"
+                content="123e4567-e89b-12d3-a456-426614174000"
+            />
+
+            <div className={classes.properties}>
+                <Property name="Created" icon={Calendar} content={createdOn} />
                 <Property
-                    variant="primary"
-                    name="Identity"
-                    content="123e4567-e89b-12d3-a456-426614174000"
+                    name="Last Viewed"
+                    icon={Eye}
+                    content={lastAccessedOn}
                 />
+            </div>
 
-                <div className={classes.properties}>
-                    <Property
-                        name="Created"
-                        icon={Calendar}
-                        content={createdOn}
-                    />
-                    <Property
-                        name="Last Viewed"
-                        icon={Eye}
-                        content={lastAccessedOn}
-                    />
-                </div>
+            {actions.map(Action)}
 
-                {actions.map(Action)}
-
-                <ButtonGroup>
-                    <Button variant="secondary" icon={Beaker} text="Analysis" />
-                    <Button variant="secondary" icon={Share} text="Export" />
-                    <Button variant="danger" icon={Trash} text="Delete" />
-                </ButtonGroup>
-            </Route>
-        </Switch>
+            <ButtonGroup>
+                <Button variant="secondary" icon={Beaker} text="Analysis" />
+                <Button variant="secondary" icon={Share} text="Export" />
+                <Button variant="danger" icon={Trash} text="Delete" />
+            </ButtonGroup>
+        </Fragment>
     );
 }

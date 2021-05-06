@@ -1,0 +1,21 @@
+@use "@/styles" as *;
+
+.group {
+    @include column($gap: $length-16);
+}
+
+.breadcrumb {
+    @include row($gap: $length-16);
+
+    & > * {
+        &::after {
+            margin-left: $length-16;
+            color: $color-black-4;
+            content: "/";
+        }
+
+        &:last-child::after {
+            content: "";
+        }
+    }
+}
