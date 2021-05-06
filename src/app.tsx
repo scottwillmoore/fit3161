@@ -24,7 +24,7 @@ const routes = [
     },
     {
         name: "Analysis",
-        path: "/patient/:patientId/wptas",
+        path: "/patient/:patientId/analysis",
         component: Analysis,
     },
     {
@@ -35,14 +35,11 @@ const routes = [
 ];
 
 export function App() {
-    const match = useRouteMatch<any>();
     const history = useHistory();
 
-    console.log(match);
+    const handleBack = () => history.goBack();
 
-    const handleBack = history.goBack;
-
-    const handleMenu = alert;
+    const handleMenu = () => {};
 
     return (
         <div className={classes.app}>

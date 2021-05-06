@@ -17,8 +17,10 @@ export function Header({ title, breadcrumbs }: HeaderProps) {
         <header className={classes.group}>
             {breadcrumbs.length > 1 && (
                 <div className={classes.breadcrumb}>
-                    {breadcrumbs.map(({ path, name }) => (
-                        <Link to={path}>{name}</Link>
+                    {breadcrumbs.map(({ path, name }, key) => (
+                        <Link key={key} className={classes.item} to={path}>
+                            {name}
+                        </Link>
                     ))}
                 </div>
             )}

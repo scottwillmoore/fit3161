@@ -1,9 +1,9 @@
 import { format } from "date-fns";
 import { Timestamp } from "firebase/firestore";
 import { Fragment } from "react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { Link, useHistory, useParams, useRouteMatch } from "react-router-dom";
 
-import { Button, ButtonGroup, Card, CardSection } from "@/components";
+import { Button, ButtonGroup, Card, CardSection, Spinner } from "@/components";
 import {
     ArrowUpRight,
     Beaker,
@@ -75,37 +75,6 @@ type ActionProps = {
     path: string;
 };
 
-// function Action({ title, description, path }: ActionProps) {
-//     const history = useHistory();
-//     const { url } = useRouteMatch();
-//     const handleClick = () => {
-//         history.push(`${url}/${path}`);
-//     };
-
-//     return (
-//         <Card as="button" className={classes.action} onClick={handleClick}>
-//             <CardSection>
-//                 <div className={classes.header}>
-//                     <Icon variant="primary" icon={Clippy} />
-//                     <ArrowUpRight className={classes.arrow} height="24" />
-//                 </div>
-//                 <div className={classes.body}>
-//                     <h1 className={classes.title}>{title}</h1>
-//                     <p className={classes.description}>{description}</p>
-//                 </div>
-//             </CardSection>
-
-//             <CardSection variant="secondary" className={classes.properties}>
-//                 <Property
-//                     icon={Clock}
-//                     name="Last Administered"
-//                     content={`11th December 2020`}
-//                 />
-//             </CardSection>
-//         </Card>
-//     );
-// }
-
 function Action({ title, description, path }: ActionProps) {
     const history = useHistory();
     const { url } = useRouteMatch();
@@ -136,17 +105,14 @@ function Action({ title, description, path }: ActionProps) {
     );
 }
 
-export type PatientParams = {
-    patientId: string;
-};
-
 export function Patient() {
-    const { path } = useRouteMatch();
-    const { patientId } = useParams<PatientParams>();
+    const { patientId } = useParams<{ patientId: string }>();
+    const history = useHistory();
 
     const patient = usePatient(patientId);
+
     if (!patient) {
-        return null;
+        return <Spinner />;
     }
 
     const dateFormat = "do MMMM yyyy";
@@ -155,6 +121,12 @@ export function Patient() {
 
     const createdOn = formatTimestamp(patient.createdOn);
     const lastAccessedOn = formatTimestamp(patient.lastAccessedOn);
+
+    const handleAnalysis = () => history.push(`/patient/${patientId}/analysis`);
+
+    const handleExport = () => {};
+
+    const handleDelete = () => {};
 
     return (
         <Fragment>
@@ -174,12 +146,29 @@ export function Patient() {
                 />
             </div>
 
-            {actions.map(Action)}
+            {actions.map((action, key) => (
+                <Action key={key} {...action} />
+            ))}
 
             <ButtonGroup>
-                <Button variant="secondary" icon={Beaker} text="Analysis" />
-                <Button variant="secondary" icon={Share} text="Export" />
-                <Button variant="danger" icon={Trash} text="Delete" />
+                <Button
+                    variant="secondary"
+                    icon={Beaker}
+                    text="Analysis"
+                    onClick={handleAnalysis}
+                />
+                <Button
+                    variant="secondary"
+                    icon={Share}
+                    text="Export"
+                    onClick={handleExport}
+                />
+                <Button
+                    variant="danger"
+                    icon={Trash}
+                    text="Delete"
+                    onClick={handleDelete}
+                />
             </ButtonGroup>
         </Fragment>
     );
