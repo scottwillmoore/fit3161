@@ -1,7 +1,5 @@
--   Fix the progress bar layout
 -   Store and submit test result into database
 -   Automatically create new patient
 -   Fix back button and create optional warning prompt
--   Handle edge cases with test
 -   Show start and end page for test
 -   Delete patient

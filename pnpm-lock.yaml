@@ -10,6 +10,7 @@ specifiers:
   prettier: ^2.2.1
   react: ^17.0.2
   react-dom: ^17.0.2
+  react-error-boundary: ^3.1.3
   react-router-dom: ^5.2.0
   react-transition-group: ^4.4.1
   sass: ^1.32.12
@@ -22,6 +23,7 @@ dependencies:
   firebase: 9.0.0-beta.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-error-boundary: 3.1.3_react@17.0.2
   react-router-dom: 5.2.0_react@17.0.2
   react-transition-group: 4.4.1_react-dom@17.0.2+react@17.0.2
   uuid: 8.3.2
@@ -1293,6 +1295,16 @@ packages:
       object-assign: 4.1.1
       react: 17.0.2
       scheduler: 0.20.2
+    dev: false
+
+  /react-error-boundary/3.1.3_react@17.0.2:
+    resolution: {integrity: sha512-A+F9HHy9fvt9t8SNDlonq01prnU8AmkjvGKV4kk8seB9kU3xMEO8J/PQlLVmoOIDODl5U2kufSBs4vrWIqhsAA==}
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.14.0
+      react: 17.0.2
     dev: false
 
   /react-is/16.13.1:

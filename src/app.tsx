@@ -1,10 +1,25 @@
 import { Fragment } from "react";
-import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
+import {
+    BrowserRouter,
+    Route,
+    Switch,
+    useHistory,
+    useRouteMatch,
+} from "react-router-dom";
 
 import { Header, Navigation } from "@/components";
 import { Abs, Analysis, Wptas, Patient, Home } from "@/routes";
+import { FirebaseProvider, useScrollReset } from "@/utilities";
+
+import { ErrorBoundary } from "./error";
 
 import classes from "./app.module.scss";
+
+const firebaseOptions = {
+    apiKey: "AIzaSyARrdJERMpllNpHFjiHV-AU14zOgrLkZIY",
+    authDomain: "fit3161-67fad.firebaseapp.com",
+    projectId: "fit3161-67fad",
+};
 
 const routes = [
     {
@@ -34,60 +49,73 @@ const routes = [
     },
 ];
 
-export function App() {
+type ViewProps = {
+    name: string;
+    component: any;
+};
+
+function useBreadcrumbs() {
+    const match = useRouteMatch<any>();
+
+    return routes
+        .filter(({ path }) => {
+            return match.path.includes(path);
+        })
+        .map(({ name, path }) => {
+            const expandedPath = Object.keys(match.params).reduce(
+                (path, param) => path.replace(`:${param}`, match.params[param]),
+                path
+            );
+            return { name, path: expandedPath };
+        });
+}
+
+function View({ name, component: Component }: ViewProps) {
     const history = useHistory();
 
-    const handleBack = () => history.goBack();
+    useScrollReset();
+
+    const breadcrumbs = useBreadcrumbs();
+
+    const handleBack = () => {
+        if (breadcrumbs.length > 1) {
+            const { path } = breadcrumbs[breadcrumbs.length - 2];
+            history.push(path);
+        }
+    };
 
     const handleMenu = () => {};
 
     return (
-        <div className={classes.app}>
+        <Fragment>
             <Navigation onBack={handleBack} onMenu={handleMenu} />
-
-            <main className={classes.container}>
-                <Switch>
-                    {routes.map(({ path, name, component: Component }, key) => (
-                        <Route
-                            key={key}
-                            exact
-                            path={path}
-                            render={({ match }) => {
-                                const isMatch = (path: string) =>
-                                    match.path.includes(path);
-
-                                const expandPath = (path: string) =>
-                                    Object.keys(match.params).length
-                                        ? Object.keys(match.params).reduce(
-                                              (path, param) =>
-                                                  path.replace(
-                                                      `:${param}`,
-                                                      match.params[param]!
-                                                  ),
-                                              path
-                                          )
-                                        : path;
-
-                                const breadcrumbs = routes
-                                    .filter(({ path }) => isMatch(path))
-                                    .map(({ path, name }) => ({
-                                        path: expandPath(path),
-                                        name,
-                                    }));
-                                return (
-                                    <Fragment>
-                                        <Header
-                                            title={name}
-                                            breadcrumbs={breadcrumbs}
-                                        />
-                                        <Component />
-                                    </Fragment>
-                                );
-                            }}
-                        />
-                    ))}
-                </Switch>
+            <main className={classes.view}>
+                <Header title={name} breadcrumbs={breadcrumbs} />
+                <Component />
             </main>
+        </Fragment>
+    );
+}
+
+export function App() {
+    return (
+        <div className={classes.app}>
+            <ErrorBoundary>
+                <FirebaseProvider options={firebaseOptions}>
+                    <BrowserRouter>
+                        <Switch>
+                            {routes.map(({ name, path, component }, key) => (
+                                <Route exact key={key} path={path}>
+                                    <View name={name} component={component} />
+                                </Route>
+                            ))}
+                            <Route>
+                                <p>Not found!</p>
+                            </Route>
+                        </Switch>
+                    </BrowserRouter>
+                </FirebaseProvider>
+            </ErrorBoundary>
         </div>
     );
 }

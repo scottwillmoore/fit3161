@@ -66,6 +66,7 @@ export type State = {
     currentQuestion: number;
     responses: Response[];
 };
+
 export function Abs() {
     const [index, setIndex] = useState(0);
 

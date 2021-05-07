@@ -8,7 +8,7 @@
     background-color: $color-white-2;
 }
 
-.container {
+.view {
     @include container($breakpoint-2);
     @include column($gap: $length-48);
     padding: $length-48 $length-32;

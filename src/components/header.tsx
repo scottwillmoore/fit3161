@@ -24,7 +24,7 @@ export function Header({ title, breadcrumbs }: HeaderProps) {
                     ))}
                 </div>
             )}
-            <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>{title}</h1>
+            <h1 className={classes.title}>{title}</h1>
         </header>
     );
 }

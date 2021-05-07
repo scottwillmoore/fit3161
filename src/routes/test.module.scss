@@ -1,13 +1,13 @@
 @use "@/styles" as *;
 
 .title {
-    font-size: $font-size-xxlarge;
+    font-size: $font-size-5;
     font-weight: bold;
     color: $color-black-1;
 }
 
 .subtitle {
-    font-size: $font-size-large;
+    font-size: $font-size-3;
     color: $color-black-4;
 }
 
@@ -16,13 +16,13 @@
 }
 
 .behaviour {
-    font-size: $font-size-xlarge;
+    font-size: $font-size-4;
     font-weight: $font-weight-bold;
     color: $color-black-1;
     height: 2em;
 }
 
 .question {
-    font-size: $font-size-medium;
+    font-size: $font-size-2;
     color: $color-black-4;
 }
