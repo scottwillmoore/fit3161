@@ -1,5 +1,4 @@
 -   Store and submit test result into database
 -   Automatically create new patient
--   Fix back button and create optional warning prompt
 -   Show start and end page for test
 -   Delete patient

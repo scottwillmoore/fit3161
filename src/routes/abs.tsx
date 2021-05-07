@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import { Prompt } from "react-router-dom";
 
 import { Button, ButtonGroup, Progress, Radio, RadioGroup } from "@/components";
 import { ArrowLeft, ArrowRight } from "@/icons";
@@ -72,6 +73,8 @@ export function Abs() {
 
     return (
         <Fragment>
+            <Prompt message="Are you sure you want to go back?" />
+
             <Progress min={0} max={1} value={index / (behaviours.length - 1)} />
 
             <div className={classes.questionGroup}>

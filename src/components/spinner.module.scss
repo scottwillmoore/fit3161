@@ -11,8 +11,12 @@
 }
 
 .container {
-    @include column($align: center, $justify: center);
+    @include column($align: center, $justify: center, $gap: $length-32);
     height: 100%;
+}
+
+.text {
+    font-size: $font-size-2;
 }
 
 .spinner {

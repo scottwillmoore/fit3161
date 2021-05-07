@@ -66,6 +66,40 @@ export type Patient = {
     lastAccessedOn: string;
 };
 
+export enum AbsResponse {
+    Absent = 1,
+    Slight = 2,
+    Moderate = 3,
+    Extreme = 4,
+}
+
+export type AbsTest = {
+    environment: string;
+
+    period: {
+        from: Timestamp;
+        to: Timestamp;
+    };
+
+    responses: AbsResponse[];
+
+    score: {
+        disinhibition: number;
+        aggression: number;
+        lability: number;
+    };
+};
+
+export enum WptasResponse {
+    Correct = 1,
+    Incorrect = 2,
+    CorrectPrompted = 3,
+}
+
+export type WptasTest = {
+    responses: WptasResponse[];
+};
+
 export function usePatient(patientId: string) {
     const { store } = useFirebase();
 

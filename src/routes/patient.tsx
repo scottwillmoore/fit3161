@@ -108,6 +108,13 @@ export function Patient() {
 
     const history = useHistory();
 
+    // The error handling needs to be improved.
+    // The hook needs to be redesigned...
+    // 1. Loading
+    // 2. Found
+    // 3. Not Found
+    // 4. Another Error
+
     const patient = usePatient(patientId);
 
     if (!patient) {
@@ -128,7 +135,7 @@ export function Patient() {
             <Property
                 icon={Person}
                 name="Identity"
-                content="123e4567-e89b-12d3-a456-426614174000"
+                content="htflF3tgvSWDfz5Gk1z1"
             />
 
             <div className={classes.properties}>
