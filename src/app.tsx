@@ -4,11 +4,20 @@ import {
     Route,
     Switch,
     useHistory,
+    useLocation,
     useRouteMatch,
 } from "react-router-dom";
 
 import { Header, Navigation } from "@/components";
-import { Abs, Analysis, Wptas, Patient, Home } from "@/routes";
+import {
+    Abs,
+    Analysis,
+    DeletePatient,
+    Home,
+    NewPatient,
+    ViewPatient,
+    Wptas,
+} from "@/routes";
 import { FirebaseProvider, useScrollReset } from "@/utilities";
 
 import { ErrorBoundary } from "./error";
@@ -30,7 +39,17 @@ const routes = [
     {
         name: "Patient",
         path: "/patient/:patientId",
-        component: Patient,
+        component: ViewPatient,
+    },
+    {
+        name: "New Patient",
+        path: "/patient/:patientId/new",
+        component: NewPatient,
+    },
+    {
+        name: "Delete Patient",
+        path: "/patient/:patientId/delete",
+        component: DeletePatient,
     },
     {
         name: "Agitated Behaviour Scale",
@@ -73,7 +92,8 @@ function useBreadcrumbs() {
 function View({ name, component: Component }: ViewProps) {
     const history = useHistory();
 
-    useScrollReset();
+    const location = useLocation();
+    useScrollReset([location]);
 
     const breadcrumbs = useBreadcrumbs();
 

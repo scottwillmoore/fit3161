@@ -34,10 +34,14 @@ export async function addPatient(
 export async function getPatient(
     database: FirebaseFirestore,
     patientId: string
-) {
+): Promise<PatientData | undefined> {
     const path = getPatientPath(patientId);
     const document = doc(database, path);
-    return await getDoc<PatientData>(document);
+    const snapshot = await getDoc<PatientData>(document);
+
+    if (snapshot.exists()) {
+        return snapshot.data();
+    }
 }
 
 export async function updatePatient(
@@ -61,3 +65,44 @@ function getAbsPath(patientId: string, testId: string) {
 //     const document = doc(database, path);
 //     await setDoc<AbsData>(document, {});
 // }
+
+// OLD
+
+export type Patient = {
+    createdOn: string;
+    lastAccessedOn: string;
+};
+
+export enum AbsResponse {
+    Absent = 1,
+    Slight = 2,
+    Moderate = 3,
+    Extreme = 4,
+}
+
+export type AbsTest = {
+    environment: string;
+
+    period: {
+        from: Timestamp;
+        to: Timestamp;
+    };
+
+    responses: AbsResponse[];
+
+    score: {
+        disinhibition: number;
+        aggression: number;
+        lability: number;
+    };
+};
+
+export enum WptasResponse {
+    Correct = 1,
+    Incorrect = 2,
+    CorrectPrompted = 3,
+}
+
+export type WptasTest = {
+    responses: WptasResponse[];
+};

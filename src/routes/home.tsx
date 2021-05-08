@@ -2,7 +2,9 @@ import { Fragment, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Button, ButtonGroup, Input } from "@/components";
-import { Star } from "@/icons";
+import { Flame, Search } from "@/icons";
+
+import { v4 as generateId } from "uuid";
 
 export function Home() {
     const history = useHistory();
@@ -13,7 +15,11 @@ export function Home() {
         setPatientId(event.target.value);
     };
 
-    const handleClick = () => {
+    const handleRandom = () => {
+        setPatientId(generateId());
+    };
+
+    const handleSearch = () => {
         history.push(`/patient/${patientId}`);
     };
 
@@ -21,7 +27,8 @@ export function Home() {
         <Fragment>
             <Input value={patientId} onChange={handleChange} />
             <ButtonGroup>
-                <Button icon={Star} text="Go" onClick={handleClick} />
+                <Button icon={Flame} text="Random" onClick={handleRandom} />
+                <Button icon={Search} text="Find" onClick={handleSearch} />
             </ButtonGroup>
         </Fragment>
     );
