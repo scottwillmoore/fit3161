@@ -5,3 +5,4 @@ export * from "./spinner";
 export * from "./navigation";
 export * from "./progress";
 export * from "./radio";
+export * from "./linechart";

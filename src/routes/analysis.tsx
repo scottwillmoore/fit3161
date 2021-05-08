@@ -1,3 +1,7 @@
+import { Linechart } from "@/components";
+
 export function Analysis() {
-    return null;
+    return (
+        <Linechart></Linechart>
+    );
 }
