@@ -1,16 +1,23 @@
 import { format } from "date-fns";
 import { Timestamp } from "firebase/firestore";
 import { Fragment } from "react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import {
+    Redirect,
+    useHistory,
+    useParams,
+    useRouteMatch,
+} from "react-router-dom";
 
 import { Button, ButtonGroup, Card, CardSection, Spinner } from "@/components";
 import {
+    ArrowLeft,
     ArrowUpRight,
     Beaker,
     Calendar,
     Clock,
     Eye,
     Person,
+    Plus,
     Share,
     Trash,
 } from "@/icons";
@@ -99,37 +106,40 @@ function formatTimestamp(timestamp: Timestamp) {
     return format(timestamp.toDate(), dateFormat);
 }
 
-export type PatientParams = {
-    patientId: string;
-};
-
-export function Patient() {
-    const { patientId } = useParams<PatientParams>();
-
+export function ViewPatient() {
     const history = useHistory();
 
+    const { patientId } = useParams<{ patientId: string }>();
     const patient = usePatient(patientId);
 
-    if (!patient) {
-        return <Spinner />;
+    switch (patient.state) {
+        case "idle":
+        case "load":
+            return <Spinner />;
+
+        case "success":
+            break;
+
+        case "error":
+            throw "Failure to get patient data";
     }
 
-    const createdOn = formatTimestamp(patient.createdOn);
-    const lastAccessedOn = formatTimestamp(patient.lastAccessedOn);
+    if (!patient.value) {
+        return <Redirect to={`/patient/${patientId}/new`} />;
+    }
+
+    const createdOn = formatTimestamp(patient.value.createdOn);
+    const lastAccessedOn = formatTimestamp(patient.value.lastAccessedOn);
 
     const handleAnalysis = () => history.push(`/patient/${patientId}/analysis`);
 
     const handleExport = () => {};
 
-    const handleDelete = () => {};
+    const handleDelete = () => history.push(`/patient/${patientId}/delete`);
 
     return (
         <Fragment>
-            <Property
-                icon={Person}
-                name="Identity"
-                content="123e4567-e89b-12d3-a456-426614174000"
-            />
+            <Property icon={Person} name="Identification" content={patientId} />
 
             <div className={classes.properties}>
                 <Property name="Created" icon={Calendar} content={createdOn} />
@@ -163,6 +173,30 @@ export function Patient() {
                     text="Delete"
                     onClick={handleDelete}
                 />
+            </ButtonGroup>
+        </Fragment>
+    );
+}
+
+export function NewPatient() {
+    return (
+        <Fragment>
+            <p>The patient does not exist.</p>
+            <ButtonGroup>
+                <Button icon={ArrowLeft} text="Back" />
+                <Button variant="primary" icon={Plus} text="Create" />
+            </ButtonGroup>
+        </Fragment>
+    );
+}
+
+export function DeletePatient() {
+    return (
+        <Fragment>
+            <p>Are you sure you want to delete the patient?</p>
+            <ButtonGroup>
+                <Button icon={ArrowLeft} text="Back" />
+                <Button variant="danger" icon={Trash} text="Create" />
             </ButtonGroup>
         </Fragment>
     );

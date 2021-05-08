@@ -1,23 +1,15 @@
-import { createContext, useContext, useEffect, useState } from "react";
-
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import {
     FirebaseApp,
     FirebaseOptions,
     deleteApp,
     initializeApp,
 } from "firebase/app";
+import { FirebaseFirestore, getFirestore } from "firebase/firestore";
 
-import {
-    DocumentData,
-    FirebaseFirestore,
-    Timestamp,
-    doc,
-    getDoc,
-    getFirestore,
-    updateDoc,
-} from "firebase/firestore";
-
+import { getPatient, PatientData, validateId } from "@/functions";
 import { ChildrenProps } from "@/utilities";
+import { usePromise } from "./hooks";
 
 export const FirebaseContext = createContext<FirebaseState>(
     {} as FirebaseState
@@ -29,7 +21,7 @@ export type FirebaseProviderProps = {
 
 export type FirebaseState = {
     app: FirebaseApp;
-    store: FirebaseFirestore;
+    database: FirebaseFirestore;
 };
 
 export function FirebaseProvider({ options, children }: FirebaseProviderProps) {
@@ -37,9 +29,9 @@ export function FirebaseProvider({ options, children }: FirebaseProviderProps) {
 
     useEffect(() => {
         const app = initializeApp(options);
-        const store = getFirestore(app);
+        const database = getFirestore(app);
 
-        setState({ app, store });
+        setState({ app, database });
 
         return () => {
             deleteApp(app);
@@ -61,27 +53,25 @@ export function useFirebase() {
     return useContext(FirebaseContext);
 }
 
-export type Patient = {
-    createdOn: string;
-    lastAccessedOn: string;
-};
+export function useApp() {
+    return useFirebase().app;
+}
+
+export function useDatabase() {
+    return useFirebase().database;
+}
 
 export function usePatient(patientId: string) {
-    const { store } = useFirebase();
+    // if (!validateId(patientId)) {
+    //     throw "Invalid patient id";
+    // }
 
-    const [patient, setPatient] = useState<DocumentData | undefined>();
+    const database = useDatabase();
 
-    useEffect(() => {
-        (async () => {
-            const reference = doc(store, "patients", patientId);
+    const promise = useMemo(() => getPatient(database, patientId), [
+        database,
+        patientId,
+    ]);
 
-            const snapshot = await getDoc(reference);
-            if (snapshot.exists()) {
-                setPatient(snapshot.data());
-                await updateDoc(reference, "lastAccessedOn", Timestamp.now());
-            }
-        })();
-    }, [patientId]);
-
-    return patient;
+    return usePromise(promise);
 }

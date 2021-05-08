@@ -4,13 +4,13 @@ specifiers:
   '@types/react': ^17.0.4
   '@types/react-dom': ^17.0.3
   '@types/react-router-dom': ^5.1.7
+  '@types/uuid': ^8.3.0
   '@vitejs/plugin-react-refresh': ^1.3.3
   date-fns: ^2.21.1
   firebase: 9.0.0-beta.1
   prettier: ^2.2.1
   react: ^17.0.2
   react-dom: ^17.0.2
-  react-error-boundary: ^3.1.3
   react-router-dom: ^5.2.0
   react-transition-group: ^4.4.1
   sass: ^1.32.12
@@ -23,7 +23,6 @@ dependencies:
   firebase: 9.0.0-beta.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
-  react-error-boundary: 3.1.3_react@17.0.2
   react-router-dom: 5.2.0_react@17.0.2
   react-transition-group: 4.4.1_react-dom@17.0.2+react@17.0.2
   uuid: 8.3.2
@@ -32,6 +31,7 @@ devDependencies:
   '@types/react': 17.0.4
   '@types/react-dom': 17.0.3
   '@types/react-router-dom': 5.1.7
+  '@types/uuid': 8.3.0
   '@vitejs/plugin-react-refresh': 1.3.3
   prettier: 2.2.1
   sass: 1.32.12
@@ -766,6 +766,10 @@ packages:
     resolution: {integrity: sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==}
     dev: true
 
+  /@types/uuid/8.3.0:
+    resolution: {integrity: sha512-eQ9qFW/fhfGJF8WKHGEHZEyVWfZxrT+6CLIJGBcZPfxUh/+BnEj+UCGYMlr9qZuX/2AltsvwrGqp0LhEW8D0zQ==}
+    dev: true
+
   /@vitejs/plugin-react-refresh/1.3.3:
     resolution: {integrity: sha512-J3KFwSQKrEK7fgOwTx0PMTlsolZORUch6BswjsM50q+Y7zSvX1ROIRn+tK2VE8SCvbYRHtzEKFlYW3vsWyTosQ==}
     engines: {node: '>=12.0.0'}
@@ -1295,16 +1299,6 @@ packages:
       object-assign: 4.1.1
       react: 17.0.2
       scheduler: 0.20.2
-    dev: false
-
-  /react-error-boundary/3.1.3_react@17.0.2:
-    resolution: {integrity: sha512-A+F9HHy9fvt9t8SNDlonq01prnU8AmkjvGKV4kk8seB9kU3xMEO8J/PQlLVmoOIDODl5U2kufSBs4vrWIqhsAA==}
-    engines: {node: '>=10', npm: '>=6'}
-    peerDependencies:
-      react: '>=16.13.1'
-    dependencies:
-      '@babel/runtime': 7.14.0
-      react: 17.0.2
     dev: false
 
   /react-is/16.13.1:
