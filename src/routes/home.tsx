@@ -3,15 +3,12 @@ import { useHistory } from "react-router-dom";
 
 import { Button, ButtonGroup, Input } from "@/components";
 import { Flame, Search } from "@/icons";
-
-import { v4 as generateId } from "uuid";
+import { generateId } from "@/models";
 
 export function Home() {
     const history = useHistory();
 
-    const [patientId, setPatientId] = useState(
-        "01082134-42bf-4020-8c33-599fcb0b808e"
-    );
+    const [patientId, setPatientId] = useState("eEU9EsmPZiD4Y5VfDQgWLZ");
 
     const handleChange = (event: any) => {
         setPatientId(event.target.value);

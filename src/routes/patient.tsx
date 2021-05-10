@@ -21,7 +21,7 @@ import {
     Share,
     Trash,
 } from "@/icons";
-import { deletePatient, getPatient, newPatient } from "@/functions";
+import { generateId, deletePatient, getPatient, newPatient } from "@/models";
 import { useFirebase, useAsync } from "@/utilities";
 
 import classes from "./patient.module.scss";
@@ -61,8 +61,10 @@ type ActionProps = {
 function Action({ title, description, path }: ActionProps) {
     const history = useHistory();
     const { url } = useRouteMatch();
+
+    const testId = generateId();
     const handleClick = () => {
-        history.push(`${url}/${path}`);
+        history.push(`${url}/${path}/${testId}`);
     };
 
     return (
@@ -132,6 +134,7 @@ export function Patient() {
             break;
 
         case "error":
+            throw result.error;
             throw "Failure to get patient data";
 
         default:
