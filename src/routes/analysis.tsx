@@ -1,5 +1,7 @@
 import { Linechart } from "@/components";
 
+import classes from "./test.module.scss";
+
 const wptas_data = [
     [0, 0, 1, 0, 0, 0, 1],
     [0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1],
@@ -27,7 +29,12 @@ const abs_data = [
 export function Analysis() {
     return (
         <div>
+            <h1 className={classes.subtitle}>
+                Westmead Post-Traumatic Amnesia Scale
+            </h1>
             <Linechart data={wptas_data} test="wptas"></Linechart>
+            <br />
+            <h1 className={classes.subtitle}>Agitated Behaviour Scale</h1>
             <Linechart data={abs_data} test="abs"></Linechart>
         </div>
     );
