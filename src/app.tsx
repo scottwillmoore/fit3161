@@ -9,15 +9,7 @@ import {
 } from "react-router-dom";
 
 import { Header, Navigation } from "@/components";
-import {
-    Abs,
-    Analysis,
-    DeletePatient,
-    Home,
-    NewPatient,
-    ViewPatient,
-    Wptas,
-} from "@/routes";
+import { Abs, Analysis, Home, Delete, New, Patient, Wptas } from "@/routes";
 import { FirebaseProvider, useScrollReset } from "@/utilities";
 
 import { ErrorBoundary } from "./error";
@@ -39,17 +31,17 @@ const routes = [
     {
         name: "Patient",
         path: "/patient/:patientId",
-        component: ViewPatient,
+        component: Patient,
     },
     {
-        name: "New Patient",
+        name: "New",
         path: "/patient/:patientId/new",
-        component: NewPatient,
+        component: New,
     },
     {
-        name: "Delete Patient",
+        name: "Delete",
         path: "/patient/:patientId/delete",
-        component: DeletePatient,
+        component: Delete,
     },
     {
         name: "Agitated Behaviour Scale",

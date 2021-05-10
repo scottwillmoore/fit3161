@@ -7,9 +7,7 @@ import {
 } from "firebase/app";
 import { FirebaseFirestore, getFirestore } from "firebase/firestore";
 
-import { getPatient, PatientData, validateId } from "@/functions";
 import { ChildrenProps } from "@/utilities";
-import { usePromise } from "./hooks";
 
 export const FirebaseContext = createContext<FirebaseState>(
     {} as FirebaseState
@@ -51,27 +49,4 @@ export function FirebaseProvider({ options, children }: FirebaseProviderProps) {
 
 export function useFirebase() {
     return useContext(FirebaseContext);
-}
-
-export function useApp() {
-    return useFirebase().app;
-}
-
-export function useDatabase() {
-    return useFirebase().database;
-}
-
-export function usePatient(patientId: string) {
-    // if (!validateId(patientId)) {
-    //     throw "Invalid patient id";
-    // }
-
-    const database = useDatabase();
-
-    const promise = useMemo(() => getPatient(database, patientId), [
-        database,
-        patientId,
-    ]);
-
-    return usePromise(promise);
 }

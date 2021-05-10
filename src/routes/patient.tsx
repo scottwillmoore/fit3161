@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { Timestamp } from "firebase/firestore";
-import { Fragment } from "react";
+import { Fragment, useCallback, useState } from "react";
 import {
     Redirect,
     useHistory,
@@ -21,7 +21,8 @@ import {
     Share,
     Trash,
 } from "@/icons";
-import { usePatient } from "@/utilities";
+import { deletePatient, getPatient, newPatient } from "@/functions";
+import { useFirebase, useAsync } from "@/utilities";
 
 import classes from "./patient.module.scss";
 
@@ -106,40 +107,52 @@ function formatTimestamp(timestamp: Timestamp) {
     return format(timestamp.toDate(), dateFormat);
 }
 
-export function ViewPatient() {
+export function Patient() {
     const history = useHistory();
 
-    const { patientId } = useParams<{ patientId: string }>();
-    const patient = usePatient(patientId);
+    const { database } = useFirebase();
+    const { patientId } = useParams<any>();
 
-    switch (patient.state) {
+    const callback = useCallback(() => getPatient(database, patientId), [
+        database,
+        patientId,
+    ]);
+
+    const result = useAsync(callback);
+
+    switch (result.state) {
         case "idle":
         case "load":
             return <Spinner />;
 
         case "success":
+            if (!result.value) {
+                return <Redirect to={`/patient/${patientId}/new`} />;
+            }
             break;
 
         case "error":
             throw "Failure to get patient data";
+
+        default:
+            throw "UNREACHABLE";
     }
 
-    if (!patient.value) {
-        return <Redirect to={`/patient/${patientId}/new`} />;
-    }
-
-    const createdOn = formatTimestamp(patient.value.createdOn);
-    const lastAccessedOn = formatTimestamp(patient.value.lastAccessedOn);
+    // case "success":
 
     const handleAnalysis = () => history.push(`/patient/${patientId}/analysis`);
 
-    const handleExport = () => {};
+    const handleExport = () => history.push(`/patient/${patientId}/export`);
 
-    const handleDelete = () => history.push(`/patient/${patientId}/delete`);
+    const handleDelete = async () =>
+        history.push(`/patient/${patientId}/delete`);
+
+    const createdOn = formatTimestamp(result.value.createdOn);
+    const lastAccessedOn = formatTimestamp(result.value.lastAccessedOn);
 
     return (
         <Fragment>
-            <Property icon={Person} name="Identification" content={patientId} />
+            <Property icon={Person} name="Identity" content={patientId} />
 
             <div className={classes.properties}>
                 <Property name="Created" icon={Calendar} content={createdOn} />
@@ -178,25 +191,109 @@ export function ViewPatient() {
     );
 }
 
-export function NewPatient() {
+export function New() {
+    const history = useHistory();
+
+    const { database } = useFirebase();
+    const { patientId } = useParams<any>();
+
+    const callback = useCallback(() => newPatient(database, patientId), [
+        database,
+        patientId,
+    ]);
+
+    const [execute, setExecute] = useState(false);
+    const result = useAsync(callback, execute);
+
+    const handleBack = () => history.push(`/`);
+
+    const handleCreate = async () => {
+        setExecute(true);
+    };
+
+    switch (result.state) {
+        case "idle":
+            break;
+
+        case "load":
+            return <Spinner />;
+
+        case "success":
+            return <Redirect to={`/patient/${patientId}`} />;
+
+        case "error":
+        default:
+            throw "Failure to get patient data";
+    }
+
+    // case "idle":
+
     return (
         <Fragment>
-            <p>The patient does not exist.</p>
+            <Property icon={Person} name="Identity" content={patientId} />
+            <p>The patient with this identifier does not exist yet.</p>
             <ButtonGroup>
-                <Button icon={ArrowLeft} text="Back" />
-                <Button variant="primary" icon={Plus} text="Create" />
+                <Button icon={ArrowLeft} text="Back" onClick={handleBack} />
+                <Button
+                    variant="primary"
+                    icon={Plus}
+                    text="Create"
+                    onClick={handleCreate}
+                />
             </ButtonGroup>
         </Fragment>
     );
 }
 
-export function DeletePatient() {
+export function Delete() {
+    const history = useHistory();
+
+    const { database } = useFirebase();
+    const { patientId } = useParams<any>();
+
+    const callback = useCallback(() => deletePatient(database, patientId), [
+        database,
+        patientId,
+    ]);
+
+    const [execute, setExecute] = useState(false);
+    const result = useAsync(callback, execute);
+
+    const handleBack = () => history.push(`/patient/${patientId}`);
+
+    const handleDelete = async () => {
+        setExecute(true);
+    };
+
+    switch (result.state) {
+        case "idle":
+            break;
+
+        case "load":
+            return <Spinner />;
+
+        case "success":
+            return <Redirect to={`/`} />;
+
+        case "error":
+        default:
+            throw "Failure to get patient data";
+    }
+
+    // case "idle":
+
     return (
         <Fragment>
-            <p>Are you sure you want to delete the patient?</p>
+            <Property icon={Person} name="Identity" content={patientId} />
+            <p>Are you sure you want to delete this patient?</p>
             <ButtonGroup>
-                <Button icon={ArrowLeft} text="Back" />
-                <Button variant="danger" icon={Trash} text="Create" />
+                <Button icon={ArrowLeft} text="Back" onClick={handleBack} />
+                <Button
+                    variant="danger"
+                    icon={Trash}
+                    text="Delete"
+                    onClick={handleDelete}
+                />
             </ButtonGroup>
         </Fragment>
     );

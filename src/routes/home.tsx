@@ -9,7 +9,9 @@ import { v4 as generateId } from "uuid";
 export function Home() {
     const history = useHistory();
 
-    const [patientId, setPatientId] = useState("da6v4m6f0g8lr9iq");
+    const [patientId, setPatientId] = useState(
+        "01082134-42bf-4020-8c33-599fcb0b808e"
+    );
 
     const handleChange = (event: any) => {
         setPatientId(event.target.value);
