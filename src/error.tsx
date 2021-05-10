@@ -37,6 +37,7 @@ export class ErrorBoundary extends Component<
 
         return (
             <div className={classes.error}>
+                <p>An error has occurred.</p>
                 <p className={classes.message}>{this.state.error}</p>
                 <ButtonGroup>
                     <Button

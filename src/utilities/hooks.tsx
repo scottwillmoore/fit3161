@@ -1,6 +1,6 @@
 import { DependencyList, useCallback, useEffect, useState } from "react";
 
-export type State = "idle" | "load" | "success" | "error";
+export type AsyncState = "idle" | "load" | "success" | "error";
 
 export type Idle = {
     state: "idle";
@@ -22,26 +22,31 @@ export type Error = {
 
 export type Result<T> = Idle | Load | Success<T> | Error;
 
-export function usePromise<T>(promise: Promise<T>): Result<T> {
-    const [state, setState] = useState<State>("idle");
+export function useAsync<T>(
+    callback: () => Promise<T>,
+    execute = true
+): Result<T> {
+    const [state, setState] = useState<AsyncState>("idle");
     const [value, setValue] = useState<T>({} as T);
     const [error, setError] = useState<any>();
 
     const run = useCallback(async () => {
         setState("load");
         try {
-            const value = await promise;
+            const value = await callback();
             setValue(value);
             setState("success");
         } catch (error) {
             setError(error);
             setState("error");
         }
-    }, [promise]);
+    }, [callback]);
 
     useEffect(() => {
-        run();
-    }, [run]);
+        if (execute) {
+            run();
+        }
+    }, [run, execute]);
 
     return { state, value, error };
 }
