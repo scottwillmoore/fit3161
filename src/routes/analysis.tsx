@@ -1,6 +1,6 @@
 import { Linechart } from "@/components";
 
-import classes from "./test.module.scss";
+import classes from "./abs.module.scss";
 
 const wptas_data = [
     [0, 0, 1, 0, 0, 0, 1],
