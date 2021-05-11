@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import { Header, Navigation } from "@/components";
-import { Abs, Analysis, Home, Delete, New, Patient, Wptas } from "@/routes";
+import { Abs, Analysis, Home, DeletePatient, Patient, Wptas } from "@/routes";
 import { FirebaseProvider, useScrollReset } from "@/utilities";
 
 import { ErrorBoundary } from "./error";
@@ -34,24 +34,19 @@ const routes = [
         component: Patient,
     },
     {
-        name: `New`,
-        path: `/patient/:patientId/new`,
-        component: New,
+        name: `Analysis`,
+        path: `/patient/:patientId/analysis`,
+        component: Analysis,
     },
     {
         name: `Delete`,
         path: `/patient/:patientId/delete`,
-        component: Delete,
+        component: DeletePatient,
     },
     {
         name: `Agitated Behaviour Scale`,
         path: `/patient/:patientId/abs/:testId`,
         component: Abs,
-    },
-    {
-        name: `Analysis`,
-        path: `/patient/:patientId/analysis`,
-        component: Analysis,
     },
     {
         name: `Westmead Post-Traumatic Amnesia Scale`,

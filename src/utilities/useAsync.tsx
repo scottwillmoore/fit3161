@@ -75,9 +75,3 @@ export function useAsync<TArgs extends any[], TValue, TError = any>(
 
     return state;
 }
-
-export function useScrollReset(dependencies: DependencyList) {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, dependencies);
-}

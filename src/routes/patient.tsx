@@ -1,6 +1,6 @@
 import { format } from "date-fns";
-import { Timestamp } from "firebase/firestore";
-import { Fragment, useCallback, useState } from "react";
+import { FirebaseFirestore, Timestamp } from "firebase/firestore";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import {
     Redirect,
     useHistory,
@@ -23,8 +23,14 @@ import {
     Trash,
     ScreenFull,
 } from "@/icons";
-import { generateId, deletePatient, getPatient, newPatient } from "@/models";
-import { useFirebase, useAsync } from "@/utilities";
+import {
+    PatientData,
+    generateId,
+    deletePatient,
+    getPatient,
+    newPatient,
+} from "@/models";
+import { useAsyncCallback, useFirebase } from "@/utilities";
 
 import classes from "./patient.module.scss";
 
@@ -111,71 +117,94 @@ function formatTimestamp(timestamp: Timestamp) {
     return format(timestamp.toDate(), dateFormat);
 }
 
-export function Patient() {
+type NewProps = {
+    onComplete: () => void;
+};
+
+function New({ onComplete: onNew }: NewProps) {
     const history = useHistory();
 
     const { database } = useFirebase();
     const { patientId } = useParams<any>();
 
+    const [state, callback] = useAsyncCallback(newPatient, [patientId]);
+
+    const handleBack = () => history.push(`/`);
+
+    const handleCreate = async () => {
+        callback(database, patientId);
+    };
+
+    switch (state.type) {
+        case "idle":
+            // See below.
+            break;
+
+        case "load":
+            return <Spinner />;
+
+        case "success":
+            onNew();
+            return <Spinner />;
+
+        case "failure":
+            throw "Failure to create patient";
+
+        default:
+            throw "";
+    }
+
+    return (
+        <Fragment>
+            <Property icon={Person} name="Identifier" content={patientId} />
+            <p>The patient with this identifier does not exist yet.</p>
+            <ButtonGroup>
+                <Button icon={ArrowLeft} text="Back" onClick={handleBack} />
+                <Button
+                    variant="primary"
+                    icon={Plus}
+                    text="Create"
+                    onClick={handleCreate}
+                />
+            </ButtonGroup>
+        </Fragment>
+    );
+}
+
+export type ViewProps = {
+    patientData: PatientData;
+};
+
+function View({ patientData }: ViewProps) {
+    const history = useHistory();
+
+    const { patientId } = useParams<any>();
+
     const [expanded, setExpanded] = useState(false);
-
-    const callback = useCallback(() => getPatient(database, patientId), [
-        database,
-        patientId,
-    ]);
-
-    const result = useAsync(callback);
 
     const handleExpand = () => {
         setExpanded(!expanded);
     };
 
-    // const [imageUrl, setImageUrl] = useState("");
+    const handleAnalysis = () => {
+        history.push(`/patient/${patientId}/analysis`);
+    };
 
-    // const handleExpand = async () => {
-    //     try {
-    //         const response = await QRCode.toDataURL(patientId);
-    //         setImageUrl(response);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+    const handleExport = () => {
+        history.push(`/patient/${patientId}/export`);
+    };
 
-    switch (result.state) {
-        case "idle":
-        case "load":
-            return <Spinner />;
-
-        case "success":
-            if (!result.value) {
-                return <Redirect to={`/patient/${patientId}/new`} />;
-            }
-            break;
-
-        case "error":
-            throw result.error;
-            throw "Failure to get patient data";
-
-        default:
-            throw "UNREACHABLE";
-    }
-
-    // case "success":
-
-    const handleAnalysis = () => history.push(`/patient/${patientId}/analysis`);
-
-    const handleExport = () => history.push(`/patient/${patientId}/export`);
-
-    const handleDelete = async () =>
+    const handleDelete = () => {
         history.push(`/patient/${patientId}/delete`);
+    };
 
-    const createdOn = formatTimestamp(result.value.createdOn);
-    const lastAccessedOn = formatTimestamp(result.value.lastAccessedOn);
+    const createdOn = formatTimestamp(patientData.createdOn);
+    const lastAccessedOn = formatTimestamp(patientData.lastAccessedOn);
 
     return (
         <Fragment>
             <div className={classes.identity}>
-                <Property icon={Person} name="Identity" content={patientId} />
+                <Property icon={Person} name="Identifier" content={patientId} />
                 <ScreenFull
                     height="24"
                     className={classes.expand}
@@ -226,82 +255,58 @@ export function Patient() {
     );
 }
 
-export function New() {
-    const history = useHistory();
-
+export function Patient() {
     const { database } = useFirebase();
     const { patientId } = useParams<any>();
 
-    const callback = useCallback(() => newPatient(database, patientId), [
-        database,
-        patientId,
-    ]);
+    const [state, callback] = useAsyncCallback(getPatient, [patientId]);
 
-    const [execute, setExecute] = useState(false);
-    const result = useAsync(callback, execute);
+    useEffect(() => {
+        callback(database, patientId);
+    }, [callback]);
 
-    const handleBack = () => history.push(`/`);
-
-    const handleCreate = async () => {
-        setExecute(true);
+    const handleNew = () => {
+        callback(database, patientId);
     };
 
-    switch (result.state) {
+    switch (state.type) {
         case "idle":
-            break;
-
         case "load":
             return <Spinner />;
 
         case "success":
-            return <Redirect to={`/patient/${patientId}`} />;
+            if (state.value == undefined) {
+                return <New onComplete={handleNew} />;
+            }
+            return <View patientData={state.value} />;
 
-        case "error":
+        case "failure":
+            throw state.error;
+
         default:
-            throw "Failure to get patient data";
+            throw "";
     }
-
-    // case "idle":
-
-    return (
-        <Fragment>
-            <Property icon={Person} name="Identity" content={patientId} />
-            <p>The patient with this identifier does not exist yet.</p>
-            <ButtonGroup>
-                <Button icon={ArrowLeft} text="Back" onClick={handleBack} />
-                <Button
-                    variant="primary"
-                    icon={Plus}
-                    text="Create"
-                    onClick={handleCreate}
-                />
-            </ButtonGroup>
-        </Fragment>
-    );
 }
 
-export function Delete() {
+export function DeletePatient() {
     const history = useHistory();
 
     const { database } = useFirebase();
     const { patientId } = useParams<any>();
 
-    const callback = useCallback(() => deletePatient(database, patientId), [
-        database,
-        patientId,
-    ]);
+    const [state, callback] = useAsyncCallback(deletePatient, [patientId]);
 
-    const [execute, setExecute] = useState(false);
-    const result = useAsync(callback, execute);
-
-    const handleBack = () => history.push(`/patient/${patientId}`);
-
-    const handleDelete = async () => {
-        setExecute(true);
+    const handleBack = () => {
+        history.push(`/patient/${patientId}`);
     };
 
-    switch (result.state) {
+    const handleDelete = async () => {
+        callback(database, patientId);
+    };
+
+    switch (state.type) {
         case "idle":
+            // See below.
             break;
 
         case "load":
@@ -310,16 +315,16 @@ export function Delete() {
         case "success":
             return <Redirect to={`/`} />;
 
-        case "error":
-        default:
-            throw "Failure to get patient data";
-    }
+        case "failure":
+            throw "Failure to delete patient";
 
-    // case "idle":
+        default:
+            throw "";
+    }
 
     return (
         <Fragment>
-            <Property icon={Person} name="Identity" content={patientId} />
+            <Property icon={Person} name="Identifier" content={patientId} />
             <p>Are you sure you want to delete this patient?</p>
             <ButtonGroup>
                 <Button icon={ArrowLeft} text="Back" onClick={handleBack} />
