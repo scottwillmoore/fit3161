@@ -20,11 +20,14 @@ import {
     Plus,
     Share,
     Trash,
+    ScreenFull,
 } from "@/icons";
 import { generateId, deletePatient, getPatient, newPatient } from "@/models";
 import { useFirebase, useAsync } from "@/utilities";
 
 import classes from "./patient.module.scss";
+
+import QRCode from "qrcode";
 
 export type IconProps = {
     icon: any;
@@ -115,12 +118,23 @@ export function Patient() {
     const { database } = useFirebase();
     const { patientId } = useParams<any>();
 
+    const [imageUrl, setImageUrl] = useState("");
+
     const callback = useCallback(() => getPatient(database, patientId), [
         database,
         patientId,
     ]);
 
     const result = useAsync(callback);
+
+    const generateQrCode = async () => {
+        try {
+            const response = await QRCode.toDataURL(patientId);
+            setImageUrl(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     switch (result.state) {
         case "idle":
@@ -189,7 +203,24 @@ export function Patient() {
                     text="Delete"
                     onClick={handleDelete}
                 />
+                <Button
+                    variant="secondary"
+                    icon={ScreenFull}
+                    text="Show QR"
+                    onClick={generateQrCode}
+                />
             </ButtonGroup>
+
+            {imageUrl ? (
+                <img
+                    src={imageUrl}
+                    alt="img"
+                    width="50%"
+                    height="50%"
+                    margin-left="auto"
+                    margin-right="auto"
+                />
+            ) : null}
         </Fragment>
     );
 }

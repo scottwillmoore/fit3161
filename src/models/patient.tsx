@@ -30,6 +30,7 @@ export async function newPatient(
 
     const path = getPatientPath(patientId);
     const document = doc(database, path);
+
     await setDoc<PatientData>(document, {
         createdOn: serverTimestamp() as Timestamp,
         lastAccessedOn: serverTimestamp() as Timestamp,
