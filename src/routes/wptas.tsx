@@ -1,51 +1,44 @@
 import { Checkbox, CheckboxGroup } from "@/components";
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 
 export const images = [
-    { id: 0, url: "/bird.png" },
-    { id: 1, url: "/clock.png" },
-    { id: 2, url: "/cup.png" },
-    { id: 3, url: "/flower.png" },
-    { id: 4, url: "/fork.png" },
-    { id: 5, url: "/keys.png" },
-    { id: 6, url: "/pen.png" },
-    { id: 7, url: "/scissors.png" },
-    { id: 8, url: "/toothbrush.png" },
+    { value: 0, url: "/pen.png" },
+    { value: 1, url: "/bird.png" },
+    { value: 2, url: "/flower.png" },
+    { value: 3, url: "/cup.png" },
+    { value: 4, url: "/keys.png" },
+    { value: 5, url: "/toothbrush.png" },
+    { value: 6, url: "/clock.png" },
+    { value: 7, url: "/fork.png" },
+    { value: 8, url: "/scissors.png" },
 ];
-
-let checked: any[] = [];
 
 export function Wptas() {
     const [checked, setChecked] = useState(new Array(9).fill(false));
 
-    // console.log(checked);
-
     const isDisabled = (id: number) => {
-        return checked.filter((x) => x === true).length >= 3;
-    };
-
-    const isChecked = (id: number) => {
-        return checked[id];
+        return checked.filter((x) => x === true).length >= 3 && !checked[id];
     };
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        let temp = checked;
-        temp[parseInt(event.target.id)] = !checked[parseInt(event.target.id)];
+        let temp = [...checked];
+        temp[parseInt(event.target.value)] = !checked[
+            parseInt(event.target.value)
+        ];
 
         setChecked(temp);
     };
 
     return (
         <CheckboxGroup>
-            {images.map((img, key) => {
-                console.log(img.id);
-                console.log(isChecked(img.id));
+            {images.map(({ value, url }, key) => {
                 return (
                     <Checkbox
                         key={key}
-                        img_src={img.url}
-                        checked={isChecked(img.id)}
-                        disabled={isDisabled(img.id)}
+                        img_src={url}
+                        value={value}
+                        checked={checked[value]}
+                        disabled={isDisabled(value)}
                         onChange={handleChange}
                     />
                 );

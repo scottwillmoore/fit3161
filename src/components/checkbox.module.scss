@@ -5,17 +5,15 @@
 }
 
 .image {
-    display: block;
-    width: 80%;
-    height: 50%;
+    width: 60%;
+    height: 70%;
 }
 
 // .cardSection {
-//     // @include row($align: center, $gap: $length-24);
+//     @include row($align: center, $gap: $length-24);
 // }
 
 .input {
-    position: absolute;
     opacity: 0;
 }
 
@@ -25,17 +23,6 @@
     border-color: $color-blue-1;
 }
 
-// .checkbox {
-//     @include transition();
-//     flex-shrink: 0;
-//     width: $length-24;
-//     height: $length-24;
-//     border-width: $border-width;
-//     border-color: $color-white-5;
-//     border-radius: 100%;
-// }
-
-// box surrounding
 .checkboxGroup {
     display: grid;
     grid-template-columns: 200px 200px 200px;
