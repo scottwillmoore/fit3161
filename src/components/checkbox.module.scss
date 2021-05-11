@@ -1,59 +1,45 @@
-@use "colors" as *;
-@use "spaces" as *;
-@use "utilities" as *;
-@use "variables" as *;
+@use "@/styles" as *;
 
 .card:hover {
     box-shadow: $ring;
 }
 
-.cardSection {
-    @include row($align: center, $space-between: $space-24);
+.image {
+    display: block;
+    width: 80%;
+    height: 50%;
 }
+
+// .cardSection {
+//     // @include row($align: center, $gap: $length-24);
+// }
 
 .input {
     position: absolute;
     opacity: 0;
 }
 
+// box checked
 .input:checked + * .cardSection {
-    border-color: $blue-3;
-    box-shadow: $ring;
+    background-color: $color-blue-5;
+    border-color: $color-blue-1;
 }
 
-.checkbox {
-    @include transition();
-    flex-shrink: 0;
-    width: $space-24;
-    height: $space-24;
-    border-width: $border-width;
-    border-color: $white-5;
-    border-radius: 100%;
-}
+// .checkbox {
+//     @include transition();
+//     flex-shrink: 0;
+//     width: $length-24;
+//     height: $length-24;
+//     border-width: $border-width;
+//     border-color: $color-white-5;
+//     border-radius: 100%;
+// }
 
-.input:checked + * .radio {
-    background-color: $white-1;
-    border-color: $blue-1;
-    border-width: $space-6;
-}
-
-.column {
-    @include column($space-between: $space-8);
-}
-
-.title {
-    font-size: $font-size-3;
-    font-weight: $font-weight-bold;
-}
-
-.description {
-    font-size: $font-size-2;
-    color: $black-4;
-}
-
+// box surrounding
 .checkboxGroup {
     display: grid;
-    grid-template-columns: 100px 100px 100px;
+    grid-template-columns: 200px 200px 200px;
     grid-gap: 10px;
-    position: centre;
+    justify-content: center;
+    align-content: center;
 }
