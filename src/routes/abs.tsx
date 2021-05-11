@@ -11,24 +11,46 @@ import {
 } from "@/components";
 import { ArrowLeft, ArrowRight, Check } from "@/icons";
 import {
-    AbsChoice,
+    AbsAnswer,
     AbsData,
     behaviours,
+    calculateScores,
     choices,
     newAbs,
     question,
 } from "@/models";
-import { useAsync, useFirebase } from "@/utilities";
+import { useAsyncCallback, useFirebase } from "@/utilities";
 
 import classes from "./abs.module.scss";
+
+type SubmitProps = {
+    onBack: () => void;
+    onSubmit: () => void;
+};
+
+function Submit({ onBack, onSubmit }: SubmitProps) {
+    return (
+        <Fragment>
+            <ButtonGroup>
+                <Button icon={ArrowLeft} text="Back" onClick={onBack} />
+                <Button
+                    variant="primary"
+                    icon={Check}
+                    text="Submit"
+                    onClick={onSubmit}
+                />
+            </ButtonGroup>
+        </Fragment>
+    );
+}
 
 export function Abs() {
     const { database } = useFirebase();
     const { patientId, testId } = useParams<any>();
 
-    const [answers, setAnswers] = useState<AbsChoice[]>([]);
+    const [answers, setAnswers] = useState<AbsAnswer[]>([]);
 
-    const [currentAnswer, setCurrentAnswer] = useState<AbsChoice | undefined>();
+    const [currentAnswer, setCurrentAnswer] = useState<AbsAnswer | undefined>();
     const currentIndex = answers.length + 1;
 
     const isStart = answers.length <= 0;
@@ -37,27 +59,16 @@ export function Abs() {
     const isPreviousDisabled = isStart;
     const isNextDisabled = isEnd || !currentAnswer;
 
-    const absData: AbsData = {
-        answers,
-    };
-
-    const submitCallback = useCallback(
-        () => newAbs(database, patientId, testId, absData),
-        [database, patientId, testId, absData]
-    );
-
-    const [submit, setSubmit] = useState(false);
-    const submitResult = useAsync(submitCallback, submit);
+    const [state, callback] = useAsyncCallback(newAbs, [patientId, testId]);
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        setCurrentAnswer(parseInt(event.target.value) as AbsChoice);
+        setCurrentAnswer(parseInt(event.target.value) as AbsAnswer);
     };
 
     const handlePrevious = () => {
         const newAnswers = [...answers];
-        const previousChoice = newAnswers.pop();
-
-        setCurrentAnswer(previousChoice);
+        const previousAnswer = newAnswers.pop();
+        setCurrentAnswer(previousAnswer);
         setAnswers(newAnswers);
     };
 
@@ -65,17 +76,21 @@ export function Abs() {
         if (!currentAnswer) {
             return;
         }
-
         setCurrentAnswer(undefined);
         setAnswers([...answers, currentAnswer]);
     };
 
     const handleSubmit = () => {
-        setSubmit(true);
+        const absData: AbsData = {
+            answers,
+            scores: calculateScores(answers),
+        };
+        callback(database, patientId, testId, absData);
     };
 
-    switch (submitResult.state) {
+    switch (state.type) {
         case "idle":
+            // See below.
             break;
 
         case "load":
@@ -84,86 +99,62 @@ export function Abs() {
         case "success":
             return <Redirect to={`/patient/${patientId}`} />;
 
-        case "error":
-        default:
+        case "failure":
             throw "Failure to submit agitated behaviour scale data";
-    }
 
-    let fragment = null;
-
-    if (isEnd) {
-        fragment = (
-            <Fragment>
-                <Prompt message="Are you sure you want to go back?" />
-
-                <ButtonGroup>
-                    <Button
-                        icon={ArrowLeft}
-                        text="Back"
-                        onClick={handlePrevious}
-                    />
-                    <Button
-                        variant="primary"
-                        icon={Check}
-                        text="Submit"
-                        onClick={handleSubmit}
-                    />
-                </ButtonGroup>
-            </Fragment>
-        );
-    } else {
-        fragment = (
-            <Fragment>
-                <div className={classes.questionGroup}>
-                    <p className={classes.question}>{question}</p>
-                    <h1 className={classes.behaviour}>
-                        {behaviours[answers.length]}
-                    </h1>
-                </div>
-
-                <RadioGroup>
-                    {choices.map(({ value, ...response }, key) => {
-                        const isChecked = currentAnswer == value;
-                        return (
-                            <Radio
-                                key={key}
-                                name="response"
-                                value={value}
-                                checked={isChecked}
-                                onChange={handleChange}
-                                {...response}
-                            />
-                        );
-                    })}
-                </RadioGroup>
-
-                <ButtonGroup>
-                    <Button
-                        variant="secondary"
-                        icon={ArrowLeft}
-                        text="Previous"
-                        disabled={isPreviousDisabled}
-                        onClick={handlePrevious}
-                    />
-                    <Button
-                        variant="primary"
-                        icon={ArrowRight}
-                        text="Next"
-                        disabled={isNextDisabled}
-                        onClick={handleNext}
-                    />
-                </ButtonGroup>
-            </Fragment>
-        );
+        default:
+            throw "";
     }
 
     return (
         <Fragment>
             <Prompt message="Are you sure you want to go back?" />
-
             <Progress current={currentIndex} total={behaviours.length} />
+            {isEnd ? (
+                <Submit onBack={handlePrevious} onSubmit={handleSubmit} />
+            ) : (
+                <Fragment>
+                    <div className={classes.questionGroup}>
+                        <p className={classes.question}>{question}</p>
+                        <h1 className={classes.behaviour}>
+                            {behaviours[answers.length]}
+                        </h1>
+                    </div>
 
-            {fragment}
+                    <RadioGroup>
+                        {choices.map(({ value, ...response }, key) => {
+                            const isChecked = currentAnswer == value;
+                            return (
+                                <Radio
+                                    key={key}
+                                    name="response"
+                                    value={value}
+                                    checked={isChecked}
+                                    onChange={handleChange}
+                                    {...response}
+                                />
+                            );
+                        })}
+                    </RadioGroup>
+
+                    <ButtonGroup>
+                        <Button
+                            variant="secondary"
+                            icon={ArrowLeft}
+                            text="Previous"
+                            disabled={isPreviousDisabled}
+                            onClick={handlePrevious}
+                        />
+                        <Button
+                            variant="primary"
+                            icon={ArrowRight}
+                            text="Next"
+                            disabled={isNextDisabled}
+                            onClick={handleNext}
+                        />
+                    </ButtonGroup>
+                </Fragment>
+            )}
         </Fragment>
     );
 }

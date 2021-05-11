@@ -1,7 +1,7 @@
 import { FirebaseFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { validateId } from "@/models";
 
-export type AbsChoice = 1 | 2 | 3 | 4;
+export type AbsAnswer = 1 | 2 | 3 | 4;
 
 export type AbsData = {
     //     environment: string;
@@ -17,11 +17,21 @@ export type AbsData = {
     //         aggression: number;
     //         lability: number;
     //     };
-    answers: AbsChoice[];
+    answers: AbsAnswer[];
+    scores: {
+        disinhibition: number;
+        aggression: number;
+        lability: number;
+    };
 };
 
 const initialAbsData: AbsData = {
     answers: [],
+    scores: {
+        disinhibition: 0,
+        aggression: 0,
+        lability: 0,
+    },
 };
 
 export const question = `Select the response which best describes this behaviour of the patient.`;
@@ -86,4 +96,21 @@ export async function newAbs(
         ...initialAbsData,
         ...absData,
     });
+}
+
+const disinhibitionIndices = [1, 2, 3, 6, 7, 8, 9, 10];
+const aggressionIndices = [3, 4, 5, 14];
+const labilityIndices = [11, 12, 13];
+
+export function calculateScores(answers: AbsAnswer[]) {
+    const calculateScore = (indices: number[]) =>
+        answers
+            .filter((_, i) => indices.includes(i + 1))
+            .reduce((previous, current) => previous + current, 0);
+
+    return {
+        aggression: calculateScore(aggressionIndices),
+        disinhibition: calculateScore(disinhibitionIndices),
+        lability: calculateScore(labilityIndices),
+    };
 }

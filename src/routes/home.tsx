@@ -11,7 +11,7 @@ import classes from "./home.module.scss";
 export function Home() {
     const history = useHistory();
 
-    const [patientId, setPatientId] = useState("eEU9EsmPZiD4Y5VfDQgWLZ");
+    const [patientId, setPatientId] = useState("jhb279PGiy6Jj216JzWWVm");
 
     const handleScan = (data: string | null) => {
         if (data && validateId(data)) {
