@@ -13,6 +13,21 @@
     padding: $length-24 $length-32;
 }
 
+.button {
+    @include transition();
+    padding: $length-4;
+    border-radius: 100%;
+
+    &:focus {
+        outline: none;
+        box-shadow: $ring;
+    }
+
+    &:hover {
+        box-shadow: $ring;
+    }
+}
+
 .title {
     text-align: center;
     font-size: $font-size-3;

@@ -64,6 +64,35 @@
     color: $color-black-4;
 }
 
+.identity {
+    @include row($align: center, $justify: space-between);
+}
+
+.expand {
+    @include transition();
+    box-sizing: content-box;
+    padding: $length-8;
+    color: $color-black-1;
+    border-radius: 100%;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: $ring;
+    }
+}
+
+.qrCode {
+    @include transition();
+    @include column($align: center, $justify: center);
+    align-self: center;
+    padding: $length-32;
+    width: max-content;
+    background-color: $color-white-1;
+    border-color: $color-white-5;
+    border-radius: $border-radius;
+    border-width: $border-width;
+}
+
 .properties {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

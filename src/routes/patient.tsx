@@ -7,6 +7,7 @@ import {
     useParams,
     useRouteMatch,
 } from "react-router-dom";
+import QrCode from "react-qr-code";
 
 import { Button, ButtonGroup, Card, CardSection, Spinner } from "@/components";
 import {
@@ -26,8 +27,6 @@ import { generateId, deletePatient, getPatient, newPatient } from "@/models";
 import { useFirebase, useAsync } from "@/utilities";
 
 import classes from "./patient.module.scss";
-
-import QRCode from "qrcode";
 
 export type IconProps = {
     icon: any;
@@ -118,7 +117,7 @@ export function Patient() {
     const { database } = useFirebase();
     const { patientId } = useParams<any>();
 
-    const [imageUrl, setImageUrl] = useState("");
+    const [expanded, setExpanded] = useState(false);
 
     const callback = useCallback(() => getPatient(database, patientId), [
         database,
@@ -127,14 +126,20 @@ export function Patient() {
 
     const result = useAsync(callback);
 
-    const generateQrCode = async () => {
-        try {
-            const response = await QRCode.toDataURL(patientId);
-            setImageUrl(response);
-        } catch (error) {
-            console.log(error);
-        }
+    const handleExpand = () => {
+        setExpanded(!expanded);
     };
+
+    // const [imageUrl, setImageUrl] = useState("");
+
+    // const handleExpand = async () => {
+    //     try {
+    //         const response = await QRCode.toDataURL(patientId);
+    //         setImageUrl(response);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     switch (result.state) {
         case "idle":
@@ -169,7 +174,20 @@ export function Patient() {
 
     return (
         <Fragment>
-            <Property icon={Person} name="Identity" content={patientId} />
+            <div className={classes.identity}>
+                <Property icon={Person} name="Identity" content={patientId} />
+                <ScreenFull
+                    height="24"
+                    className={classes.expand}
+                    onClick={handleExpand}
+                />
+            </div>
+
+            {expanded && (
+                <div className={classes.qrCode}>
+                    <QrCode value={patientId} size={96} />
+                </div>
+            )}
 
             <div className={classes.properties}>
                 <Property name="Created" icon={Calendar} content={createdOn} />
@@ -203,24 +221,7 @@ export function Patient() {
                     text="Delete"
                     onClick={handleDelete}
                 />
-                <Button
-                    variant="secondary"
-                    icon={ScreenFull}
-                    text="Show QR"
-                    onClick={generateQrCode}
-                />
             </ButtonGroup>
-
-            {imageUrl ? (
-                <img
-                    src={imageUrl}
-                    alt="img"
-                    width="50%"
-                    height="50%"
-                    margin-left="auto"
-                    margin-right="auto"
-                />
-            ) : null}
         </Fragment>
     );
 }
