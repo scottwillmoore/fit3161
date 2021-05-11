@@ -55,7 +55,7 @@ const routes = [
     },
     {
         name: `Westmead Post-Traumatic Amnesia Scale`,
-        path: `/patient/:patientId/wptas`,
+        path: `/patient/:patientId/wptas/:testId`,
         component: Wptas,
     },
 ];
