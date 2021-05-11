@@ -9,7 +9,7 @@ export function generateId() {
 }
 
 export function validateId(id: string) {
-    return true;
+    //return true;
     const uuid = translator.toUUID(id);
-    // return validateUuid(uuid);
+    return validateUuid(uuid);
 }
