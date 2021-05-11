@@ -1,7 +1,16 @@
-import { FirebaseFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+    FirebaseFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    getDocs,
+    collection,
+} from "firebase/firestore";
 import { validateId } from "@/models";
 
 export type AbsAnswer = 1 | 2 | 3 | 4;
+
+export type WithId<T> = { id: string } & T;
 
 export type AbsData = {
     //     environment: string;
@@ -76,7 +85,19 @@ export const choices = [
     },
 ];
 
-function getAbsPath(patientId: string, testId: string) {
+function getAbsPath(patientId: string, testId?: string) {
+    if (!validateId(patientId)) {
+        throw "Invalid patient identifier";
+    }
+
+    if (!testId) {
+        return `patients/${patientId}/abs`;
+    }
+
+    if (!validateId(testId)) {
+        throw "Invalid test identifier";
+    }
+
     return `patients/${patientId}/abs/${testId}`;
 }
 
@@ -86,16 +107,42 @@ export async function newAbs(
     testId: string,
     absData: Partial<AbsData>
 ) {
-    if (!validateId(patientId)) {
-        throw "Invalid patient identifier";
-    }
-
     const path = getAbsPath(patientId, testId);
     const document = doc(database, path);
     await setDoc<AbsData>(document, {
         ...initialAbsData,
         ...absData,
     });
+}
+
+export async function getAbs(
+    database: FirebaseFirestore,
+    patientId: string,
+    testId: string
+) {
+    const path = getAbsPath(patientId, testId);
+    const reference = doc(database, path);
+    const snapshot = await getDoc<AbsData>(reference);
+
+    if (snapshot.exists()) {
+        return snapshot.data();
+    }
+}
+
+export async function getAllAbs(
+    database: FirebaseFirestore,
+    patientId: string
+): Promise<WithId<AbsData>[]> {
+    const path = getAbsPath(patientId);
+    const reference = collection(database, path);
+    const snapshots = await getDocs<AbsData>(reference);
+
+    return snapshots.docs
+        .filter((snapshot) => snapshot.exists())
+        .map((snapshot) => ({
+            id: snapshot.id,
+            ...snapshot.data(),
+        }));
 }
 
 const disinhibitionIndices = [1, 2, 3, 6, 7, 8, 9, 10];

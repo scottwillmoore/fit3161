@@ -1,6 +1,11 @@
-import { Linechart } from "@/components";
+import { useParams } from "react-router-dom";
+
+import { Spinner, Linechart } from "@/components";
+import { useAsyncCallback, useFirebase } from "@/utilities";
 
 import classes from "./abs.module.scss";
+import { getAllAbs } from "@/models";
+import { useEffect } from "react";
 
 const wptas_data = [
     [0, 0, 1, 0, 0, 0, 1],
@@ -27,8 +32,39 @@ const abs_data = [
 ];
 
 export function Analysis() {
+    const { database } = useFirebase();
+    const { patientId } = useParams<any>();
+
+    const [state, callback] = useAsyncCallback(getAllAbs, [patientId]);
+
+    useEffect(() => {
+        callback(database, patientId);
+    }, [patientId]);
+
+    switch (state.type) {
+        case "idle":
+        case "load":
+            return <Spinner />;
+
+        case "success":
+            // See below.
+            break;
+
+        case "failure":
+            throw "Failure to get analysis";
+
+        default:
+            throw "";
+    }
+
+    const allAbsData = state.value;
+
     return (
         <div>
+            {allAbsData.map((absData, i) => (
+                <p>{absData.id}</p>
+            ))}
+
             <h1 className={classes.subtitle}>
                 Westmead Post-Traumatic Amnesia Scale
             </h1>

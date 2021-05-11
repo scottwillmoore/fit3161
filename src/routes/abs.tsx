@@ -28,6 +28,14 @@ type SubmitProps = {
     onSubmit: () => void;
 };
 
+export type ViewProps = {
+    absData: AbsData;
+};
+
+function View({ absData }: ViewProps) {
+    return <p>{absData.scores.aggression}</p>;
+}
+
 function Submit({ onBack, onSubmit }: SubmitProps) {
     return (
         <Fragment>
