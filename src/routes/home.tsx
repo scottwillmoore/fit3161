@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Button, ButtonGroup, Input } from "@/components";
-import { Flame, Search } from "@/icons";
+import { Flame, Search, ScreenFull } from "@/icons";
 import { generateId } from "@/models";
 
 import QRCode from "qrcode";
