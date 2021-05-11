@@ -1,0 +1,22 @@
+@use "@/styles" as *;
+
+.qrReader {
+    @include transition();
+    overflow: clip;
+    width: 100%;
+    padding: $length-16;
+    background-color: $color-white-1;
+    border-color: $color-white-5;
+    border-radius: $border-radius;
+    border-width: $border-width;
+    box-shadow: $box-shadow;
+
+    &:hover {
+        box-shadow: $ring;
+    }
+
+    & > * {
+        overflow: clip;
+        border-radius: $border-radius;
+    }
+}

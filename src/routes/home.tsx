@@ -1,58 +1,66 @@
-import { Fragment, useState } from "react";
+import { ChangeEventHandler, Fragment, useState } from "react";
 import { useHistory } from "react-router-dom";
+import QrReader from "react-qr-reader";
 
 import { Button, ButtonGroup, Input } from "@/components";
 import { Flame, Search } from "@/icons";
 import { generateId, validateId } from "@/models";
 
-import QrReader from "react-qr-reader";
+import classes from "./home.module.scss";
 
 export function Home() {
     const history = useHistory();
-    const [scanResultWebCam, setScanResultWebCam] = useState("");
 
-    const [patientId, setPatientId] = useState("");
-    //eEU9EsmPZiD4Y5VfDQgWLZ
+    const [patientId, setPatientId] = useState("eEU9EsmPZiD4Y5VfDQgWLZ");
 
-    const handleChange = (event: any) => {
-        setPatientId(event.target.value);
+    const handleScan = (data: string | null) => {
+        if (data && validateId(data)) {
+            setPatientId(data);
+        }
     };
 
-    const handleRandom = () => {
-        setPatientId(generateId());
-    };
-
-    const handleSearch = () => {
-        history.push(`/patient/${patientId}`);
-    };
-
-    const handleErrorWebCam = (error) => {
+    const handleError = (error: any) => {
         console.log(error);
     };
 
-    const handleScanWebCam = (result) => {
-        if (result) {
-            if (!validateId(patientId)) {
-                throw "Invalid patient identifier";
-            }
-            setPatientId(result);
-        }
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+        setPatientId(event.target.value);
+    };
+
+    const handleRandomize = () => {
+        setPatientId(generateId());
+    };
+
+    const handleGo = () => {
+        history.push(`/patient/${patientId}`);
     };
 
     return (
         <Fragment>
-            <Input value={patientId} onChange={handleChange} />
-            <ButtonGroup>
-                <Button icon={Flame} text="Random" onClick={handleRandom} />
-                <Button icon={Search} text="Find" onClick={handleSearch} />
-            </ButtonGroup>
+            <p>Please scan a patient QR-code below to get started!</p>
 
             <QrReader
-                delay={300}
-                style={{ width: "100%" }}
-                onError={handleErrorWebCam}
-                onScan={handleScanWebCam}
+                className={classes.qrReader}
+                showViewFinder={false}
+                onScan={handleScan}
+                onError={handleError}
             />
+
+            <Input value={patientId} onChange={handleChange} />
+
+            <ButtonGroup>
+                <Button
+                    icon={Flame}
+                    text="Randomize"
+                    onClick={handleRandomize}
+                />
+                <Button
+                    variant="primary"
+                    icon={Search}
+                    text="Go"
+                    onClick={handleGo}
+                />
+            </ButtonGroup>
         </Fragment>
     );
 }
