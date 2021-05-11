@@ -1,24 +1,27 @@
 import classes from "./progress.module.scss";
 
 export type ProgressProps = {
-    min?: number;
-    max?: number;
-    value: number;
+    current: number;
+    total: number;
 };
 
-export function Progress({ min = 0, max = 100, value }: ProgressProps) {
-    const percentage = (100 * value) / (max - min);
+export function Progress({ current, total }: ProgressProps) {
+    const percentage = (100 * (current - 1)) / total;
     return (
         <div className={classes.container}>
-            {/* <span className={classes.description}>Question 1 of 7</span> */}
+            <span className={classes.description}>
+                {current <= total
+                    ? `Question ${current} of ${total}`
+                    : `Finished`}
+            </span>
             <div className={classes.progress}>
                 <div
                     className={classes.bar}
                     style={{ width: `${percentage}%` }}
                     role="progressbar"
-                    aria-valuemin={min}
-                    aria-valuemax={max}
-                    aria-valuenow={value}
+                    aria-valuemin={0}
+                    aria-valuemax={total + 1}
+                    aria-valuenow={current}
                 ></div>
             </div>
         </div>

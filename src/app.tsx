@@ -17,45 +17,45 @@ import { ErrorBoundary } from "./error";
 import classes from "./app.module.scss";
 
 const firebaseOptions = {
-    apiKey: "AIzaSyARrdJERMpllNpHFjiHV-AU14zOgrLkZIY",
-    authDomain: "fit3161-67fad.firebaseapp.com",
-    projectId: "fit3161-67fad",
+    apiKey: `AIzaSyARrdJERMpllNpHFjiHV-AU14zOgrLkZIY`,
+    authDomain: `fit3161-67fad.firebaseapp.com`,
+    projectId: `fit3161-67fad`,
 };
 
 const routes = [
     {
-        name: "Home",
-        path: "/",
+        name: `Home`,
+        path: `/`,
         component: Home,
     },
     {
-        name: "Patient",
-        path: "/patient/:patientId",
+        name: `Patient`,
+        path: `/patient/:patientId`,
         component: Patient,
     },
     {
-        name: "New",
-        path: "/patient/:patientId/new",
+        name: `New`,
+        path: `/patient/:patientId/new`,
         component: New,
     },
     {
-        name: "Delete",
-        path: "/patient/:patientId/delete",
+        name: `Delete`,
+        path: `/patient/:patientId/delete`,
         component: Delete,
     },
     {
-        name: "Agitated Behaviour Scale",
-        path: "/patient/:patientId/abs",
+        name: `Agitated Behaviour Scale`,
+        path: `/patient/:patientId/abs/:testId`,
         component: Abs,
     },
     {
-        name: "Analysis",
-        path: "/patient/:patientId/analysis",
+        name: `Analysis`,
+        path: `/patient/:patientId/analysis`,
         component: Analysis,
     },
     {
-        name: "Westmead Post-Traumatic Amnesia Scale",
-        path: "/patient/:patientId/wptas",
+        name: `Westmead Post-Traumatic Amnesia Scale`,
+        path: `/patient/:patientId/wptas`,
         component: Wptas,
     },
 ];
