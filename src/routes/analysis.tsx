@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { Fragment } from "react";
+import { useHistory, useParams } from "react-router-dom";
 
-import { Spinner, Linechart } from "@/components";
+import { Spinner, Linechart, Card, CardSection } from "@/components";
 import { useAsyncCallback, useFirebase } from "@/utilities";
 
-import classes from "./abs.module.scss";
+import classes from "./analysis.module.scss";
 import { getAllAbs } from "@/models";
 import { useEffect } from "react";
 
@@ -32,6 +33,8 @@ const abs_data = [
 ];
 
 export function Analysis() {
+    const history = useHistory();
+
     const { database } = useFirebase();
     const { patientId } = useParams<any>();
 
@@ -60,18 +63,32 @@ export function Analysis() {
     const allAbsData = state.value;
 
     return (
-        <div>
+        <Fragment>
+            <h1 className={classes.title}>Agitated Behaviour Scale</h1>
+
+            <Linechart data={abs_data} test="abs"></Linechart>
+
             {allAbsData.map((absData, i) => (
-                <p>{absData.id}</p>
+                <Card
+                    key={i}
+                    onClick={() =>
+                        history.push(`/patient/${patientId}/abs/${absData.id}`)
+                    }
+                    className={classes.action}
+                >
+                    <CardSection>
+                        <p className={classes.property}>Identifier</p>
+                        <p className={classes.value}>{absData.id}</p>
+                        <p className={classes.property}>Date</p>
+                        <p className={classes.value}>{absData.takenOn}</p>
+                    </CardSection>
+                </Card>
             ))}
 
             <h1 className={classes.subtitle}>
                 Westmead Post-Traumatic Amnesia Scale
             </h1>
             <Linechart data={wptas_data} test="wptas"></Linechart>
-            <br />
-            <h1 className={classes.subtitle}>Agitated Behaviour Scale</h1>
-            <Linechart data={abs_data} test="abs"></Linechart>
-        </div>
+        </Fragment>
     );
 }

@@ -1,0 +1,35 @@
+@use "@/styles" as *;
+
+.action {
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+        box-shadow: $ring;
+    }
+
+    &:hover {
+        box-shadow: $ring;
+    }
+
+    & > * {
+        @include column($gap: $length-8);
+    }
+}
+
+.property {
+    font-size: $font-size-2;
+    font-weight: $font-weight-bold;
+    color: $color-black-4;
+}
+
+.value {
+    font-size: $font-size-3;
+    color: $color-black-1;
+}
+
+.title {
+    font-size: $font-size-4;
+    font-weight: $font-weight-bold;
+    color: $color-black-4;
+}

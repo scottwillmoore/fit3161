@@ -5,12 +5,16 @@ import {
     setDoc,
     getDocs,
     collection,
+    Timestamp,
+    serverTimestamp,
 } from "firebase/firestore";
 import { validateId } from "@/models";
 
 export type AbsAnswer = 1 | 2 | 3 | 4;
 
-export type WithId<T> = { id: string } & T;
+export type WithId<T> = {
+    id: string;
+} & T;
 
 export type AbsData = {
     //     environment: string;
@@ -26,6 +30,7 @@ export type AbsData = {
     //         aggression: number;
     //         lability: number;
     //     };
+    takenOn: Timestamp;
     answers: AbsAnswer[];
     scores: {
         disinhibition: number;
@@ -35,6 +40,7 @@ export type AbsData = {
 };
 
 const initialAbsData: AbsData = {
+    takenOn: serverTimestamp() as Timestamp,
     answers: [],
     scores: {
         disinhibition: 0,

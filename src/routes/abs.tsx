@@ -1,9 +1,17 @@
-import { ChangeEventHandler, Fragment, useCallback, useState } from "react";
+import {
+    ChangeEventHandler,
+    Fragment,
+    useCallback,
+    useEffect,
+    useState,
+} from "react";
 import { Prompt, Redirect, useParams } from "react-router-dom";
 
 import {
     Button,
     ButtonGroup,
+    Card,
+    CardSection,
     Progress,
     Radio,
     RadioGroup,
@@ -16,6 +24,7 @@ import {
     behaviours,
     calculateScores,
     choices,
+    getAbs,
     newAbs,
     question,
 } from "@/models";
@@ -27,14 +36,6 @@ type SubmitProps = {
     onBack: () => void;
     onSubmit: () => void;
 };
-
-export type ViewProps = {
-    absData: AbsData;
-};
-
-function View({ absData }: ViewProps) {
-    return <p>{absData.scores.aggression}</p>;
-}
 
 function Submit({ onBack, onSubmit }: SubmitProps) {
     return (
@@ -52,7 +53,9 @@ function Submit({ onBack, onSubmit }: SubmitProps) {
     );
 }
 
-export function Abs() {
+type NewProps = {};
+
+function New() {
     const { database } = useFirebase();
     const { patientId, testId } = useParams<any>();
 
@@ -89,7 +92,7 @@ export function Abs() {
     };
 
     const handleSubmit = () => {
-        const absData: AbsData = {
+        const absData: Partial<AbsData> = {
             answers,
             scores: calculateScores(answers),
         };
@@ -165,4 +168,64 @@ export function Abs() {
             )}
         </Fragment>
     );
+}
+
+type ViewProps = {
+    absData: AbsData;
+};
+
+function View({ absData }: ViewProps) {
+    return (
+        <Fragment>
+            <div className="">
+                <p>Agression</p>
+                <p>{absData.scores.aggression}</p>
+                <p>Agression</p>
+                <p>{absData.scores.disinhibition}</p>
+                <p>Lability</p>
+                <p>{absData.scores.lability}</p>
+            </div>
+            <Card>
+                {behaviours.map((behaviour, i) => {
+                    const answer = absData.answers[i];
+                    const choice = choices[answer - 1].title;
+                    return (
+                        <CardSection key={i} className={classes.answerGroup}>
+                            <p className={classes.question}>{behaviour}</p>
+                            <p className={classes.answer}>{choice}</p>
+                        </CardSection>
+                    );
+                })}
+            </Card>
+        </Fragment>
+    );
+}
+
+export function Abs() {
+    const { database } = useFirebase();
+    const { patientId, testId } = useParams<any>();
+
+    const [state, callback] = useAsyncCallback(getAbs, [patientId, testId]);
+
+    useEffect(() => {
+        callback(database, patientId, testId);
+    }, []);
+
+    switch (state.type) {
+        case "idle":
+        case "load":
+            return <Spinner />;
+
+        case "success":
+            if (!state.value) {
+                return <New />;
+            }
+            return <View absData={state.value} />;
+
+        case "failure":
+            throw "Failure to submit agitated behaviour scale data";
+
+        default:
+            throw "";
+    }
 }

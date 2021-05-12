@@ -26,3 +26,12 @@
     font-size: $font-size-2;
     color: $color-black-4;
 }
+
+.answerGroup {
+    @include column($gap: $length-8);
+}
+
+.answer {
+    font-size: $font-size-3;
+    font-weight: $font-weight-bold;
+}
