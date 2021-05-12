@@ -5,7 +5,7 @@ import {
     useEffect,
     useState,
 } from "react";
-import { Prompt, Redirect, useParams } from "react-router-dom";
+import { Prompt, Redirect, useHistory, useParams } from "react-router-dom";
 
 import {
     Button,
@@ -175,6 +175,14 @@ type ViewProps = {
 };
 
 function View({ absData }: ViewProps) {
+    const history = useHistory();
+
+    const { patientId, testId } = useParams<any>();
+
+    const handleBack = () => {
+        history.push(`/patient/${patientId}`);
+    };
+
     return (
         <Fragment>
             <div className="">
@@ -197,6 +205,10 @@ function View({ absData }: ViewProps) {
                     );
                 })}
             </Card>
+
+            <ButtonGroup>
+                <Button icon={ArrowLeft} text="Back" onClick={handleBack} />
+            </ButtonGroup>
         </Fragment>
     );
 }

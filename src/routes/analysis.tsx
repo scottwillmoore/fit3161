@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+import { Timestamp } from "firebase/firestore";
 import { Fragment } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -7,6 +9,12 @@ import { useAsyncCallback, useFirebase } from "@/utilities";
 import classes from "./analysis.module.scss";
 import { getAllAbs } from "@/models";
 import { useEffect } from "react";
+
+const dateFormat = "do MMMM yyyy";
+
+function formatTimestamp(timestamp: Timestamp) {
+    return format(timestamp.toDate(), dateFormat);
+}
 
 const wptas_data = [
     [0, 0, 1, 0, 0, 0, 1],
@@ -68,22 +76,32 @@ export function Analysis() {
 
             <Linechart data={abs_data} test="abs"></Linechart>
 
-            {allAbsData.map((absData, i) => (
-                <Card
-                    key={i}
-                    onClick={() =>
-                        history.push(`/patient/${patientId}/abs/${absData.id}`)
-                    }
-                    className={classes.action}
-                >
-                    <CardSection>
-                        <p className={classes.property}>Identifier</p>
-                        <p className={classes.value}>{absData.id}</p>
-                        <p className={classes.property}>Date</p>
-                        <p className={classes.value}>{absData.takenOn}</p>
-                    </CardSection>
-                </Card>
-            ))}
+            {allAbsData
+                .filter((absData) => absData.takenOn != undefined)
+                .map((absData, i) => (
+                    <Card
+                        key={i}
+                        onClick={() =>
+                            history.push(
+                                `/patient/${patientId}/abs/${absData.id}`
+                            )
+                        }
+                        className={classes.action}
+                    >
+                        <CardSection>
+                            <p className={classes.property}>Identifier</p>
+                            <p className={classes.value}>{absData.id}</p>
+                            {absData.takenOn && (
+                                <Fragment>
+                                    <p className={classes.property}>Date</p>
+                                    <p className={classes.value}>
+                                        {formatTimestamp(absData.takenOn)}
+                                    </p>
+                                </Fragment>
+                            )}
+                        </CardSection>
+                    </Card>
+                ))}
 
             <h1 className={classes.subtitle}>
                 Westmead Post-Traumatic Amnesia Scale
