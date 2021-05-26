@@ -182,18 +182,31 @@ function View({ patientData }: ViewProps) {
 
     const [expanded, setExpanded] = useState(false);
 
+    /**
+     * Handles the screenfull button press to set expanded true/false.
+     * This is used by the QR Code div to show/hide the QR code.
+     */
     const handleExpand = () => {
         setExpanded(!expanded);
     };
 
+    /**
+     * Route the user to the analysis page
+     */
     const handleAnalysis = () => {
         history.push(`/patient/${patientId}/analysis`);
     };
 
+    /**
+     * Route the user to the export page
+     */
     const handleExport = () => {
         history.push(`/patient/${patientId}/export`);
     };
 
+    /**
+     * Route the user to the delete user page
+     */
     const handleDelete = () => {
         history.push(`/patient/${patientId}/delete`);
     };
@@ -205,19 +218,19 @@ function View({ patientData }: ViewProps) {
         <Fragment>
             <div className={classes.identity}>
                 <Property icon={Person} name="Identifier" content={patientId} />
+                /** * Button to show/hide the QR Code of the patient. */
                 <ScreenFull
                     height="24"
                     className={classes.expand}
                     onClick={handleExpand}
                 />
             </div>
-
+            /** Generates the QR Code of the patient when expanded is true. */
             {expanded && (
                 <div className={classes.qrCode}>
                     <QrCode value={patientId} size={96} />
                 </div>
             )}
-
             <div className={classes.properties}>
                 <Property name="Created" icon={Calendar} content={createdOn} />
                 <Property
@@ -226,11 +239,9 @@ function View({ patientData }: ViewProps) {
                     content={lastAccessedOn}
                 />
             </div>
-
             {actions.map((action, key) => (
                 <Action key={key} {...action} />
             ))}
-
             <ButtonGroup>
                 <Button
                     variant="secondary"
