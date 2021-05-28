@@ -17,6 +17,11 @@ const options = {
     },
 };
 
+/**
+ * function to add all number elements in the array
+ * @param array array containing numbers to be added
+ * @returns sum of all number in array
+ */
 let sum = (array: number[]): number => {
     return array.reduce((sum, current) => sum + current, 0);
 };
@@ -33,6 +38,8 @@ export function Linechart({ data, test }: LinechartProps) {
         label = "WPTAS";
         backgroundColor = "rgba(75,192,192,0.2)";
         borderColor = "rgba(75,192,192,1)";
+
+        // dataset used to generate line graph
         dataset = [
             {
                 label: label,
@@ -51,7 +58,8 @@ export function Linechart({ data, test }: LinechartProps) {
             data.map((x: number[]) => x.slice(2, 5).concat(x.slice(13, 14))),
             data.map((x: number[]) => x.slice(10, 13)),
         ];
-
+        
+        // dataset used to generate line graph
         dataset = [
             {
                 label: "Disinhibition",
@@ -80,6 +88,7 @@ export function Linechart({ data, test }: LinechartProps) {
         ];
     }
 
+    // dynamically generate number of days based on number of data in data array
     const days = [...Array(data.length).keys()].map((x) => "Day " + (x + 1));
 
     const scores = data.map((x) => sum(x));

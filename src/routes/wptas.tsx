@@ -16,10 +16,12 @@ export const images = [
 export function Wptas() {
     const [checked, setChecked] = useState(new Array(9).fill(false));
 
+    // condition to disable the selection box
     const isDisabled = (id: number) => {
         return checked.filter((x) => x === true).length >= 3 && !checked[id];
     };
 
+    // handler function to check and update the checked array
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         let temp = [...checked];
         temp[parseInt(event.target.value)] = !checked[
